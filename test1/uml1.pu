@@ -1,4 +1,4 @@
-@startuml
+@startuml 期末考试流程
 |#efe|教务处|
 start
 :安排考试;
