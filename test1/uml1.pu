@@ -1,5 +1,5 @@
 @startuml
-|教务处|
+|#efe|教务处|
 start
 :安排考试;
 :考试安排表;
@@ -9,24 +9,21 @@ split
     :AB试卷;
 split again
     :打印审批表;
-    |系主任|
+    |#efe|系主任|
     :审批签字;
     :打印审批表;
 end split
-|教务处|
+|#efe|教务处|
 :打印试卷;
 :试卷;
 |学生|
 :参加考试;
 :答卷;
-
-:阅卷成绩;
+|教师|
+:阅卷出成绩;
 split
-    :答卷;
-    :装订存档;
-split again
     :成绩单;
-    |教务处|
+    |#efe|教务处|
     if (有不及格?) then(有)
         :安排补考;
     else()
@@ -38,10 +35,14 @@ split again
     split again
 
     end split
-
-
+split again
+    |教师|
+    :答卷;
+    :装订存档;
 end split
 |教师|
 fork
+    : ;
+end fork
 :期末流程结束;
 @enduml
