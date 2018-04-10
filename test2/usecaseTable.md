@@ -1,5 +1,5 @@
 ### 表2.1"图书查询"用例规约
-<link href="./tableCss.css" rel="stylesheet" type="text/css">
+<link href="tableCss.css" rel="stylesheet" type="text/css">
 
 |用例名称|图书查询|
 |:-|:-|
