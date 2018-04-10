@@ -15,7 +15,6 @@ rectangle 图书管理系统{
     (续借) as renew
     (还书) as ret_
     (违规处理) as fine
-    (添加图书) as addBM_
     (书目管理) as bookI_
 
     root -right-> (系统管理)
@@ -36,7 +35,6 @@ Borrower --> sett_
 
 Admin --> bor_
 Admin --> ret_
-Admin --> addBM_
 Admin --> bookI_
 left to right direction
 
