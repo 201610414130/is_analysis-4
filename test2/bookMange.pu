@@ -23,6 +23,7 @@ rectangle 图书管理系统{
 bor_ ..> query:<<include>>
 ret_ <.. fine:<<extend>>
 bor_ <.. renew:<<extend>>
+renew <.. fine:<<extend>>
 
 ' 外部实体之间的关系
 
