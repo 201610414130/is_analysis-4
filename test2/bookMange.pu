@@ -28,8 +28,9 @@ renew <.. fine:<<extend>>
 ' 外部实体之间的关系
 
 Borrower --|> Visitor
-Admin --|> Borrower
+' Admin --|> Borrower
 root --|> Admin
+'图书管理员和借阅者之间似乎不应该有泛化关系，管理者不能既当运动员，又当裁判员。
 ' 用例与参与的外部实体之间的关系
 Visitor --> query
 Borrower --> sett_
