@@ -28,7 +28,21 @@ package Bean #ccf{
     borrower -up-|> user:继承
     admin -up-|> user:继承
     root -up-|> user:继承
+    
+    class bookinfo{
+        -String ISBN
+        -String name
+        -String Label
+        -String publisher
+        -String author
+    }
+    note right: 图书的简单信息,\n用来形成图书目录
 
+    class bookMenu{
+        -ArrayList<bookinfo> bookMenu
+    }
+    note right: 图书目录,由图书的简\n单信息构成的集合组成
+    bookMenu "1" --* "N" bookinfo
     class book{
         -String ISBN
         -String name
@@ -41,7 +55,6 @@ package Bean #ccf{
         -Date publishDate
         -short stock
         -short Number
-
     }
     class bookDetList{
         -Date borrowDate
