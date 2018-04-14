@@ -28,7 +28,7 @@ package Bean #ccf{
     borrower -up-|> user:继承
     admin -up-|> user:继承
     root -up-|> user:继承
-    
+
     class bookinfo{
         -String ISBN
         -String name
@@ -57,19 +57,22 @@ package Bean #ccf{
         -short Number
     }
     class bookDetList{
+        -String ID
         -Date borrowDate
         -Date returnDate
         -byte deadline
         -byte status
     }
     class bookDetListInfo{
-
+        -byte number
     }
     class borrowHis{
-
+        -Boolean flag
     }
     class ticket{
-
+        -String title
+        -String info
+        -String adminID
     }
     bookDetListInfo "1" --* "1" book:记录
     bookDetList "N" --o "1" borrower:拥有

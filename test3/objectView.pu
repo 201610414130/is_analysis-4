@@ -1,0 +1,108 @@
+@startuml borrower
+object borrower{
+    "借书卡号" ID = "01-nnnn-nnnn-nnnn"
+    "口令" pwd = "xxxxxxxxxx"
+    "账号创建时间" createTime= 2018-04-14 01:16:00
+    "账号类型及激活天数" status = 188
+    "姓" firstName = "张"
+    "名" lastName = "五"
+    "身份证号码" IDCardNo = "nnnnnn-nnnn-nn-nn-nnnx"
+    "邮箱地址" email = "xxxxx@xx.com"
+    "电话号码" m_phoneNumber = "nnn-nnnn-nnnn"
+    "信用评级" creditRating = 100
+}
+note right: status由两部分二进制数组成分别为:\n10(读者类型);111100(60天的激活时间)
+@enduml
+
+@startuml admin
+object admin{
+    "职工卡号" ID = "10-nnnn-nnnn-nnnn"
+    "口令" pwd = "xxxxxxxxxx"
+    "账号创建时间" createTime= 2018-04-14 01:16:00
+    "账号类型及激活天数" status = 124
+    "姓" firstName = "管"
+    "名" lastName = "仲"
+    "邮箱地址" email = "xxxxx@xx.com"
+    "是否获取了管理员权限" root = false
+}
+note right: sstatus由两部分二进制数组成分别为:\n01(图书管理员类型);111100(60天的激活时间)
+@enduml
+@startuml root
+object root{
+    "管理号" ID = "r0-xxxx-xxxx-xxxx"
+    "口令" pwd = "xxxxxxxxxx"
+    "账号创建时间" createTime= 2018-04-14 01:16:00
+    "账号类型及激活天数" status = 63
+}
+note right: sstatus由两部分二进制数组成分别为:\n00(超级管理员类型);111111(永久激活)
+@enduml
+
+@startuml book
+object book{
+    "ISBN号" ISBN = "978-7-308-17148-9"
+    "书名" name = "Linux程序设计"
+    "分类" Label = "计算机-Linux编程-基础教材"
+    "封面图片" logo = "/xxx/xxxx/xxxx.webp"
+    "简介" info = "一本简单明了的Linux搞程序开发的编程基础"
+    "价格" price = 78.00元
+    "出版社" publisher ="浙江大学出版社"
+    "作译者" author = "金国庆 刘加海 李江明 谢井"
+    "出版日期" publishDate = 2017-9
+    "剩余量" stock = 6
+    "总数" Number = 7
+}
+@enduml
+@startuml bookDetList
+object bookDetList{
+    "借书单号" ID = nnnnnnnnnnnnnnnn
+    "借书卡号" ID = "01-nnnn-nnnn-nnnn"
+    "借书日期" borrowDate = 2018-04-14 01:16:00
+    "还书日期" returnDate = 2018-04-14 01:16:00
+    "还书限期" deadline = 30
+    "书单状态" status = 2
+}
+object bookDetListInfo{
+    "ISBN号" ISBN = "978-7-308-17148-9"
+    "借书数量" number = 1
+}
+bookDetList "1" --* "N" bookDetListInfo:拥有
+@enduml
+
+@startuml borrowHis
+object borrowHis{
+    "借书单号" ID = nnnnnnnnnnnnnnnn
+    "借书卡号" ID = "01-nnnn-nnnn-nnnn"
+    "借书日期" borrowDate = 2018-04-14 01:16:00
+    "还书日期" returnDate = 2018-04-14 01:16:00
+    "还书限期" deadline = 30
+    "书单状态" status = 2
+    "处罚标记" flag = true
+}
+object bookDetListInfo{
+    "ISBN号" ISBN = "978-7-308-17148-9"
+    "借书数量" number = 1
+}
+borrowHis "1" --* "N" bookDetListInfo:拥有
+object ticket{
+    "借书单号" ID = nnnnnnnnnnnnnnnn
+    "处罚标题" title = 1
+    "处罚明细" info = "xxxxxxxxxxxx"
+    "处理人" adminID = "10-nnnn-nnnn-nnnn"
+}
+borrowHis "1" --o "N" ticket:包含
+@enduml
+
+@startuml bookMenu
+object bookinfo{
+   "ISBN号" ISBN = "978-7-308-17148-9"
+    "书名" name = "Linux程序设计"
+    "分类" Label = "计算机-Linux编程-基础教材"
+   "出版社" publisher ="浙江大学出版社"
+    "作译者" author = "金国庆 刘加海 李江明 谢井"
+}
+object bookMenu{
+    ArrayList<bookMenu>
+}
+bookMenu "1" --* "N" bookinfo
+@enduml
+
