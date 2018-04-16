@@ -1,7 +1,7 @@
 @startuml borrower
 object borrower{
     "借书卡号" ID = "01-nnnn-nnnn-nnnn"
-    "口令" pwd = "xxxxxxxxxx"
+    "口令" pwd = pwd("xxxxxxxxxx")
     "账号创建时间" createTime= 2018-04-14 01:16:00
     "账号类型及激活天数" status = 188
     "姓" firstName = "张"
@@ -17,7 +17,7 @@ note right: status由两部分二进制数组成分别为:\n10(读者类型);111
 @startuml admin
 object admin{
     "职工卡号" ID = "10-nnnn-nnnn-nnnn"
-    "口令" pwd = "xxxxxxxxxx"
+    "口令" pwd = pwd("xxxxxxxxxx")
     "账号创建时间" createTime= 2018-04-14 01:16:00
     "账号类型及激活天数" status = 124
     "姓" firstName = "管"
@@ -30,7 +30,7 @@ note right: sstatus由两部分二进制数组成分别为:\n01(图书管理员�
 @startuml root
 object root{
     "管理号" ID = "r0-xxxx-xxxx-xxxx"
-    "口令" pwd = "xxxxxxxxxx"
+    "口令" pwd = pwd("xxxxxxxxxx")
     "账号创建时间" createTime= 2018-04-14 01:16:00
     "账号类型及激活天数" status = 63
 }
