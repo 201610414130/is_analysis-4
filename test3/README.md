@@ -3,7 +3,7 @@
 ### 1.1图示
 [上一版本的图示](../out/test3/classView/classView.png)
 
-![classViev](../out/test3/classView/classView_V2.png)
+![classViev](../out/test3/classView/classView_v2.png)
 ### 1.2代码
 [点击查看](classView.pu)
 ### 1.3说明
