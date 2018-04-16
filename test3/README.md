@@ -1,8 +1,8 @@
 # 实验3:图书管理系统领域对象建模
 ## 1.图书管理系统类图
 ### 1.1图示
-[上一版本的图示](../out/test3/classView/classView.png)
-
+[上一版本的图示点这里](../out/test3/classView/classView.png)
+楼下这个版本的:
 ![classViev](../out/test3/classView/classView_v2.png)
 ### 1.2代码
 [点击查看](classView.pu)
