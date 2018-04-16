@@ -74,7 +74,7 @@ package Bean #ccf{
         -String info
         -String adminID
     }
-    bookDetListInfo --* book:记录
+    bookDetListInfo "1" -- "1" book:记录
     bookDetList "N" -left- "1" user:拥有或管理
     borrowHis "N" -- "1" admin:管理
     borrowHis --|> bookDetList:继承
