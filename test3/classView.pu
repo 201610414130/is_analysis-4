@@ -60,7 +60,7 @@ package Bean #ccf{
         -String ID
         -Date borrowDate
         -Date returnDate
-        -byte deadline
+        -short deadline
         -byte status
     }
     class bookDetListInfo{

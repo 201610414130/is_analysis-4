@@ -20,16 +20,166 @@
 ~~~
 ### 2.2.对象图展示
 #### 2.2.1.借阅者对象图
+~~~
+代码及说明:
+    @startuml borrower
+    object borrower{
+        "借书卡号" ID = "01-nnnn-nnnn-nnnn"
+        "口令" pwd = "xxxxxxxxxx"
+        "账号创建时间" createTime= 2018-04-14 01:16:00
+        "账号类型及激活天数" status = 188
+        "姓" firstName = "张"
+        "名" lastName = "五"
+        "身份证号码" IDCardNo = "nnnnnn-nnnn-nn-nn-nnnx"
+        "邮箱地址" email = "xxxxx@xx.com"
+        "电话号码" m_phoneNumber = "nnn-nnnn-nnnn"
+        "信用评级" creditRating = 100
+    }
+    note right: status由两部分二进制数组成分别为:\n10(读者类型);111100(60天的激活时间)
+    @enduml
+
+    1.借书卡号为借阅者登录系统的唯一凭证,其一01开头,加上三组四位的数字组成
+    2.口令是登录验证登录操作是否是本人的唯一凭证,由8到20位字母数字组成
+    3.status中,借阅者前两位bit不变,后面6bit表示1到60天的激活时间,当时间小于1时,账号会被锁死,需要申请解锁.每次借书都会刷新时间
+    4.基础分数为100,不同分段影响借阅者借书能力.
+~~~
 ![借阅者对象图](../out/test3/objectView/borrower.png)
 #### 2.2.2.图书管理员对象图
+~~~
+代码及说明:
+    @startuml admin
+    object admin{
+        "职工卡号" ID = "10-nnnn-nnnn-nnnn"
+        "口令" pwd = "xxxxxxxxxx"
+        "账号创建时间" createTime= 2018-04-14 01:16:00
+        "账号类型及激活天数" status = 124
+        "姓" firstName = "管"
+        "名" lastName = "仲"
+        "邮箱地址" email = "xxxxx@xx.com"
+        "是否获取了管理员权限" root = false
+    }
+    note right: sstatus由两部分二进制数组成分别为:\n01(图书管理员类型);111100(60天的激活时间)
+    @enduml
+
+    1.借书卡号为借阅者登录系统的唯一凭证,其一01开头,加上三组四位的数字组成
+    2.root为ture时如类图中所示,图书管理员才可以对系统进行一些删改操作,以保证数据安全
+~~~
 ![图书管理员对象图](../out/test3/objectView/admin.png)
 #### 2.2.3.超级管理员对象图
+~~~
+代码及说明:
+    @startuml root
+    object root{
+        "管理号" ID = "r0-xxxx-xxxx-xxxx"
+        "口令" pwd = "xxxxxxxxxx"
+        "账号创建时间" createTime= 2018-04-14 01:16:00
+        "账号类型及激活天数" status = 63
+    }
+    note right: sstatus由两部分二进制数组成分别为:\n00(超级管理员类型);111111(永久激活)
+    @enduml
+    
+    1. 为系统账号,故无特殊属性.
+~~~
 ![超级管理员对象图](../out/test3/objectView/root.png)
 #### 2.2.4.图书对象图
+~~~
+代码及说明:
+    @startuml book
+    object book{
+        "ISBN号" ISBN = "978-7-308-17148-9"
+        "书名" name = "Linux程序设计"
+        "分类" Label = "计算机-Linux编程-基础教材"
+        "封面图片" logo = "/xxx/xxxx/xxxx.webp"
+        "简介" info = "一本简单明了的Linux搞程序开发的编程基础"
+        "价格" price = 78.00元
+        "出版社" publisher ="浙江大学出版社"
+        "作译者" author = "金国庆 刘加海 李江明 谢井"
+        "出版日期" publishDate = 2017-9
+        "剩余量" stock = 6
+        "总数" Number = 7
+    }
+    @enduml
+
+    1. 然而并没有什么特别的...
+    2. logo存储的时图片在服务器上的地址
+~~~
 ![图书对象图](../out/test3/objectView/book.png)
 #### 2.2.5.借书单对象图
+~~~
+代码及说明:
+    @startuml bookDetList
+    object bookDetList{
+        "借书单号" ID = nnnnnnnnnnnnnnnn
+        "借书卡号" ID = "01-nnnn-nnnn-nnnn"
+        "借书日期" borrowDate = 2018-04-14 01:16:00
+        "还书日期" returnDate = null
+        "还书限期" deadline = 30
+        "书单状态" status = 1
+    }
+    object bookDetListInfo{
+        "ISBN号" ISBN = "978-7-308-17148-9"
+        "借书数量" number = 1
+    }
+    bookDetList "1" --* "N" bookDetListInfo:拥有
+    @enduml
+
+    1. 考虑到一次借书可能会借出多本书,所以分成书单和详单两部分
+    2. 借书单表示为借书状态时就一定没还书(大概?),故还书日期为空
+    3. 还书期限表示即结束日起,截至n天后为正常借书,超过仍为办理续借或者还书视为逾期
+(初始默认期限的10天,一次最多续借10天,最大不超过30天,再多直接还了再借吧...)
+    4. 书单由多种状态,不同状态时表示为不同意义...1:正常借出(还包含续借);2:正常归还;3:逾期归还;4:遗失;5~7:损坏(数字越大损坏等级越严重)
+    5. 对于number,一次借书操作借出相同书籍不得超过3本,故用byte型
+~~~
 ![借书单对象图](../out/test3/objectView/bookDetList.png)
 #### 2.2.6.借书历史对象图
+~~~
+代码及说明:
+    @startuml borrowHis
+    object borrowHis{
+        "借书单号" ID = nnnnnnnnnnnnnnnn
+        "借书卡号" ID = "01-nnnn-nnnn-nnnn"
+        "借书日期" borrowDate = 2018-04-14 01:16:00
+        "还书日期" returnDate = 2018-04-14 01:16:00
+        "还书限期" deadline = 30
+        "书单状态" status = 2
+        "处罚标记" flag = true
+    }
+    object bookDetListInfo{
+        "ISBN号" ISBN = "978-7-308-17148-9"
+        "借书数量" number = 1
+    }
+    borrowHis "1" --* "N" bookDetListInfo:拥有
+    object ticket{
+        "借书单号" ID = nnnnnnnnnnnnnnnn
+        "处罚标题" title = XXX
+        "处罚明细" info = "xxxxxxxxxxxx"
+        "处理人" adminID = "10-nnnn-nnnn-nnnn"
+    }
+    borrowHis "1" --o "N" ticket:包含
+    @enduml
+
+    1. 借书历史基本上由书单转换,所以基本上相似(除了借书单状态)
+    2. 附加了一个处罚标记,为真时表示存在违规处罚,默认处罚日期为还书当时(进行了处理并提交了才形成的借书历史啊)
+    3. 处罚明细ticket中的内容简单易懂(大概?)
+~~~
 ![借书历史对象图](../out/test3/objectView/borrowHis.png)
 #### 2.2.7.书目对象图
+~~~
+代码及说明:
+    @startuml bookMenu
+    object bookinfo{
+    "ISBN号" ISBN = "978-7-308-17148-9"
+        "书名" name = "Linux程序设计"
+        "分类" Label = "计算机-Linux编程-基础教材"
+    "出版社" publisher ="浙江大学出版社"
+        "作译者" author = "金国庆 刘加海 李江明 谢井"
+    }
+    object bookMenu{
+        ArrayList<bookMenu>
+    }
+    bookMenu "1" --* "N" bookinfo
+    @enduml
+
+    1. 就是存到内存方便查找的几个简单书籍目录?
+~~~
 ![书目对象图](../out/test3/objectView/bookMenu.png)
