@@ -42,7 +42,7 @@ package Bean #ccf{
         -ArrayList<bookinfo> bookMenu
     }
     note right: 图书目录,由图书的简\n单信息构成的集合组成
-    bookMenu "1" --* "N" bookinfo
+    bookMenu --* bookinfo
     class book{
         -String ISBN
         -String name
@@ -74,12 +74,12 @@ package Bean #ccf{
         -String info
         -String adminID
     }
-    bookDetListInfo "1" --* "1" book:记录
+    bookDetListInfo --* book:记录
     bookDetList "N" --o "1" borrower:拥有
     borrowHis "1" --|> "1" bookDetList:继承
-    bookDetList "1" --* "N" bookDetListInfo:拥有
-    borrowHis "1" --o "N" ticket:包含
-    ' admin "1" -- "N" bookDetList:管理维护
+    bookDetList --* bookDetListInfo:拥有
+    borrowHis "1" --o "*" ticket:包含
+    ' admin "1" -- "*" bookDetList:管理维护
 }
 package serivce #cfc{
     class userSerivce{
