@@ -1,53 +1,295 @@
-@startuml 图书查询
+@startuml 图书查询(条件查询)
+title 图书查询(条件查询)
 hide footbox
+skinparam backgroundColor #ded
 actor 游客
 boundary 客户端
 control 服务器
-collections bookMenu
+entity bookMenu
 database 图书数据
 
 activate 游客
 activate bookMenu
-游客 -> 客户端: 输入检索条件
 activate 客户端
+游客 -> 客户端: 输入检索条件
 客户端 -> 客户端: 验证输入信息
 客户端 --> 游客: 显示错误提示信息
-deactivate 游客
-activate 服务器
 客户端 -> 服务器: 传入检索条件
-服务器 -> bookMenu: 在bookMenu中检索
-deactivate 服务器
-bookMenu --> 客户端: 查询成功就返回对应结果,失败则返回提示信息
-activate 游客
-游客 -> 客户端: 点击查看详情
-deactivate 游客
 activate 服务器
+服务器 -> bookMenu: 在bookMenu中检索
+bookMenu --> 客户端: 查询成功就返回对应结果,失败则返回提示信息
+游客 -> 客户端: 点击查看详情
 客户端 -> 服务器: 返回对应书籍ISBN
-activate 图书数据
 服务器 -> 图书数据: 查询图书详情
-deactivate 服务器
+activate 图书数据
 图书数据 --> 客户端: 返回图书详情
-deactivate 图书数据
+@enduml
+
+@startuml 图书查询(全部查询)
+title 图书查询(全部查询)
+skinparam backgroundColor #ded
+hide footbox
+actor 游客
+boundary 客户端
+control 服务器
+entity bookMenu
+
+activate 游客
+activate bookMenu
+游客 -> 客户端: 点击查询
+activate 客户端
+客户端 -> 服务器: 传入检索条件
+activate 服务器
+服务器 -> bookMenu: 获取图书菜单
+bookMenu -> 客户端: 返回图书菜单
 @enduml
 
 @startuml 借书
+skinparam backgroundColor #eee
+hide footbox
+actor 图书管理员
+boundary 客户端
+control 服务器
+' entity bookMenu
+collections 借书单
+database 数据库
 
+
+activate 图书管理员
+activate 客户端
+[-> 图书管理员: 查询将借阅的图书信息
+图书管理员 -> 图书管理员: 检查图书是否满足借阅条件
+图书管理员 -> 客户端: 输入借阅者借阅证
+客户端 -> 服务器: 发起查询借阅者信息请求
+activate 服务器
+服务器 -> 数据库: 查询借阅者信息
+activate 数据库
+数据库 -> 客户端: 返回借阅者详情
+图书管理员 -> 客户端: 验证是否符合借阅要求
+客户端 -> 服务器: 提交借书数据
+服务器 -> 借书单: 生成借书单
+activate 借书单
+借书单 -> 数据库: 保存数据
 @enduml
+
 @startuml 续借
+skinparam backgroundColor #eef
+hide footbox
+actor 图书管理员
+boundary 客户端
+control 服务器
+collections 借书单
+database 数据库
+activate 图书管理员
+activate 客户端
+[-> 图书管理员: 检查书籍完整性
+[<-- 图书管理员: 违规处理
+图书管理员 -> 客户端: 输入借阅者借阅证
 
+客户端 -> 服务器: 发起查询借阅者借阅信息请求
+activate 服务器
+
+服务器 -> 数据库: 获取借阅者'借书'状态借书单
+activate 数据库
+数据库 -> 借书单: 生成借书单集合
+deactivate 数据库
+activate 借书单
+借书单 -> 客户端: 返回借书单列表
+deactivate 借书单
+图书管理员 -> 客户端: 找到并验证是否符合续借要求
+[<-- 图书管理员: 违规处理
+图书管理员 -> 客户端: 确认提交
+客户端 -> 服务器: 提交续借请求
+服务器 -> 借书单: 更新对应借书单
+activate 借书单
+借书单 -> 数据库: 保存数据
+activate 数据库
 @enduml
+
 @startuml 还书
+skinparam backgroundColor #eee
+hide footbox
+actor 图书管理员
+boundary 客户端
+control 服务器
+collections 借书单
+database 数据库
+collections 借书历史
+activate 图书管理员
+activate 客户端
+[-> 图书管理员: 检查书籍完整性
+[<-- 图书管理员: 违规处理
+图书管理员 -> 客户端: 输入借阅者借阅证
+客户端 -> 服务器: 发起查询借阅者借阅信息请求
+activate 服务器
+服务器 -> 数据库: 获取借阅者'借书'状态借书单
+activate 数据库
+数据库 -> 借书单: 生成借书单集合
+activate 借书单
+借书单 -> 客户端: 返回借书单列表
+deactivate 借书单
+图书管理员 -> 客户端: 查找对应借书单
+图书管理员 -> 图书管理员: 检查是否逾期
+[<-- 图书管理员: 违规处理
+图书管理员 -> 客户端: 确认提交
+客户端 -> 服务器: 提交还书请求
 
+服务器 -> 借书历史: 根据借书单生成借书记录
+activate 借书历史
+借书历史 -> 数据库: 保存数据
+服务器 -> 数据库: 删除已保存历史的借书单
 @enduml
+
 @startuml 违规处理
-
+skinparam backgroundColor #eee
+hide footbox
+actor 图书管理员
+boundary 客户端
+control 服务器
+database 数据库
+collections 罚单
+collections 借书历史
+entity 借阅者
+activate 图书管理员
+activate 客户端
+[->图书管理员: 违规信息
+图书管理员->图书管理员: 决策处理办法
+图书管理员->客户端: 记录并提交
+客户端->服务器: 传递请求
+activate 服务器
+服务器->借书历史: 生成借书记录
+activate 借书历史
+服务器->罚单: 生成罚单
+activate 罚单
+借书历史->数据库: 保存借书记录
+deactivate 借书历史
+activate 数据库
+罚单->数据库: 保存罚单
+deactivate 罚单
+服务器->借阅者: 根据处罚更新借阅者信息
+activate 借阅者
+借阅者->数据库: 保存借阅者信息
 @enduml
-@startuml 书目管理
 
+@startuml 书目管理(增加图书)
+skinparam backgroundColor #eee
+title 增加图书
+hide footbox
+actor 图书管理员
+boundary 客户端
+entity .图书管理员
+control 服务器
+entity book
+database 数据库
+activate 图书管理员
+activate 客户端
+activate .图书管理员
+图书管理员->客户端: 选择增加图书选项
+客户端->图书管理员: 弹出身份验证页面
+图书管理员->客户端: 输入图书管理员密码
+客户端->客户端: 验证输入有效性
+客户端-->图书管理员: 显示错误提示
+客户端->.图书管理员: 比较身份信息
+客户端->图书管理员: 显示身份验证操作结果及下一步界面
+图书管理员->客户端: 填写图书详细信息,检查并提交
+客户端->服务器: 发起增加图书请求
+服务器->book: 生成书籍实体
+book->数据库: 存储书籍
+服务器->客户端: 显示操作结果
 @enduml
+
+@startuml 书目管理(修改图书)
+skinparam backgroundColor #eee
+title 修改图书
+hide footbox
+actor 图书管理员
+boundary 客户端
+entity .图书管理员
+control 服务器
+entity book
+entity bookMenu
+database 数据库
+activate 图书管理员
+activate 客户端
+activate .图书管理员
+activate bookMenu
+图书管理员->客户端: 点击修改图书
+客户端->图书管理员: 弹出身份验证页面
+图书管理员->客户端: 输入管理密码
+客户端->.图书管理员: 验证管理员权限
+客户端->图书管理员: 显示验证结果
+图书管理员->客户端: 输入需修改图书详细
+客户端->服务器: 发起查询请求
+activate 服务器
+服务器->数据库: 查询书籍详情
+activate 数据库
+数据库->book: 生成书籍实体
+deactivate 数据库
+activate book
+book->客户端: 返回书籍
+deactivate book
+图书管理员->客户端: 修改书籍信息
+客户端->客户端: 验证修改项合法性
+客户端-->图书管理员: 错误提示
+客户端->服务器: 发起更新书籍请求
+服务器->bookMenu: 更新相关条目
+服务器->数据库: 更新书籍信息
+activate 数据库
+@enduml
+
+@startuml 书目管理(删除图书)
+skinparam backgroundColor #eee
+title 删除图书
+hide footbox
+actor 图书管理员
+boundary 客户端
+entity .图书管理员
+control 服务器
+entity book
+entity bookMenu
+database 数据库
+activate 图书管理员
+activate 客户端
+activate .图书管理员
+activate bookMenu
+图书管理员->客户端: 点击修改图书
+客户端->图书管理员: 弹出身份验证页面
+图书管理员->客户端: 输入管理密码
+客户端->.图书管理员: 验证管理员权限
+客户端->图书管理员: 显示验证结果
+图书管理员->客户端: 输入需修改图书详细
+客户端->服务器: 发起查询请求
+activate 服务器
+服务器->数据库: 查询书籍详情
+activate 数据库
+数据库->book: 生成书籍实体
+deactivate 数据库
+activate book
+book->客户端: 返回书籍
+deactivate book
+图书管理员->客户端: 确认删除
+客户端->服务器: 发起删除书籍请求
+服务器->bookMenu: 删除相关条目
+服务器->数据库: 删除书籍信息
+activate 数据库
+@enduml
+
 @startuml 系统管理
+skinparam backgroundColor #eee
+hide footbox
+actor 超级管理员
+boundary 客户端
+control 服务器
+database 数据库
 
 @enduml
+
 @startuml 账户设置(用户自身)
+skinparam backgroundColor #eee
+hide footbox
+actor 借阅者
+boundary 客户端
+control 服务器
+database 数据库
 
 @enduml
