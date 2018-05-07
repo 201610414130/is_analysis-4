@@ -1,7 +1,7 @@
 # 实验五图书管理系统数据库设计与界面设计
 ## 5.1 数据库设计说明
 <span style="color:#f00">root:</span>***由于其存在唯一,不给它单独一个数据库的表进行存放,直接存在配置文件内***
-user与bookMenu与bookinfo不是数据库对象,不存数据库
+<br>user不是数据库对象,不存数据库
 ~~~
     1. 一共涉及到8张表
     2. 分别是:
@@ -16,96 +16,98 @@ user与bookMenu与bookinfo不是数据库对象,不存数据库
         i. 书类--lable
     3. 以MySQL5.7版本的数据库为基础设计,PK表示主键,FK表示外键,N表示否,Y表示是
     4. bookDeListInfo与borrowHisInfo在对象图中对应同一对象(所存储数据完全相同,但持久化时不适合存储到同一表内)
+    5. 将主外键约束和约束合并为一个单元格
 ~~~
 ## 5.2数据库设计
 ### 5.2.1 借阅者--borrower表
-|字段|类型|主键，外键|可以为空|约束|说明|
+|字段|类型|可以为空|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:-----|
-|ID|varchar(15)|PK|N|||
-|pwd|varchar(20)||N|||
-|createTime|datetime||N||
-|status|tinyint||N||
-|firstName|varchar(10)||Y||
-|lastName|varchar(10)||Y||
-|IDCardNo|varchar(18)||Y||
-|email|varchar(25)||Y||
-|m_phoneNumber|varchar(15)||Y||
-|creditRating|varchar(4)||N||
+|ID|varchar(15)|N|PK|服务器生成|
+|pwd|varchar(20)|N|字母数字下划线||
+|createTime|datetime|N||服务器生成|
+|status|tinyint|N||说明参照test3对象图|
+|firstName|varchar(10)|Y|汉字或字母|
+|lastName|varchar(10)|Y|汉字或字母|
+|IDCardNo|varchar(18)|Y||仅在客户端进行输入检测|
+|email|varchar(25)|Y||仅在客户端进行输入检测|
+|m_phoneNumber|varchar(15)|Y||仅在客户端进行输入检测|
+|creditRating|varchar(4)|N|80(默认),范围0~100||
 
 ### 5.2.2 管理员--admin表
-|字段|类型|主键，外键|可以为空|约束|说明|
+|字段|类型|可以为空|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:-----|
-|ID|varchar(15)|PK|N|||
-|pwd|varchar(20)||N|||
-|createTime|datetime||N||
-|status|tinyint||N||
-|firstName|varchar(10)||Y||
-|lastName|varchar(10)||Y||
-|email|varchar(25)||Y||
-|root|bit||N||
+|ID|varchar(15)|N|PK|服务器生成|
+|pwd|varchar(20)|N|字母数字下划线||
+|createTime|datetime|N||服务器生成|
+|status|tinyint|N||说明参照test3对象图|
+|firstName|varchar(10)|Y|汉字或字母|
+|lastName|varchar(10)|Y|汉字或字母|
+|email|varchar(25)|Y||仅在客户端进行输入检测|
+注:
+    root字段只在类中出现,不在数据库中出现,创建adimn对象时默认为false,当验证管理权限成功后更改为ture
 
 ### 5.2.3 书籍--book
-|字段|类型|主键，外键|可以为空|约束|说明|
+|字段|类型|可以为空|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:-----|
-|ISBN|varchar(13)|PK|N||
-|name|varchar(100)||N||
-|Label|varchar(50)||N||
-|logo|varchar(100)||Y||存储图片地址链接|
-|info|varchar(150)||Y||
-|price|float||N||
-|publisher|varchar(50)||N||
-|author|varchar(50)||N||
-|publishDate|datetime||N||
-|stock|smallint||N||
-|Number|smallint||N||
+|ISBN|varchar(13)|N|PK|仅在客户端进行输入检测|
+Name|varchar(100)|N||仅在客户端进行输入检测|
+|Label|varchar(50)|N||通过下拉列表选择的,实在想不到还要怎么约束|
+|logo|varchar(100)|Y||存储图片地址链接|
+|info|varchar(150)|Y||仅在客户端进行输入检测|
+|price|float|N||仅在客户端进行输入检测|
+|publisher|varchar(50)|N||仅在客户端进行输入检测|
+|author|varchar(50)|N||仅在客户端进行输入检测|
+|publishDate|datetime|N||仅在客户端进行输入检测|
+|stock|smallint|N||仅在客户端进行输入检测|
+|Number|smallint|N|Number<=stock,且大于0|
 
 ### 5.2.4 借书单--bookDeList
-|字段|类型|主键，外键|可以为空|约束|说明|
+|字段|类型|可以为空|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:-----|
-|ID|varchar(16)|PK|N||
-|borrower_ID|varchar(15)|FK|N||
-|borrowDate|datetime||N||
-|deadline|smallint||N||
-|status|tinyint||N||
+|ID|varchar(16)|N|PK|服务器生成|
+|borrower_ID|varchar(15)|N|FK|
+|borrowDate|datetime|N||服务器生成|
+|deadline|smallint|N|范围:0~30|说明参照test3对象图|
+|status|tinyint|N||说明参照test3对象图|
 
 ### 5.2.5 借书详单--bookDeListInfo
-|字段|类型|主键，外键|可以为空|约束|说明|
+|字段|类型|可以为空|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:-----|
-|ID|int|PK|N||自增|
-|ISBN|varchar(13)|FK|N||
-|number|smallint||N||
+|ID|int|N|PK|服务器生成|
+|ISBN|varchar(13)|N|FK|
+Number|smallint|N|大于0,小于生成详单时库存且小于3|
 
 ### 5.2.6 借书历史--borrowHis
-|字段|类型|主键，外键|可以为空|约束|说明|
+|字段|类型|可以为空|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:-----|
-|ID|varchar(16)|PK|N||
-|borrower_ID|varchar(15)|FK|N||
-|borrowDate|datetime||N||
-|returnDate|datetime||Y||
-|deadline|smallint||N||
-|status|tinyint||N||
-|flag|bit|N|||
+|ID|varchar(16)|N|PK|从对应bookDeList项转换过来|
+|borrower_ID|varchar(15)|N|FK|从对应bookDeList项转换过来|
+|borrowDate|datetime|N||从对应bookDeList项转换过来|
+|returnDate|datetime|Y||服务器生成|
+|deadline|smallint|N||从对应bookDeList项转换过来|
+|status|tinyint|N||参照test3对象图|
+|flag|bitN|N||标记是否违规|
 
 ### 5.2.7 借书历史详单--borrowHisInfo
-|字段|类型|主键，外键|可以为空|约束|说明|
+|字段|类型|可以为空|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:-----|
-|ID|int|PK|N||自增|
-|ISBN|varchar(13)|FK|N||
-|number|smallint||N||
+|ID|int|N|PK|从对应bookDeListInfo项转换过来|
+|ISBN|varchar(13)|N|FK|从对应bookDeListInfo项转换过来|
+Number|smallint|N||从对应bookDeListInfo项转换过来|
 
 ### 5.2.8 罚单--ticket
-|字段|类型|主键，外键|可以为空|约束|说明|
+|字段|类型|可以为空|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:-----|
-|ID|int|PK|N||自增|
-|bookDeList_ID|varchar(16)|FK|N||
-|title|varchar(20)||N||
-|info|varchar(200)||N||
-|admin_ID|varchar(15)|FK|N|||
+|ID|int|N|PK|服务器生成|
+|bookDeList_ID|varchar(16)|N|FK|
+|title|varchar(20)|N||仅在客户端进行输入检测|
+|info|varchar(200)|N||仅在客户端进行输入检测|
+|admin_ID|varchar(15)|N|FK||
 ### 5.2.9 书类--lable
-|字段|类型|主键，外键|可以为空|约束|说明|
+|字段|类型|可以为空|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:-----|
-|ID|int|PK|N||自增|
-|info|varchar(50)||N||
+|ID|int|N|PK|自增|
+|info|varchar(50)|N||书的分类|
 ## 5.3 界面设计
 ### 5.3.1 书目管理
 #### (1)书目管理--添加书籍
