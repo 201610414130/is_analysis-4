@@ -49,7 +49,7 @@ user与bookMenu与bookinfo不是数据库对象,不存数据库
 |ISBN|varchar(13)|PK|N||
 |name|varchar(100)||N||
 |Label|varchar(50)||N||
-|logo|varchar(100)||Y||
+|logo|varchar(100)||Y||存储图片地址链接|
 |info|varchar(150)||Y||
 |price|float||N||
 |publisher|varchar(50)||N||
@@ -109,4 +109,89 @@ user与bookMenu与bookinfo不是数据库对象,不存数据库
 ### 5.3.1 书目管理
 #### (1)书目管理--添加书籍
 ![书目管理--添加书籍界面](../out/test5/addbook.PNG)
+相关用例:test2/书目管理
+相关类图:test3/book,test3/lable
+相关时序图:test3/书目管理(增加图书)
 #### (2)对应API
+##### 1. check ISBN existence
+检查ISBN存在性
+GET /book/:ISBN
+**Request**
+~~~
+Content-Type: application/json
+{
+    "book.ISBN": "978-7-308-17148-9"
+}
+注: 通过请求参数book.ISBN在数据库查找是否存在对应书籍
+~~~
+**Response**
+~~~
+Stauts: 200 ok
+Content-Type: application/json
+{
+    "title": "exist or no"
+    "message": "ture"
+}
+注: 
+    title: 返回内容标题
+    message: 操作结果
+~~~
+##### 2. save logo of book
+保存书籍图片
+POST /book/logo
+**Request**
+~~~
+{
+    "img": "(图片资源的二进制文件)"
+}
+~~~
+**Response**
+~~~
+Stauts: 201 CREATED
+Content-Type: application/json
+{
+    "title": "createed or no"
+    "message": "ture"
+    "logoUrl": "(图片在服务器存储设备上的地址,存储成功后由服务器返回)"
+}
+注: 
+    title: 返回内容标题
+    message: 操作结果
+~~~
+##### 3. save book
+保存图书
+POST /book
+**Request**
+~~~
+Content-Type: application/json
+"data": {
+    [{
+        "book.ISBN": "978-7-308-17148-9"
+        "book.name": "Linux程序设计"
+        "book.Label": "计算机-Linux编程-基础教材"
+        "book.logo": "${logoUrl}"
+        "book.info": "一本简单明了的Linux搞程序开发的编程基础"
+        "book.price": "78.00"
+        "book.publisher": "浙江大学出版社"
+        "book.author": "金国庆 刘加海 李江明 谢井"
+        "book.publishDate": "2018-04-14 01:16:00"
+        "book.stock": "7"
+    }]
+}
+注:
+    data: 请求的数据集合
+    ${logoUrl}表示通过获取save logo of book返回的logoUrl值为参数值
+    book.Number并不传输,在后台创建资源项时复制book.stock的值即可
+~~~
+**Response**
+~~~
+Stauts: 200 ok
+Content-Type: application/json
+{
+    "title": "createed or no"
+    "message": "ture"
+}
+注: 
+    title: 返回内容标题
+    message: 操作结果
+~~~
