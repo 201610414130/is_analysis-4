@@ -119,7 +119,7 @@ Number|smallint|N||从对应bookDeListInfo项转换过来|
 #### (2)对应API
 ##### 1. check ISBN existence
 检查ISBN存在性
-GET /book/:ISBN
+GET /book/:ISBN<br>
 **Request**
 ~~~
 Content-Type: application/json
@@ -142,7 +142,7 @@ Content-Type: application/json
 ~~~
 ##### 2. save logo of book
 保存书籍图片
-POST /book/logo
+POST /book/logo<br>
 **Request**
 ~~~
 {
@@ -164,7 +164,7 @@ Content-Type: application/json
 ~~~
 ##### 3. save book
 保存图书
-POST /book
+POST /book<br>
 **Request**
 ~~~
 Content-Type: application/json
