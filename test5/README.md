@@ -43,6 +43,7 @@
 |firstName|varchar(10)|Y|汉字或字母|
 |lastName|varchar(10)|Y|汉字或字母|
 |email|varchar(25)|Y||仅在客户端进行输入检测|
+
 注:
     root字段只在类中出现,不在数据库中出现,创建adimn对象时默认为false,当验证管理权限成功后更改为ture
 
