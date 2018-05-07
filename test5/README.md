@@ -13,6 +13,7 @@ user与bookMenu与bookinfo不是数据库对象,不存数据库
         f. 借书历史--borrowHis
         g. 借书历史详单--borrowHisInfo
         h. 罚单--ticket
+        i. 书类--lable
     3. 以MySQL5.7版本的数据库为基础设计,PK表示主键,FK表示外键,N表示否,Y表示是
     4. bookDeListInfo与borrowHisInfo在对象图中对应同一对象(所存储数据完全相同,但持久化时不适合存储到同一表内)
 ~~~
