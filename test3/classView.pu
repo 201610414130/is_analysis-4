@@ -29,20 +29,20 @@ package Bean #ccf{
     admin -up-|> user:继承
     root -up-|> user:继承
 
-    class bookinfo{
-        -String ISBN
-        -String name
-        -String Label
-        -String publisher
-        -String author
-    }
-    note right: 图书的简单信息,\n用来形成图书目录
+    ' class bookinfo{
+    '     -String ISBN
+    '     -String name
+    '     -String Label
+    '     -String publisher
+    '     -String author
+    ' }
+    ' note right: 图书的简单信息,\n用来形成图书目录
 
-    class bookMenu{
-        -ArrayList<bookinfo> bookMenu
-    }
-    note right: 图书目录,由图书的简\n单信息构成的集合组成
-    bookMenu --* bookinfo
+    ' class bookMenu{
+    '     -ArrayList<bookinfo> bookMenu
+    ' }
+    ' note right: 图书目录,由图书的简\n单信息构成的集合组成
+    ' bookMenu --* bookinfo
     class book{
         -String ISBN
         -String name
@@ -59,7 +59,6 @@ package Bean #ccf{
     class bookDetList{
         -String ID
         -Date borrowDate
-        -Date returnDate
         -short deadline
         -byte status
     }
@@ -67,6 +66,7 @@ package Bean #ccf{
         -byte number
     }
     class borrowHis{
+        -Date returnDate
         -Boolean flag
     }
     class ticket{
@@ -74,9 +74,14 @@ package Bean #ccf{
         -String info
         -String adminID
     }
+    class lable{
+        -int ID
+        -String info
+    }
+    note right: 图书分类,用来控制添加或修改图书时\n控制器选项范围,不与book建立直接联系
     bookDetListInfo "1" -- "1" book:记录
     bookDetList "N" -left- "1" user:拥有或管理
-    borrowHis "N" -- "1" admin:管理
+    ticket "N" -- "1" admin:管理
     borrowHis --|> bookDetList:继承
     bookDetList --* bookDetListInfo:拥有
     borrowHis --o ticket:包含

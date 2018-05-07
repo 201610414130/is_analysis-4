@@ -57,9 +57,8 @@ object bookDetList{
     "借书单号" ID = nnnnnnnnnnnnnnnn
     "借书卡号" ID = "01-nnnn-nnnn-nnnn"
     "借书日期" borrowDate = 2018-04-14 01:16:00
-    "还书日期" returnDate = 2018-04-14 01:16:00
     "还书限期" deadline = 30
-    "书单状态" status = 2
+    "借书状态" status = 1
 }
 object bookDetListInfo{
     "ISBN号" ISBN = "978-7-308-17148-9"
@@ -75,7 +74,7 @@ object borrowHis{
     "借书日期" borrowDate = 2018-04-14 01:16:00
     "还书日期" returnDate = 2018-04-14 01:16:00
     "还书限期" deadline = 30
-    "书单状态" status = 2
+    "借书状态" status = 2
     "处罚标记" flag = true
 }
 object bookDetListInfo{
@@ -104,5 +103,11 @@ object bookMenu{
     ArrayList<bookMenu>
 }
 bookMenu "1" --* "N" bookinfo
+@enduml
+@startuml Label
+object Label{
+    "id号" ID = "n"
+    "分类名" info = "计算机类"
+}
 @enduml
 
