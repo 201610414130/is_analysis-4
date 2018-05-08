@@ -118,9 +118,13 @@ Number|smallint|N||从对应bookDeListInfo项转换过来|
 相关时序图:test3/书目管理(增加图书)
 #### (2)对应API
 1. check ISBN existence API
+    
     检查ISBN存在性,以防止重复创建书籍
+
 - HTTP动词,请求方式及地址(该地址表示从项目根地址出发)
+ 
     异步 GET /checkISBN?ISBN=978-7-308-17148-9
+
 - 请求参数
  
     |请求参数|必选|描述|
@@ -152,9 +156,13 @@ Number|smallint|N||从对应bookDeListInfo项转换过来|
         }
         ~~~
 2. save logo of book API
+    
     保存书籍图片
+
 - HTTP动词,请求方式及地址(该地址表示从项目根地址出发)
+    
     异步 POST /saveImg
+
 - 请求参数
  
     |请求参数|必选|描述|
@@ -187,9 +195,13 @@ Number|smallint|N||从对应bookDeListInfo项转换过来|
         }
         ~~~
 3. add book API
+    
     保存图书
+
 - HTTP动词,请求方式及地址(该地址表示从项目根地址出发)
+    
     异步 POST /addbook
+    
 - 请求参数
  
     |请求参数|必选|描述|
