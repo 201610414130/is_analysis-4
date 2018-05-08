@@ -183,7 +183,7 @@ Number|smallint|N||从对应bookDeListInfo项转换过来|
         {
             "img": "(图片资源的二进制文件)"
         }
-    ~~~
+        ~~~
     - **Response**
         ~~~
         Stauts: 201 CREATED
