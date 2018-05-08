@@ -3,7 +3,7 @@
 <span style="color:#f00">root:</span>***由于其存在唯一,不给它单独一个数据库的表进行存放,直接存在配置文件内***
 <br>user不是数据库对象,不存数据库
 ~~~
-    1. 一共涉及到8张表
+    1. 一共涉及到9张表
     2. 分别是:
         a. 借阅者--borrower
         b. 管理员--admin
@@ -15,8 +15,9 @@
         h. 罚单--ticket
         i. 书类--lable
     3. 以MySQL5.7版本的数据库为基础设计,PK表示主键,FK表示外键,N表示否,Y表示是
-    4. bookDeListInfo与borrowHisInfo在对象图中对应同一对象(所存储数据完全相同,但持久化时不适合存储到同一表内)
-    5. 将主外键约束和约束合并为一个单元格
+    4. 对比test3会发现borrowHisInfo为增加的表,类图中无对应名字类,他其实对应于bookDeListInfo类
+    5. bookDeListInfo与borrowHisInfo在对象图中对应同一对象(由于存储需求不同需要分成两张表)
+    6. 将主外键约束和约束合并为一个单元格
 ~~~
 ## 5.2数据库设计
 ### 5.2.1 借阅者--borrower表
@@ -75,7 +76,7 @@ Name|varchar(100)|N||仅在客户端进行输入检测|
 |字段|类型|可以为空|约束|说明|
 |:-------:|:------:|:----:|:---:|:-----|
 |ID|int|N|PK|服务器生成|
-|ISBN|varchar(13)|N|FK|
+|ISBN|varchar(13)|N|FK|bookDeList中字段'ID'为其外键|
 Number|smallint|N|大于0,小于生成详单时库存且小于3|
 
 ### 5.2.6 借书历史--borrowHis
@@ -93,7 +94,7 @@ Number|smallint|N|大于0,小于生成详单时库存且小于3|
 |字段|类型|可以为空|约束|说明|
 |:-------:|:------:|:----:|:---:|:-----|
 |ID|int|N|PK|从对应bookDeListInfo项转换过来|
-|ISBN|varchar(13)|N|FK|从对应bookDeListInfo项转换过来|
+|ISBN|varchar(13)|N|FK|从对应bookDeListInfo项转换过来,borrowHis中字段'ID'为其外键|
 Number|smallint|N||从对应bookDeListInfo项转换过来|
 
 ### 5.2.8 罚单--ticket
