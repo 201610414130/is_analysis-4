@@ -164,7 +164,7 @@ Number|smallint|N||从对应bookDeListInfo项转换过来|
 - 返回参数
  
     |返回参数|描述|
-    |:-------:|:---:|:-----|
+    |:-------:|:-----|
     |title|返回项标题|
     |message|返回的服务器信息:success:保存成功,<br>FileOverMaxSize:图片过大,<br>OnFile:文件不存在,<br>InternalERROR:内部错误|
     |logoUrl|图片在服务器存储设备上的地址<br>存储成功后由服务器返回|
