@@ -122,14 +122,18 @@ Number|smallint|N||从对应bookDeListInfo项转换过来|
 - HTTP动词,请求方式及地址(该地址表示从项目根地址出发)
     异步 GET /checkISBN?ISBN=978-7-308-17148-9
 - 请求参数
+ 
     |请求参数|必选|描述|
     |:-------:|:---:|:-----|
     |ISBN|TURE|需要验证的ISBN号|
+
 - 返回参数
+ 
     |返回参数|描述|
     |:-------:|:-----|
     |title|返回项标题|
     |message|返回的服务器信息(ture:存在,<br>false:不存在在,<br>InternalERROR:内部错误)|
+
 - *示例*
     - **Request**
         ~~~
@@ -152,15 +156,19 @@ Number|smallint|N||从对应bookDeListInfo项转换过来|
 - HTTP动词,请求方式及地址(该地址表示从项目根地址出发)
     异步 POST /saveImg
 - 请求参数
+ 
     |请求参数|必选|描述|
     |:-------:|:---:|:-----|
     |img|TURE|需要上传的图片文件,小于1M|
+
 - 返回参数
+ 
     |返回参数|描述|
     |:-------:|:---:|:-----|
     |title|返回项标题|
     |message|返回的服务器信息:success:保存成功,<br>FileOverMaxSize:图片过大,<br>OnFile:文件不存在,<br>InternalERROR:内部错误|
     |logoUrl|图片在服务器存储设备上的地址<br>存储成功后由服务器返回|
+
 - *示例*
     - **Request**
         ~~~
@@ -183,14 +191,18 @@ Number|smallint|N||从对应bookDeListInfo项转换过来|
 - HTTP动词,请求方式及地址(该地址表示从项目根地址出发)
     异步 POST /addbook
 - 请求参数
+ 
     |请求参数|必选|描述|
     |:-------:|:---:|:-----|
     |data|TURE|填写的图书json串(每项必填,详见示例)|
+
 - 返回参数
+ 
     |返回参数|描述|
     |:-------:|:-----|
     |title|返回项标题|
     |message|返回的服务器信息(ture:添加成功,<br>false:添加失败,<br>InternalERROR:内部错误|
+
 - *示例*
     - **Request**
         ~~~
