@@ -117,85 +117,109 @@ Number|smallint|N||从对应bookDeListInfo项转换过来|
 相关类图:test3/book,test3/lable
 相关时序图:test3/书目管理(增加图书)
 #### (2)对应API
-##### 1. check ISBN existence
-检查ISBN存在性
-GET /book/:ISBN<br>
-**Request**
-~~~
-Content-Type: application/json
-{
-    "book.ISBN": "978-7-308-17148-9"
-}
-注: 通过请求参数book.ISBN在数据库查找是否存在对应书籍
-~~~
-**Response**
-~~~
-Stauts: 200 ok
-Content-Type: application/json
-{
-    "title": "exist or no"
-    "message": "ture"
-}
-注: 
-    title: 返回内容标题
-    message: 操作结果
-~~~
-##### 2. save logo of book
-保存书籍图片
-POST /book/logo<br>
-**Request**
-~~~
-{
-    "img": "(图片资源的二进制文件)"
-}
-~~~
-**Response**
-~~~
-Stauts: 201 CREATED
-Content-Type: application/json
-{
-    "title": "createed or no"
-    "message": "ture"
-    "logoUrl": "(图片在服务器存储设备上的地址,存储成功后由服务器返回)"
-}
-注: 
-    title: 返回内容标题
-    message: 操作结果
-~~~
-##### 3. save book
-保存图书
-POST /book<br>
-**Request**
-~~~
-Content-Type: application/json
-"data": {
-    [{
-        "book.ISBN": "978-7-308-17148-9"
-        "book.name": "Linux程序设计"
-        "book.Label": "计算机-Linux编程-基础教材"
-        "book.logo": "${logoUrl}"
-        "book.info": "一本简单明了的Linux搞程序开发的编程基础"
-        "book.price": "78.00"
-        "book.publisher": "浙江大学出版社"
-        "book.author": "金国庆 刘加海 李江明 谢井"
-        "book.publishDate": "2018-04-14 01:16:00"
-        "book.stock": "7"
-    }]
-}
-注:
-    data: 请求的数据集合
-    ${logoUrl}表示通过获取save logo of book返回的logoUrl值为参数值
-    book.Number并不传输,在后台创建资源项时复制book.stock的值即可
-~~~
-**Response**
-~~~
-Stauts: 200 ok
-Content-Type: application/json
-{
-    "title": "createed or no"
-    "message": "ture"
-}
-注: 
-    title: 返回内容标题
-    message: 操作结果
-~~~
+1. check ISBN existence API
+    检查ISBN存在性,以防止重复创建书籍
+- HTTP动词,请求方式及地址(该地址表示从项目根地址出发)
+    异步 GET /checkISBN?ISBN=978-7-308-17148-9
+- 请求参数
+    |请求参数|必选|描述|
+    |:-------:|:---:|:-----|
+    |ISBN|TURE|需要验证的ISBN号|
+- 返回参数
+    |返回参数|描述|
+    |:-------:|:-----|
+    |title|返回项标题|
+    |message|返回的服务器信息(ture:存在,<br>false:不存在在,<br>InternalERROR:内部错误)|
+- *示例*
+    - **Request**
+        ~~~
+        Content-Type: application/json
+        {
+            "book.ISBN": "978-7-308-17148-9"
+        }
+        ~~~
+    - **Response**
+        ~~~
+        Stauts: 200 ok
+        Content-Type: application/json
+        {
+            "title": "ISBN exist"
+            "message": "ture"
+        }
+        ~~~
+2. save logo of book API
+    保存书籍图片
+- HTTP动词,请求方式及地址(该地址表示从项目根地址出发)
+    异步 POST /saveImg
+- 请求参数
+    |请求参数|必选|描述|
+    |:-------:|:---:|:-----|
+    |img|TURE|需要上传的图片文件,小于1M|
+- 返回参数
+    |返回参数|描述|
+    |:-------:|:---:|:-----|
+    |title|返回项标题|
+    |message|返回的服务器信息:success:保存成功,<br>FileOverMaxSize:图片过大,<br>OnFile:文件不存在,<br>InternalERROR:内部错误|
+    |logoUrl|图片在服务器存储设备上的地址<br>存储成功后由服务器返回|
+- *示例*
+    - **Request**
+        ~~~
+        {
+            "img": "(图片资源的二进制文件)"
+        }
+    ~~~
+    - **Response**
+        ~~~
+        Stauts: 201 CREATED
+        Content-Type: application/json
+        {
+            "title": "createed or no"
+            "message": "success"
+            "logoUrl": "[图片地址]"
+        }
+        ~~~
+3. add book API
+    保存图书
+- HTTP动词,请求方式及地址(该地址表示从项目根地址出发)
+    异步 POST /addbook
+- 请求参数
+    |请求参数|必选|描述|
+    |:-------:|:---:|:-----|
+    |data|TURE|填写的图书json串(每项必填,详见示例)|
+- 返回参数
+    |返回参数|描述|
+    |:-------:|:-----|
+    |title|返回项标题|
+    |message|返回的服务器信息(ture:添加成功,<br>false:添加失败,<br>InternalERROR:内部错误|
+- *示例*
+    - **Request**
+        ~~~
+        Content-Type: application/json
+        "data": {
+            [{
+                "book.ISBN": "978-7-308-17148-9"
+                "book.name": "Linux程序设计"
+                "book.Label": "计算机-Linux编程-基础教材"
+                "book.logo": "${logoUrl}"
+                "book.info": "一本简单明了的Linux搞程序开发的编程基础"
+                "book.price": "78.00"
+                "book.publisher": "浙江大学出版社"
+                "book.author": "金国庆 刘加海 李江明 谢井"
+                "book.publishDate": "2018-04-14 01:16:00"
+                "book.stock": "7"
+            }]
+        }
+        注:
+            data: 请求的数据集合
+            ${logoUrl}表示通过获取save logo of book返回的logoUrl值为参数值
+            book.Number并不传输,在后台创建资源项时复制book.stock的值即可
+        ~~~
+    - **Response**
+        ~~~
+        Stauts: 200 ok
+        Content-Type: application/json
+        {
+            "title": "createed or no"
+            "message": "ture"
+        }
+        ~~~
