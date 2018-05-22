@@ -1,0 +1,36 @@
+@startuml 用例图
+left to right direction
+:学生: as student
+:任课教师: as teacher
+:院系管理员: as admin
+:超级管理员: as root
+rectangle 实验管理平台{
+    (选课) as singCourse
+    (查看用户信息) as showUser
+    (修改用户信息) as updateUser
+    (修改密码) as updatePwd
+    (查询成绩) as queryGrade
+
+    (批改成绩) as setGrade
+    (设计课程实验及评分标准) as setCourse
+    (课程管理) as courseMange
+    (学生管理) as studentMange
+    (教师管理) as teacherMange
+}
+student --> singCourse
+student --> showUser
+student --> updateUser
+student --> updatePwd
+student --> queryGrade
+
+teacher --> setGrade
+
+admin --> setCourse
+admin --> courseMange
+admin --> studentMange
+
+root --> teacherMange
+
+teacher --|> student
+root --|> admin
+@enduml
