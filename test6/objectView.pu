@@ -4,7 +4,7 @@ object student{
     "密码" pwd = pwd("xxxxxxxxxx")
     "姓名" name = "张三"
     "GitHub账号" Gname = "xxxxxxx"
-    "所属班级" objectNo = ""
+    "所属班级" objectNo = "nnnn-nn-nnn-nn"
 }
 @enduml
 
@@ -31,8 +31,8 @@ object admin{
 
 @startuml institute
 object clazz{
-    "班级编号" objectNo = "nnnn-nn-nnn-nn"
-    "班级" objectName = "2015级-xxx专业-n班"
+    "班级编号" classNo = "nnnn-nn-nnn-nn"
+    "班级" className = "2015级-xxx专业-n班"
     "学历" education = "专/本/..."
     "所属专业" majorNo = "nnn"
 }
@@ -53,6 +53,7 @@ major *-- institute
 @startuml cexperiment
 object cexperiment{
     "课程实验编号" experimentNo = "nnn-nnn-nn"
+    "课程实验序号" oder = "n"
     "课程实验标题" title = "xxxxxx"
     "课程实验简介" info = "xxxxxxxxxxxxxxxx"
     "课程实验提交地址" address = "https://github.com/xxxxxxxx"
@@ -68,6 +69,7 @@ object experimentclause{
 }
 cexperiment "N" -- "1" course
 @enduml
+
 @startuml course
 object course{
     "课程号" courseNo = "nnn-nnn"
@@ -78,16 +80,19 @@ object course{
     "所属专业" majorNo = "nnn"
 }
 @enduml
+
 @startuml courseClass
 object courseClass{
     "所属课程" courseNo = "nnn-nnn"
     "开课班号" cClassNo = "nnnn-n-nnnn"
+    "选修人限" number = "nn"
     "选修人数" count = "nn"
     "开课学期" term = "n"
     "开课时间" time = ""
     "任课教师" teacherNo = "nn-nnnn"
 }
 @enduml
+
 @startuml S_C
 object S_C{
     "所属课程" courseNo = "nnn-nnn"

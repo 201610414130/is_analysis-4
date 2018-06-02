@@ -42,20 +42,24 @@ class course{
     -String majorNo
 }
 class courseClass{
+    -String courseNo
     -String cClassNo
+    -int number
     -int count
     -int term
     -int time
-    -String courseNo
+
     -String teacherNo
 }
 class S_C{
+    -String courseNo
     -String cClassNo
     -String studentID
     -float score
 }
 class cexperiment{
     -String experimentNo
+    -int oder
     -String title
     -String info
     -String address
