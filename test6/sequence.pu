@@ -1,3 +1,14 @@
+@startuml 选课(教师选课)
+title 选课(教师选课)
+hide footbox
+skinparam backgroundColor #cdf
+actor teacher
+database course表
+database 教师选课表
+@enduml
+@startuml 选课(学生选课)
+title 选课(学生选课)
+@enduml
 @startuml
 
 @enduml

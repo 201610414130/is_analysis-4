@@ -1,36 +1,40 @@
 @startuml 用例图
 left to right direction
+:User: 
 :学生: as student
 :任课教师: as teacher
 :院系管理员: as admin
-:超级管理员: as root
-rectangle 实验管理平台{
-    (选课) as singCourse
+package 用户基本功能{
     (查看用户信息) as showUser
     (修改用户信息) as updateUser
     (修改密码) as updatePwd
-    (查询成绩) as queryGrade
-
-    (批改成绩) as setGrade
-    (设计课程实验及评分标准) as setCourse
-    (课程管理) as courseMange
-    (学生管理) as studentMange
-    (教师管理) as teacherMange
+    (登录) as login
+    (登出) as logout
+    User -up-> showUser
+    User -up-> updateUser
+    User -up-> updatePwd
+    User -up-> login
+    User -up-> logout
 }
-student --> singCourse
-student --> showUser
-student --> updateUser
-student --> updatePwd
-student --> queryGrade
-
-teacher --> setGrade
-
-admin --> setCourse
-admin --> courseMange
-admin --> studentMange
-
-root --> teacherMange
-
-teacher --|> student
-root --|> admin
+package 业务用例集{
+    (选课) as singCourse
+    (查询成绩) as queryGrade
+    (批改成绩) as setGrade
+    (添加课程实验) as addCourseTask
+    (编辑课程实验) as ediCourseTask
+    (添加课程) as addCourse
+    (编辑课程) as ediCourse
+    (删除课程) as delCourse
+    User --> singCourse
+    User --> queryGrade
+    teacher --> setGrade
+    admin --> addCourseTask
+    admin --> ediCourseTask
+    admin --> addCourse
+    admin --> ediCourse
+    admin --> delCourse
+}
+student -up-|> User
+teacher -up-|> User
+admin -up-|> User
 @enduml

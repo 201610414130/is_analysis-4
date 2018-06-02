@@ -1,3 +1,87 @@
-@startuml 
-
+@startuml 实验管理平台用例图
+class user{
+    -String userID
+    -String pwd
+    -String name
+}
+class student{
+    -String Gname
+    -String classNo
+}
+class teacher{
+    -String Gname
+    -String title
+    -String degree
+    -String instituteNo
+}
+class admin{
+    -String instituteNo
+}
+class clazz{
+    -String classNo
+    -String className
+    -String education
+    -String majorNo
+}
+class major{
+    -String majorNo
+    -String majorName
+    -String instituteNo
+}
+class institute{
+    -String instituteNo
+    -String facultyName
+    -String telephone
+}
+class course{
+    -String courseNo
+    -String courseName
+    -int creditHour
+    -int courseHour
+    -String priorCourse
+    -String majorNo
+}
+class courseClass{
+    -String cClassNo
+    -int count
+    -int term
+    -int time
+    -String courseNo
+    -String teacherNo
+}
+class S_C{
+    -String cClassNo
+    -String studentID
+    -float score
+}
+class cexperiment{
+    -String experimentNo
+    -String title
+    -String info
+    -String address
+    -float score
+    -String courseNo
+}
+class experimentclause{
+    -String experimentclauseNo
+    -String title
+    -String evaluate
+    -float score
+    -String experimentNo
+}
+student -up-|> user
+teacher -up-|> user
+admin -up-|> user
+student "N" -- "1" clazz
+clazz "N" o-- "1" major
+major *-- institute
+teacher "N" -- "1" institute
+admin "N" -- "1" institute
+S_C "N" -- "1" student
+S_C "N" -- "1" courseClass
+courseClass "N" -- "1" course
+courseClass "N" -- "1" teacher
+course "N" -- "1" major
+experimentclause *-- cexperiment
+cexperiment "N" -- "1" course
 @enduml

@@ -1,3 +1,97 @@
-@startuml
+@startuml student
+object student{
+    "学号" userID = "nnnn-nn-nnn-nn-nn"
+    "密码" pwd = pwd("xxxxxxxxxx")
+    "姓名" name = "张三"
+    "GitHub账号" Gname = "xxxxxxx"
+    "所属班级" objectNo = ""
+}
+@enduml
 
+@startuml teacher
+object teacher{
+    "工号" userID = "nn-nnnn"
+    "密码" pwd = pwd("xxxxxxxxxx")
+    "姓名" name = "李四"
+    "GitHub账号" Gname = "xxxxxxx"
+    "职称" title = "教授/副教授/..."
+    "学位" degree = "专/本/..."
+    "所属院系" instituteNo = "nn"
+}
+@enduml
+
+@startuml admin
+object admin{
+    "工号" userID = "nn-nnnn"
+    "密码" pwd = pwd("xxxxxxxxxx")
+    "姓名" name = "王五"
+    "所属院系" instituteNo = "nn"
+}
+@enduml
+
+@startuml institute
+object clazz{
+    "班级编号" objectNo = "nnnn-nn-nnn-nn"
+    "班级" objectName = "2015级-xxx专业-n班"
+    "学历" education = "专/本/..."
+    "所属专业" majorNo = "nnn"
+}
+object major{
+    "专业编号" majorNo = "nnn"
+    "专业名称" majorName = "xxxx专业"
+    "所属院系" instituteNo = "nn"
+}
+object institute{
+    "院系编号" instituteNo = "nn"
+    "院系名称" instituteName = "xxx系(学院)"
+    "办公电话" telephone = "nnnnnnnnn"
+}
+clazz "N" o-- "1" major
+major *-- institute
+@enduml
+
+@startuml cexperiment
+object cexperiment{
+    "课程实验编号" experimentNo = "nnn-nnn-nn"
+    "课程实验标题" title = "xxxxxx"
+    "课程实验简介" info = "xxxxxxxxxxxxxxxx"
+    "课程实验提交地址" address = "https://github.com/xxxxxxxx"
+    "课程实验成绩" score = "nnn"
+    "所属课程" courseNo = "nnn-nnn"
+}
+object experimentclause{
+    "课程实验评价项编号" experimentclauseNo = "nnn-nnn-nn-nn"
+    "评价项名称" title = "xxxxxx"
+    "评价" evaluate = "xxxxxxxxxxxxxxxxxxxxxxxxx"
+    "分数" score = "nnn"
+    "所属课程实验" experimentNo = "nnn-nnn-nn"
+}
+cexperiment "N" -- "1" course
+@enduml
+@startuml course
+object course{
+    "课程号" courseNo = "nnn-nnn"
+    "课程名称" courseName = "xxxx"
+    "学分" creditHour = "n"
+    "学时" courseHour = "n"
+    "先修课程" priorCourse = "nnn-nnn"
+    "所属专业" majorNo = "nnn"
+}
+@enduml
+@startuml courseobject
+object courseobject{
+    "" cobjectNo = ""
+    "" count = ""
+    "" term = ""
+    "" time = ""
+    "" courseNo = ""
+    "" teacherNo = ""
+}
+@enduml
+@startuml S_C
+object S_C{
+    "" cobjectNo = ""
+    "" studentID = ""
+    "" score = ""
+}
 @enduml
