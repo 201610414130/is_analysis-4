@@ -1,3 +1,51 @@
+@startuml 登录
+
+@enduml
+
+@startuml 登出
+
+@enduml
+
+@startuml 修改密码
+
+@enduml
+
+@startuml 修改用户信息
+
+@enduml
+
+@startuml 查看用户信息
+
+@enduml
+
+@startuml 批改成绩
+
+@enduml
+
+@startuml 添加课程
+
+@enduml
+
+@startuml 编辑课程
+
+@enduml
+
+@startuml 删除课程
+
+@enduml
+
+@startuml 添加课程实验
+
+@enduml
+
+@startuml 编辑课程实验
+
+@enduml
+
+@startuml 删除课程实验
+
+@enduml
+
 @startuml 选课(教师选课)
 title 选课(教师选课)
 hide footbox
@@ -6,9 +54,26 @@ actor teacher
 database course表
 database 教师选课表
 @enduml
+
 @startuml 选课(学生选课)
 title 选课(学生选课)
 @enduml
-@startuml
 
+@startuml 查看成绩
+title 查看成绩用例时序图
+hide footbox
+actor user
+alt user = teacher
+    user --> teacher: 查询所授课程学生成绩
+    teacher --> courseClass: 获取所授课程开\n课班号及课程号
+    courseClass --> S_C: 获取学生成绩及学号
+    S_C --> student: 获取学生信息
+    student --> user: 每个所授学生信息及其已批改实验平均成绩
+    group 点击成绩详情
+        
+    end
+    ' courseClass --> course
+    ' course --> cexperiment:
+    ' cexperiment --> experimentclause:
+end
 @enduml

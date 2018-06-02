@@ -1,4 +1,4 @@
-@startuml 实验管理平台用例图
+@startuml 实验管理平台类图
 class user{
     -String userID
     -String pwd
@@ -48,7 +48,6 @@ class courseClass{
     -int count
     -int term
     -int time
-
     -String teacherNo
 }
 class S_C{
@@ -57,21 +56,43 @@ class S_C{
     -String studentID
     -float score
 }
+
 class cexperiment{
     -String experimentNo
+    -int oder
+    -String title
+    -String courseNo
+}
+
+class experimentclause{
+    -String experimentclauseNo
+    -String title
+    -String experimentNo
+}
+
+class cexperiments{
+    -String experimentclauseNo
+    -String studentID
     -int oder
     -String title
     -String info
     -String address
     -float score
-    -String courseNo
+    -Date date
 }
-class experimentclause{
+class experimentclauses{
     -String experimentclauseNo
     -String title
     -String evaluate
     -float score
     -String experimentNo
+}
+class experimentscores{
+    -String experimentscoresNo
+    -String experimentNo
+    -String courseNo
+    -String cClassNo
+    -String studentID
 }
 student -up-|> user
 teacher -up-|> user
@@ -88,4 +109,8 @@ courseClass "N" -- "1" teacher
 course "N" -- "1" major
 experimentclause *-- cexperiment
 cexperiment "N" -- "1" course
+experimentscores "N" -- "1" S_C
+experimentscores "N" -- "1" cexperiment
+experimentclauses *-- cexperiments
+experimentscores "1"--"1" cexperiments
 @enduml

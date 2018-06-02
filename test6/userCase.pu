@@ -18,10 +18,11 @@ package 用户基本功能{
 }
 package 业务用例集{
     (选课) as singCourse
-    (查询成绩) as queryGrade
+    (查看成绩) as queryGrade
     (批改成绩) as setGrade
     (添加课程实验) as addCourseTask
     (编辑课程实验) as ediCourseTask
+    (删除课程实验) as delCourseTask
     (添加课程) as addCourse
     (编辑课程) as ediCourse
     (删除课程) as delCourse
@@ -30,6 +31,7 @@ package 业务用例集{
     teacher --> setGrade
     admin --> addCourseTask
     admin --> ediCourseTask
+    admin --> delCourseTask
     admin --> addCourse
     admin --> ediCourse
     admin --> delCourse

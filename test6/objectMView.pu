@@ -1,4 +1,4 @@
-@startuml student
+@startuml 对象图-总
 object student{
     "学号" userID = "nnnn-nn-nnn-nn-nn"
     "密码" pwd = pwd("xxxxxxxxxx")
@@ -6,9 +6,7 @@ object student{
     "GitHub账号" Gname = "xxxxxxx"
     "所属班级" objectNo = "nnnn-nn-nnn-nn"
 }
-@enduml
 
-@startuml teacher
 object teacher{
     "工号" userID = "nn-nnnn"
     "密码" pwd = pwd("xxxxxxxxxx")
@@ -18,39 +16,33 @@ object teacher{
     "学位" degree = "专/本/..."
     "所属院系" instituteNo = "nn"
 }
-@enduml
 
-@startuml admin
 object admin{
     "工号" userID = "nn-nnnn"
     "密码" pwd = pwd("xxxxxxxxxx")
     "姓名" name = "王五"
     "所属院系" instituteNo = "nn"
 }
-@enduml
 
-@startuml institute
 object clazz{
     "班级编号" classNo = "nnnn-nn-nnn-nn"
     "班级" className = "2015级-xxx专业-n班"
     "学历" education = "专/本/..."
     "所属专业" majorNo = "nnn"
 }
+
 object major{
     "专业编号" majorNo = "nnn"
     "专业名称" majorName = "xxxx专业"
     "所属院系" instituteNo = "nn"
 }
+
 object institute{
     "院系编号" instituteNo = "nn"
     "院系名称" instituteName = "xxx系(学院)"
     "办公电话" telephone = "nnnnnnnnn"
 }
-clazz "N" o-- "1" major
-major *-- institute
-@enduml
 
-@startuml cexperiment
 object cexperiment{
     "课程实验编号" experimentNo = "nnn-nnn-nn"
     "课程实验序号" oder = "n"
@@ -62,10 +54,7 @@ object experimentclause{
     "评价项名称" title = "xxxxxx"
     "所属课程实验" experimentNo = "nnn-nnn-nn"
 }
-experimentclause *-- cexperiment
-@enduml
 
-@startuml cexperiments
 object cexperiments{
     "课程实验编号" experimentNo = "nnn-nnn-nn"
     "学号" userID = "nnnn-nn-nnn-nn-nn"
@@ -83,10 +72,7 @@ object experimentclauses{
     "分数" score = "nnn"
     "所属课程实验" experimentNo = "nnn-nnn-nn"
 }
-experimentclauses *-- cexperiments
-@enduml
 
-@startuml course
 object course{
     "课程号" courseNo = "nnn-nnn"
     "课程名称" courseName = "xxxx"
@@ -95,9 +81,7 @@ object course{
     "先修课程" priorCourse = "nnn-nnn"
     "所属专业" majorNo = "nnn"
 }
-@enduml
 
-@startuml courseClass
 object courseClass{
     "所属课程" courseNo = "nnn-nnn"
     "开课班号" cClassNo = "nnnn-n-nnnn"
@@ -107,18 +91,13 @@ object courseClass{
     "开课时间" time = ""
     "任课教师" teacherNo = "nn-nnnn"
 }
-@enduml
 
-@startuml S_C
 object S_C{
     "所属课程" courseNo = "nnn-nnn"
     "开课班号" cClassNo = "nnnn-n-nnnn"
     "学号" studentID = "nnnn-nn-nnn-nn-nn"
     "成绩" score = "nn"
 }
-@enduml
-
-@startuml experimentscores
 object experimentscores{
     "实验成绩单号" experimentscoresNo = "nnnn-nn-nnn-nn-nn-nnnn-n-nnnn-nnn-nnn-nn"
     "所属课程实验" experimentNo = "nnn-nnn-nn"
@@ -126,4 +105,20 @@ object experimentscores{
     "开课班号" cClassNo = "nnnn-n-nnnn"
     "学号" studentID = "nnnn-nn-nnn-nn-nn"
 }
+student "N" -- "1" clazz
+clazz "N" o-- "1" major
+major *-- institute
+teacher "N" -- "1" institute
+admin "N" -- "1" institute
+S_C "N" -- "1" student
+S_C "N" -- "1" courseClass
+courseClass "N" -- "1" course
+courseClass "N" -- "1" teacher
+course "N" -- "1" major
+experimentclause *-- cexperiment
+cexperiment "N" -- "1" course
+experimentscores "N" -- "1" S_C
+experimentscores "N" -- "1" cexperiment
+experimentclauses *-- cexperiments
+experimentscores "1"--"1" cexperiments
 @enduml
