@@ -78,20 +78,21 @@ object course{
     "所属专业" majorNo = "nnn"
 }
 @enduml
-@startuml courseobject
-object courseobject{
-    "" cobjectNo = ""
-    "" count = ""
-    "" term = ""
-    "" time = ""
-    "" courseNo = ""
-    "" teacherNo = ""
+@startuml courseClass
+object courseClass{
+    "所属课程" courseNo = "nnn-nnn"
+    "开课班号" cClassNo = "nnnn-n-nnnn"
+    "选修人数" count = "nn"
+    "开课学期" term = "n"
+    "开课时间" time = ""
+    "任课教师" teacherNo = "nn-nnnn"
 }
 @enduml
 @startuml S_C
 object S_C{
-    "" cobjectNo = ""
-    "" studentID = ""
-    "" score = ""
+    "所属课程" courseNo = "nnn-nnn"
+    "开课班号" cClassNo = "nnnn-n-nnnn"
+    "学号" studentID = "nnnn-nn-nnn-nn-nn"
+    "成绩" score = "nn"
 }
 @enduml
