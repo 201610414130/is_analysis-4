@@ -55,6 +55,7 @@ object cexperiment{
     "课程实验编号" experimentNo = "nnn-nnn-nn"
     "课程实验序号" oder = "n"
     "课程实验标题" title = "xxxxxx"
+    "实验提交地址规定" address = "xxxxxxxx"
     "所属课程" courseNo = "nnn-nnn"
 }
 object experimentclause{
@@ -72,7 +73,7 @@ object cexperiments{
     "课程实验序号" oder = "n"
     "课程实验标题" title = "xxxxxx"
     "课程实验简介" info = "xxxxxxxxxxxxxxxx"
-    "课程实验提交地址" address = "https://github.com/xxxxxxxx"
+    "实验提交地址规定" address = "xxxxxxxx"
     "课程实验成绩" score = "nnn"
     "批改时间" date = "YY-mm-dd HH-MM-SS"
 }
