@@ -17,8 +17,10 @@ package 用户基本功能{
     User -up-> logout
 }
 package 业务用例集{
+    (提交课程实验) as submitWK
     (选课) as singCourse
-    (查看成绩) as queryGrade
+    (课程列表) as getClassList
+    (学生列表) as GetStudents
     (批改成绩) as setGrade
     (添加课程实验) as addCourseTask
     (编辑课程实验) as ediCourseTask
@@ -26,8 +28,10 @@ package 业务用例集{
     (添加课程) as addCourse
     (编辑课程) as ediCourse
     (删除课程) as delCourse
+    student --> submitWK
+    student --> getClassList
     User --> singCourse
-    User --> queryGrade
+    teacher --> GetStudents
     teacher --> setGrade
     admin --> addCourseTask
     admin --> ediCourseTask
