@@ -52,23 +52,23 @@ major *-- institute
 
 @startuml cexperiment
 object cexperiment{
-    "课程实验编号" experimentNo = "nnn-nnn-nn"
+    "课程实验编号" experimentNo = "nnn-nnn-nnnn-nn"
     "课程实验序号" oder = "n"
     "课程实验标题" title = "xxxxxx"
     "实验提交地址规定" address = "xxxxxxxx"
     "所属课程" courseNo = "nnn-nnn"
 }
 object experimentclause{
-    "课程实验评价项编号" experimentclauseNo = "nnn-nnn-nn-nn"
+    "课程实验评价项编号" experimentclauseNo = "nnn-nnn-nnnn-nn-nn"
     "评价项名称" title = "xxxxxx"
-    "所属课程实验" experimentNo = "nnn-nnn-nn"
+    "所属课程实验" experimentNo = "nnn-nnn-nnnn-nn"
 }
 experimentclause *-- cexperiment
 @enduml
 
 @startuml cexperiments
 object cexperiments{
-    "课程实验编号" experimentNo = "nnn-nnn-nn"
+    "课程实验编号" experimentNo = "nnn-nnn-nnnn-nn"
     "学号" userID = "nnnn-nn-nnn-nn-nn"
     "课程实验序号" oder = "n"
     "课程实验标题" title = "xxxxxx"
@@ -78,11 +78,11 @@ object cexperiments{
     "批改时间" date = "YY-mm-dd HH-MM-SS"
 }
 object experimentclauses{
-    "课程实验评价项编号" experimentclauseNo = "nnn-nnn-nn-nn"
+    "课程实验评价项编号" experimentclauseNo = "nnn-nnn-nnnn-nn-nn"
     "评价项名称" title = "xxxxxx"
     "评价" evaluate = "xxxxxxxxxxxxxxxxxxxxxxxxx"
     "分数" score = "nnn"
-    "所属课程实验" experimentNo = "nnn-nnn-nn"
+    "所属课程实验" experimentNo = "nnn-nnn-nnnn-nn"
 }
 experimentclauses *-- cexperiments
 @enduml
@@ -121,8 +121,8 @@ object S_C{
 
 @startuml experimentscores
 object experimentscores{
-    "实验成绩单号" experimentscoresNo = "nnnn-nn-nnn-nn-nn-nnnn-n-nnnn-nnn-nnn-nn"
-    "所属课程实验" experimentNo = "nnn-nnn-nn"
+    "实验成绩单号" experimentscoresNo = "nnn-nnn-nnnn-nn-nnnn-n-nnnn-nnnn-nn-nnn-nn-nn"
+    "所属课程实验" experimentNo = "nnn-nnn-nnnn-nn"
     "所属课程" courseNo = "nnn-nnn"
     "开课班号" cClassNo = "nnnn-n-nnnn"
     "学号" studentID = "nnnn-nn-nnn-nn-nn"
