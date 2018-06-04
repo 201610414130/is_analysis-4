@@ -1,79 +1,258 @@
-@startuml 登录
-
-@enduml
-
-@startuml 登出
-
-@enduml
-
-@startuml 修改密码
-
-@enduml
-
-@startuml 修改用户信息
-
-@enduml
-
-@startuml 查看用户信息
-
-@enduml
-
-@startuml 批改成绩
-
-@enduml
-
-@startuml 添加课程
-
-@enduml
-
-@startuml 编辑课程
-
-@enduml
-
-@startuml 删除课程
-
-@enduml
-
-@startuml 添加课程实验
-
-@enduml
-
-@startuml 编辑课程实验
-
-@enduml
-
-@startuml 删除课程实验
-
-@enduml
-
 @startuml 选课(教师选课)
-title 选课(教师选课)
+title 选课(教师选课)用例时序图
 hide footbox
-skinparam backgroundColor #cdf
 actor teacher
-database course表
-database 教师选课表
+== 查看可选课程 ==
+teacher --> major: 根据所属学院获取学院专业信息
+major --> course: 根据专业信息获取课程详细
+course --> teacher: 返回学院内可选授课课程及授课专业列表
+== 教师选课 ==
+teacher --> courseClass: 录入开课班信息
 @enduml
 
 @startuml 选课(学生选课)
-title 选课(学生选课)
+title 选课(学生选课)用例时序图
+hide footbox
+actor student
+== 查看可选课程 ==
+student -->clazz: 根据学号获取其班级号
+clazz --> major: 根据班级号获取专业信息
+major --> course: 根据专业信息获取课程详细
+course --> courseClass: 根据课程信息获取开课班信息
+courseClass --> student: 返回可选的开课班列表
+== 学生选课 ==
+student --> S_C: 录入学生选课信息
+student --> courseClass: 更新选修人数
 @enduml
 
-@startuml 查看成绩
-title 查看成绩用例时序图
+@startuml 课程列表
+title 课程列表用例时序图
+hide footbox
+actor student
+student --> S_C: 根据学号获取所选课程开课班号及课程号,成绩
+S_C --> courseClass: 根据开课班号及课程号获取该开课班信息
+courseClass --> course: 根据课程号获取课程详细信息
+course --> student: 返回学生相关课程信息
+group 点击课程
+    student --> experimentscores:根据学号,课程号开课班号查找试实验成绩单号
+    experimentscores --> cexperiments: 获取实验及成绩信息
+    cexperiments --> experimentclauses: 获取实验及成绩信息
+    experimentclauses --> student: 返回所点课程所有相关实验成绩列表
+end
+@enduml
+
+@startuml 学生列表
+title 学生列表用例时序图
+hide footbox
+actor teacher
+teacher --> courseClass: 根据工号以及默认学期获取\n所授课程开课班号及课程号
+courseClass --> S_C: 获取学生成绩及学号
+S_C --> student: 获取学生信息
+student --> teacher: 每个所授学生信息及其已批改实验平均成绩列表
+group 点击成绩详情
+    teacher --> experimentscores: 根据学号,课程号开课班号查找试实验成绩单号
+    experimentscores --> cexperiments: 获取实验及成绩信息
+    cexperiments --> experimentclauses: 获取实验及成绩信息
+    experimentclauses --> teacher: 返回所点击学生该课程所有相关实验成绩列表
+end
+@enduml
+
+@startuml 登录
+title 登录
 hide footbox
 actor user
-alt user = teacher
-    user --> teacher: 查询所授课程学生成绩
-    teacher --> courseClass: 获取所授课程开\n课班号及课程号
-    courseClass --> S_C: 获取学生成绩及学号
-    S_C --> student: 获取学生信息
-    student --> user: 每个所授学生信息及其已批改实验平均成绩
-    group 点击成绩详情
-        
-    end
-    ' courseClass --> course
-    ' course --> cexperiment:
-    ' cexperiment --> experimentclause:
-end
+boundary 前端页面
+control 服务器
+database 用户数据
+user --> 前端页面: 进入登录页面
+前端页面 --> 服务器: 发送get_publicKey请求,获取公钥
+服务器 --> 前端页面: 返回公钥
+user --> 前端页面: 输入用户ID,密码
+前端页面 --> 前端页面: 验证输入合法性
+user --> 前端页面: 点击登录
+前端页面 --> 服务器: 发送登录请求,传入公钥加密的用户ID,密码
+服务器 --> 服务器: 用私钥对公钥加密的密码\n进行解密获得用户ID,密码
+服务器 --> 用户数据: 通过用户id查找数据库存储的用户信息
+用户数据 --> 服务器: 返回加密密码及其他用户信息
+服务器 --> 服务器: 调用checkPwd()方法验证密码是否正确
+服务器 --> 服务器: 将用户信息用私钥加密存入session\n并设置失效时间根据用户类型调用不同的初始化方案
+服务器 --> 前端页面: 返回成功
+@enduml
+
+@startuml 登出
+title 选课(教师选课)用例时序图
+hide footbox
+actor user
+boundary 前端页面
+control 服务器
+user --> 前端页面: 点击登出
+前端页面 --> 前端页面: 确认登出?
+前端页面 --> 服务器: 调用logout()方法,删除session
+服务器 --> 前端页面: 返回成功及刷新页面
+前端页面 --> 前端页面: 刷新页面
+@enduml
+
+@startuml 修改密码
+title 修改密码
+hide footbox
+actor user
+boundary 前端页面
+control 服务器
+database 用户数据
+user --> 前端页面: 输入新旧密码
+前端页面 --> 前端页面: 验证输入合法性及\n两次新密码是否一致
+前端页面 --> 服务器: 发送校验旧密码请求,传入公钥加密的用户id及旧密码
+服务器 --> 服务器: 用私钥对公钥加密的密码\n进行解密获得用户id及旧密码
+服务器 --> 用户数据: 通过用户id查找数据库存储的加密密码
+用户数据 --> 服务器: 返回加密密码
+服务器 --> 服务器: 调用checkPwd()方法验证旧密码是否正确
+服务器 --> 前端页面: 返回成功
+前端页面 --> 前端页面: 确认修改
+前端页面 --> 服务器: 发送修改密码请求,传入公钥加密的用户id及新密码
+服务器 --> 服务器: 用私钥对公钥加密的密码\n进行解密获得用户id及新密码
+服务器 --> 用户数据: 传入加密算法处理过的新密码,\n调用updatePwd()方法修改用户密码
+@enduml
+
+@startuml 修改用户信息
+title 修改用户信息
+hide footbox
+actor user
+boundary 前端页面
+control 服务器
+database 用户数据
+user --> 前端页面: 点击修改个人信息
+前端页面 --> 前端页面: 从session获取个人信息\n并在修改页面中显示
+user --> 前端页面: 输入修改内容
+前端页面 --> 前端页面: 验证输入合法性
+前端页面 --> 服务器: 传入公钥加密的用户信息,\n发送更新用户请求
+服务器 --> 服务器: 用私钥对私钥加密的用户\n信息进行解密,得到用户信息
+服务器 --> 用户数据: 调用creatOrUpdateUser()\n方法保存用户信息
+@enduml
+
+@startuml 查看用户信息
+title 查看用户信息
+hide footbox
+actor user
+boundary 前端页面
+user --> 前端页面: 点击查看用户信息
+前端页面 --> 前端页面: 从session取出用私钥加密的用户信息,\n并用公钥解密获得用户信息
+前端页面 --> 前端页面: 显示得到的用户信息
+@enduml
+
+@startuml 批改成绩
+title 批改成绩
+hide footbox
+actor teacher
+boundary 前端页面
+control 服务器
+teacher --> 前端页面: 在学生实验详情\n中点击批改成绩
+前端页面 --> cexperiment: 通过课程实验编号\n查询课程实验信息
+cexperiment --> experimentclause: 通过课程实验编号\n查询各个实验评价项信息
+experimentclause --> 前端页面: 返回所点击项课程\n实验及评价项信息
+teacher --> 前端页面: 进行批改输入相关\n内容请点击提交批改
+前端页面 --> 前端页面: 验证输入内容合法性
+前端页面 --> 服务器: 发送保存批改成绩请求,\n传入实验批改数据
+服务器 --> 服务器: 处理实验数据
+服务器 --> experimentscores: 录入实验成绩单
+experimentscores --> cexperiments: 录入实验成绩信息
+cexperiments --> experimentclauses: 录入实验评价项信息
+experimentclauses --> 前端页面: 返回成功
+@enduml
+
+@startuml 添加课程
+title 添加课程
+hide footbox
+actor adimn
+boundary 前端页面
+admin --> 前端页面: 进入添加课程页面 
+前端页面 --> major: 根据院系号获取该院系专业信息
+major --> 前端页面: 返回专业信息列表
+admin --> 前端页面: 填写课程信息并选择其所属专业
+前端页面 --> 前端页面: 验证输入信息
+前端页面 --> course: 录入课程信息
+course --> 前端页面: 返回成功
+@enduml
+
+@startuml 编辑课程
+title 编辑课程
+hide footbox
+actor adimn
+boundary 前端页面
+前端页面 --> major: 根据院系号获取专业信息列表
+major --> course: 根据专业号获取课程列表
+course --> 前端页面: 返回课程及专业信息列表
+admin --> 前端页面: 点击某专业的课程的编辑按钮
+前端页面 --> 前端页面: 跳转并显示专业课程编辑界面
+admin --> 前端页面: 修改课程信息并提交
+前端页面 --> 前端页面: 验证输入信息
+前端页面 --> course: 更新课程信息
+course --> 前端页面: 返回成功
+@enduml
+
+@startuml 删除课程
+title 删除课程
+hide footbox
+actor adimn
+boundary 前端页面
+前端页面 --> major: 根据院系号获取专业信息列表
+major --> course: 根据专业号获取课程列表
+course --> 前端页面: 返回课程及专业信息列表
+admin --> 前端页面: 点击某专业的课程的删除按钮
+前端页面 --> 前端页面: 确认删除?
+前端页面 --> course: 删除课程信息
+course --> 前端页面: 返回成功
+@enduml
+
+@startuml 添加课程实验
+title 添加课程实验
+hide footbox
+actor adimn
+boundary 前端页面
+admin --> 前端页面: 进入添加课程页面 
+前端页面 --> major: 根据院系号获取该院系专业信息
+major --> course: 根据专业号获取课程信息
+course --> 前端页面: 返回课程信息列表
+admin --> 前端页面: 填写课程实验信息,实验评价项信息及选择所属课程
+前端页面 --> 前端页面: 验证输入信息
+前端页面 --> cexperiment: 录入课程实验信息
+cexperiment --> experimentclause: 录入实验评价项信息
+experimentclause --> 前端页面: 返回成功
+@enduml
+
+@startuml 编辑课程实验
+title 编辑课程实验
+hide footbox
+actor adimn
+boundary 前端页面
+admin --> 前端页面: 进入添加课程页面 
+前端页面 --> major: 根据院系号获取该院系专业信息
+major --> course: 根据专业号获取课程信息
+course --> cexperiment: 根据课程号获取实验信息
+cexperiment --> experimentclause: 根据实验号获取实验评价项信息
+experimentclause --> 前端页面: 返回课程实验及实验评价项列表
+admin --> 前端页面: 点击某课程实验的编辑按钮
+前端页面 --> 前端页面: 跳转并显示课程实验编辑界面
+admin --> 前端页面: 修改课程实验信息并提交
+前端页面 --> 前端页面: 验证输入信息
+前端页面 --> cexperiment: 更新课程实验
+cexperiment --> experimentclause: 更新课程实验评价项
+course --> 前端页面: 返回成功
+@enduml
+
+@startuml 删除课程实验
+title 删除课程实验
+hide footbox
+actor adimn
+boundary 前端页面
+admin --> 前端页面: 进入添加课程页面 
+前端页面 --> major: 根据院系号获取该院系专业信息
+major --> course: 根据专业号获取课程信息
+course --> cexperiment: 根据课程号获取实验信息
+cexperiment --> experimentclause: 根据实验号获取实验评价项信息
+experimentclause --> 前端页面: 返回课程实验及实验评价项列表
+admin --> 前端页面: 点击某课程实验的删除按钮
+前端页面 --> 前端页面: 确认删除?
+前端页面 --> experimentclause: 删除课程实验评价项
+experimentclause --> cexperiment: 删除课程实验
+cexperiment --> 前端页面: 返回成功
 @enduml
