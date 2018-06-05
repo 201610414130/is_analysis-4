@@ -4,7 +4,8 @@ object student{
     "密码" pwd = pwd("xxxxxxxxxx")
     "姓名" name = "张三"
     "GitHub账号" Gname = "xxxxxxx"
-    "所属班级" objectNo = "nnnn-nn-nnn-nn"
+    "信息修改日期" updateDate ="YY-mm-dd HH-MM-SS"
+    "所属班级" classNo = "nnnn-nn-nnn-nn"
 }
 @enduml
 

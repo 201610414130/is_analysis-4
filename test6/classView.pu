@@ -6,6 +6,7 @@ class user{
 }
 class student{
     -String Gname
+    -Date updateDate
     -String classNo
 }
 class teacher{
