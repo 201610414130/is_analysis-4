@@ -32,22 +32,25 @@
 ![对象图-总](../out/test6/classView/实验管理平台类图.png)
 - 说明
 ~~~
-    1. 类图及其来源说明:
+    1. setter,getter方法被省略, 被继承属性省略
+    2. 属性示意后面给出
+    3. ***No等外键被列在后面
+    4. 类图及其来源说明:
         1. user 它是抽象的, 方便表述信息的抽象物
         2. student -使用/修改-> 用例: 用户基本功能用例集内全部,课程列表,选课等
         3. teacher -使用/修改-> 用例: 用户基本功能用例集内全部,学生列表,批改成绩,选课等
         4. admin -使用/修改-> 用例: 用户基本功能用例集内全部等
-        5. clazz -->
-        6. major -->
-        7. institute -->
-        8. course -->
-        9. courseClass -->
-        10. S_C -->
-        11. cexperiment -->
-        12. experimentclause -->
-        13. cexperiments -->
-        14. experimentclauses -->
-        15. experimentscores -->
+        5. clazz -使用-> 用例: 对课程和课程实验的相关等
+        6. major -使用-> 用例: 对课程和课程实验的相关等
+        7. institute -使用-> 用例: 对课程和课程实验的相关等
+        8. course -增删改-> 用例: 对课程的相关等
+        9. courseClass -增加,使用-> 用例: 师生选课等 
+        10. S_C -增加-> 用例: 选课用例等
+        11. cexperiment -增删改-> 用例: 对课程实验的相关等
+        12. experimentclause -增删改-> 用例: 对课程实验的相关等
+        13. cexperiments -增改-> 用例: 课程列表,批改成绩等
+        14. experimentclauses -增改-> 用例: 课程列表,批改成绩等
+        15. experimentscores -创建-> 用例: 选课,课程列表等
 ~~~
 
 ## 4. 对象图设计 [源码](/test6/objectMView.pu)
@@ -55,7 +58,8 @@
 ![对象图-总](../out/test6/objectMView/对象图-总.png)
 - 说明
 ~~~
-
+    1. 说明丢到了对象图详细设计里面...
+    2. 关系基本上就是上面的关系...
 ~~~
 - [对象图详细设计](/test6/对象图详细设计.md)
 
