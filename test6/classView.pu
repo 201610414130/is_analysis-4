@@ -96,23 +96,23 @@ class experimentscores{
     -String cClassNo
     -String studentID
 }
-student -up-|> user
-teacher -up-|> user
-admin -up-|> user
-student "N" -- "1" clazz
+student -up-|> user:继承
+teacher -up-|> user:继承
+admin -up-|> user:继承
+student "N" -- "1" clazz:属于
 clazz "N" o-- "1" major
 major *-- institute
-teacher "N" -- "1" institute
-admin "N" -- "1" institute
-S_C "N" -- "1" student
-S_C "N" -- "1" courseClass
-courseClass "N" -- "1" course
-courseClass "N" -- "1" teacher
-course "N" -- "1" major
+teacher "N" -- "1" institute:就职
+admin "N" -- "1" institute:管理
+S_C "N" -- "1" student:选择
+S_C "N" -- "1" courseClass:供选择
+courseClass "N" -- "1" course:开办
+courseClass "N" -- "1" teacher:讲授
+course "N" -- "1" major:开办
 experimentclause *-- cexperiment
-cexperiment "N" -- "1" course
-experimentscores "N" -- "1" S_C
-experimentscores "N" -- "1" cexperiment
+cexperiment "N" -- "1" course:属于
+experimentscores "N" -- "1" S_C:每个学生选课\n由于多个实验对应\n多份实验成绩单
+experimentscores "N" -- "1" cexperiment:每个实验由于\n多个学生对应\n多个实验成绩单
 experimentclauses *-- cexperiments
-experimentscores "1"--"1" cexperiments
+experimentscores "1"--"1" cexperiments:每份成绩单都会\n对应各自的独自的\n实验数据存储
 @enduml
