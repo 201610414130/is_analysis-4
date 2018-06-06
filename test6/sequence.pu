@@ -8,6 +8,7 @@ major --> course: 根据专业信息获取课程详细
 course --> teacher: 返回学院内可选授课课程及授课专业列表
 == 教师选课 ==
 teacher --> courseClass: 录入开课班信息
+courseClass --> teacher: 返回成功
 @enduml
 
 @startuml 选课(学生选课)
@@ -22,7 +23,8 @@ course --> courseClass: 根据课程信息获取开课班信息
 courseClass --> student: 返回可选的开课班列表
 == 学生选课 ==
 student --> S_C: 录入学生选课信息
-student --> courseClass: 更新选修人数
+S_C --> courseClass: 更新选修人数
+S_C --> student: 返回成功
 @enduml
 
 @startuml 课程列表
