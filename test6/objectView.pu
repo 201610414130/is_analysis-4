@@ -41,7 +41,7 @@ object clazz{
     "所属专业" majorNo = "nnn"
 }
 object major{
-    "专业编号" majorNo = "nnn"
+    "专业编号" majorNo = "nn-nnn"
     "专业名称" majorName = "xxxx专业"
     "所属院系" instituteNo = "nn"
 }
