@@ -24,7 +24,7 @@ courseClass --> student: 返回可选的开课班列表
 == 学生选课 ==
 student --> S_C: 录入学生选课信息
 S_C --> courseClass: 更新选修人数
-S_C --> student: 返回成功
+courseClass --> student: 返回成功
 @enduml
 
 @startuml 课程列表
