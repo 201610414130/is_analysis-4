@@ -3,6 +3,7 @@ object student{
     "学号" userID = "nnnn-nn-nnn-nn-nn"
     "密码" pwd = pwd("xxxxxxxxxx")
     "姓名" name = "张三"
+    "用户类型" userType = "3"
     "GitHub账号" Gname = "xxxxxxx"
     "信息修改日期" updateDate ="YY-mm-dd HH-MM-SS"
     "所属班级" classNo = "nnnn-nn-nnn-nn"
@@ -14,6 +15,7 @@ object teacher{
     "工号" userID = "nn-nnnn"
     "密码" pwd = pwd("xxxxxxxxxx")
     "姓名" name = "李四"
+    "用户类型" userType = "2"
     "GitHub账号" Gname = "xxxxxxx"
     "职称" title = "教授/副教授/..."
     "学位" degree = "专/本/..."
@@ -26,6 +28,7 @@ object admin{
     "工号" userID = "nn-nnnn"
     "密码" pwd = pwd("xxxxxxxxxx")
     "姓名" name = "王五"
+    "用户类型" userType = "1"
     "所属院系" instituteNo = "nn"
 }
 @enduml

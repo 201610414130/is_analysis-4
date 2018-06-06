@@ -3,6 +3,7 @@ class user{
     -String userID
     -String pwd
     -String name
+    -byte userType
 }
 class student{
     -String Gname
