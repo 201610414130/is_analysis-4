@@ -7,7 +7,7 @@ teacher --> major: 根据所属学院获取学院专业信息
 major --> course: 根据专业信息获取课程详细
 course --> teacher: 返回学院内可选授课课程及授课专业列表
 == 教师选课 ==
-teacher --> courseClass: 录入开课班信息
+teacher --> courseClass: 录入教师选课信息
 courseClass --> teacher: 返回成功
 @enduml
 
