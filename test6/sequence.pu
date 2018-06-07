@@ -172,7 +172,7 @@ experimentclauses --> 前端页面: 返回成功
 @startuml 添加课程
 title 添加课程
 hide footbox
-actor adimn
+actor admin
 boundary 前端页面
 admin --> 前端页面: 进入添加课程页面 
 前端页面 --> major: 根据院系号获取该院系专业信息
@@ -186,7 +186,7 @@ course --> 前端页面: 返回成功
 @startuml 编辑课程
 title 编辑课程
 hide footbox
-actor adimn
+actor admin
 boundary 前端页面
 前端页面 --> major: 根据院系号获取专业信息列表
 major --> course: 根据专业号获取课程列表
@@ -202,7 +202,7 @@ course --> 前端页面: 返回成功
 @startuml 删除课程
 title 删除课程
 hide footbox
-actor adimn
+actor admin
 boundary 前端页面
 前端页面 --> major: 根据院系号获取专业信息列表
 major --> course: 根据专业号获取课程列表
@@ -216,7 +216,7 @@ course --> 前端页面: 返回成功
 @startuml 添加课程实验
 title 添加课程实验
 hide footbox
-actor adimn
+actor admin
 boundary 前端页面
 admin --> 前端页面: 进入添加课程页面 
 前端页面 --> major: 根据院系号获取该院系专业信息
@@ -232,7 +232,7 @@ experimentclause --> 前端页面: 返回成功
 @startuml 编辑课程实验
 title 编辑课程实验
 hide footbox
-actor adimn
+actor admin
 boundary 前端页面
 admin --> 前端页面: 进入添加课程页面 
 前端页面 --> major: 根据院系号获取该院系专业信息
@@ -252,7 +252,7 @@ course --> 前端页面: 返回成功
 @startuml 删除课程实验
 title 删除课程实验
 hide footbox
-actor adimn
+actor admin
 boundary 前端页面
 admin --> 前端页面: 进入添加课程页面 
 前端页面 --> major: 根据院系号获取该院系专业信息
