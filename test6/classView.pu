@@ -63,6 +63,7 @@ class cexperiment{
     -String experimentNo
     -int oder
     -String title
+    -String info
     -String address
     -String courseNo
 }

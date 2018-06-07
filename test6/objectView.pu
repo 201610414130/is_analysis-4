@@ -59,6 +59,7 @@ object cexperiment{
     "课程实验编号" experimentNo = "nnn-nnn-nnnn-nn"
     "课程实验序号" oder = "n"
     "课程实验标题" title = "xxxxxx"
+    "课程实验简介" info = "xxxxxxxxxxxxxxxx"
     "实验提交地址规定" address = "xxxxxxxx"
     "所属课程" courseNo = "nnn-nnn"
 }

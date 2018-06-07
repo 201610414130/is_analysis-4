@@ -1,0 +1,179 @@
+﻿$axure.loadCurrentPage({
+  "url":"修改用户信息.html",
+  "generationDate":new Date(1528362643965.08),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"017eb551a294414eadb84cff35e3f03c",
+    "type":"Axure:Page",
+    "name":"修改用户信息",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"8b529389ce744ef7acc2321ff7b250a5",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":78,
+              "y":94},
+            "size":{
+              "width":67,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"e08e8dd1d429400fbb96095b64f2de6d",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":78,
+                  "y":94},
+                "size":{
+                  "width":67,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"60c73a43bad7413da69549aa7de74c99",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":170,
+              "y":94},
+            "size":{
+              "width":140,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d0f3dcd1067c4c8299dfc4c13b2ba84b",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":170,
+                  "y":94},
+                "size":{
+                  "width":140,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/修改密码/u14.png"}},
+{
+          "id":"0918a772c9454aa593b34a43472490c4",
+          "label":"",
+          "type":"button",
+          "styleType":"button",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":130,
+              "y":130},
+            "size":{
+              "width":60,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"d26c8a86b8484fb28fb983a3428572b4",
+          "label":"",
+          "type":"button",
+          "styleType":"button",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":220,
+              "y":130},
+            "size":{
+              "width":60,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"50bccaa9b4ad4712b31eeb8fe94cd70d",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":320,
+              "y":94},
+            "size":{
+              "width":150,
+              "height":30}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"c90e2aa1384c43babbb1c2a45a1efabd",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":320,
+                  "y":94},
+                "size":{
+                  "width":150,
+                  "height":30}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/修改用户信息/u6.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "8b529389ce744ef7acc2321ff7b250a5":{
+      "scriptId":"u0"},
+    "e08e8dd1d429400fbb96095b64f2de6d":{
+      "scriptId":"u1"},
+    "60c73a43bad7413da69549aa7de74c99":{
+      "scriptId":"u2"},
+    "d0f3dcd1067c4c8299dfc4c13b2ba84b":{
+      "scriptId":"u3"},
+    "0918a772c9454aa593b34a43472490c4":{
+      "scriptId":"u4"},
+    "d26c8a86b8484fb28fb983a3428572b4":{
+      "scriptId":"u5"},
+    "50bccaa9b4ad4712b31eeb8fe94cd70d":{
+      "scriptId":"u6"},
+    "c90e2aa1384c43babbb1c2a45a1efabd":{
+      "scriptId":"u7"}}});
