@@ -57,6 +57,8 @@ object cexperiment{
 object experimentclause{
     "课程实验评价项编号" experimentclauseNo = "nnn-nnn-nnnn-nn-nn"
     "评价项名称" title = "xxxxxx"
+    "实验项满分" num = 100
+    "实验项分数占比" bili = 0.35
     "所属课程实验" experimentNo = "nnn-nnn-nnnn-nn"
 }
 
@@ -74,6 +76,8 @@ object experimentclauses{
     "课程实验评价项编号" experimentclauseNo = "nnn-nnn-nnnn-nn-nn"
     "评价项名称" title = "xxxxxx"
     "评价" evaluate = "xxxxxxxxxxxxxxxxxxxxxxxxx"
+    "实验项满分" num = 100
+    "实验项分数占比" bili = 0.35
     "分数" score = "nnn"
     "所属课程实验" experimentNo = "nnn-nnn-nnnn-nn"
 }

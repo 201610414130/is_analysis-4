@@ -70,6 +70,8 @@ class cexperiment{
 class experimentclause{
     -String experimentclauseNo
     -String title
+    -int num
+    -float bili
     -String experimentNo
 }
 
@@ -87,6 +89,8 @@ class experimentclauses{
     -String experimentclauseNo
     -String title
     -String evaluate
+    -int num
+    -float bili
     -float score
     -String experimentNo
 }
