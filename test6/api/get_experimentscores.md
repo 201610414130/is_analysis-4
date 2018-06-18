@@ -38,9 +38,9 @@
             "title": "update_pwd"
             "message": "ture"
             "cexperiments": {
-                "experimentNo": "012001201416"
+                "experimentNo": "012001201416..."
+                "experimentNo": "..."
                 "userID": "2015010120118"
-                "name": "臧三"
                 "oder": "2"
                 "title": "什么什么什么的某某"
                 "info": "emmmmmm,就是介绍了啊"
@@ -48,17 +48,21 @@
                 "score": "94.5"
                 "date": "2018-06-07 00-00-18"
                 "experimentclauses": [{
-                    "experimentclauseNo": "01200120141601"
+                    "experimentscoresNo": "01200120141601"
+                    "experimentclauseNo": "012001201416"
                     "title": "内容完整性"
                     "evaluate": "教师输入的评价啦..."
+                    "num": ".."
+                    "bili": ".."
                     "score": "94"
-                    "experimentNo": "012001201416"
                 },{
-                    "experimentclauseNo": "01200120141602"
+                    "experimentscoresNo": "01200120141602"
+                    "experimentclauseNo": "012001201416"
                     "title": "格式工整"
                     "evaluate": "教师输入的评价啦..."
-                    "score": "95"
-                    "experimentNo": "012001201416"
+                    "num": ".."
+                    "bili": ".."
+                    "score": "94"
                 },...]
             }
         }

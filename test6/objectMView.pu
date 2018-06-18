@@ -32,7 +32,7 @@ object clazz{
     "班级编号" classNo = "nnnn-nn-nnn-nn"
     "班级" className = "2015级-xxx专业-n班"
     "学历" education = "专/本/..."
-    "所属专业" majorNo = "nnn"
+    "所属专业" majorNo = "nn-nnn"
 }
 
 object major{
@@ -48,23 +48,57 @@ object institute{
 }
 
 object cexperiment{
-    "课程实验编号" experimentNo = "nnn-nnn-nnnn-nn"
+    "课程实验编号" experimentNo = "nn-nnn-nnn-nnnn-nn"
     "课程实验序号" oder = "n"
     "课程实验标题" title = "xxxxxx"
     "课程实验简介" info = "xxxxxxxxxxxxxxxx"
     "实验提交地址规定" address = "xxxxxxxx"
-    "所属课程" courseNo = "nnn-nnn"
+    "所属课程" courseNo = "nn-nnn-nnn"
 }
 object experimentclause{
-    "课程实验评价项编号" experimentclauseNo = "nnn-nnn-nnnn-nn-nn"
+    "课程实验评价项编号" experimentclauseNo = "nn-nnn-nnn-nnnn-nn-nn"
     "评价项名称" title = "xxxxxx"
     "实验项满分" num = 100
     "实验项分数占比" bili = 0.35
-    "所属课程实验" experimentNo = "nnn-nnn-nnnn-nn"
+    "所属课程实验" experimentNo = "nn-nnn-nnn-nnnn-nn"
 }
 
+
+object course{
+    "课程号" courseNo = "nn-nnn-nnn"
+    "课程名称" courseName = "xxxx"
+    "学分" creditHour = "n"
+    "学时" courseHour = "n"
+    "先修课程" priorCourse = "nnn-nnn"
+    "所属专业" majorNo = "nn-nnn"
+}
+
+object courseClass{
+    "开课班号" cClassNo = "nnnn-n-nn-nnn-nnn-nn-nnnn"
+    "所属课程" courseNo = "nn-nnn-nnn"
+    "选修人限" number = "nn"
+    "选修人数" count = "nn"
+    "开课学期" term = "n"
+    "开课时间" time = ""
+    "任课教师" teacherNo = "nn-nnnn"
+}
+
+object S_C{
+    "开课班号" cClassNo = "nnnn-n-nn-nnn-nnn-nn-nnnn"
+    "所属课程" courseNo = "nn-nnn-nnn"
+    "学号" studentID = "nnnn-nn-nnn-nn-nn"
+    "成绩" score = "nn"
+}
+object experimentscores{
+    "实验成绩单号" experimentscoresNo = "nn-nnn-nnn-nnnn-nn-nnnn-n-nn-nnn-nnn-nn-nnnn-nnnn-nn-nnn-nn-nn"
+    "所属课程实验" experimentNo = "nn-nnn-nnn-nnnn-nn"
+    "所属课程" courseNo = "nn-nnn-nnn"
+    "开课班号" cClassNo = "nnnn-n-nn-nnn-nnn-nn-nnnn"
+    "学号" studentID = "nnnn-nn-nnn-nn-nn"
+}
 object cexperiments{
-    "课程实验编号" experimentNo = "nnn-nnn-nnnn-nn"
+    "实验成绩单号" experimentscoresNo = "nn-nnn-nnn-nnnn-nn-nnnn-n-nn-nnn-nnn-nn-nnnn-nnnn-nn-nnn-nn-nn"
+    "课程实验编号" experimentNo = "nn-nnn-nnn-nnnn-nn"
     "学号" userID = "nnnn-nn-nnn-nn-nn"
     "课程实验序号" oder = "n"
     "课程实验标题" title = "xxxxxx"
@@ -74,46 +108,13 @@ object cexperiments{
     "批改时间" date = "YY-mm-dd HH-MM-SS"
 }
 object experimentclauses{
-    "课程实验评价项编号" experimentclauseNo = "nnn-nnn-nnnn-nn-nn"
+    "实验成绩单号" experimentscoresNo = "nn-nnn-nnn-nnnn-nn-nnnn-n-nn-nnn-nnn-nn-nnnn-nnnn-nn-nnn-nn-nn"
+    "课程实验评价项编号" experimentclauseNo = "nn-nnn-nnn-nnnn-nn-nn"
     "评价项名称" title = "xxxxxx"
     "评价" evaluate = "xxxxxxxxxxxxxxxxxxxxxxxxx"
     "实验项满分" num = 100
     "实验项分数占比" bili = 0.35
     "分数" score = "nnn"
-    "所属课程实验" experimentNo = "nnn-nnn-nnnn-nn"
-}
-
-object course{
-    "课程号" courseNo = "nnn-nnn"
-    "课程名称" courseName = "xxxx"
-    "学分" creditHour = "n"
-    "学时" courseHour = "n"
-    "先修课程" priorCourse = "nnn-nnn"
-    "所属专业" majorNo = "nnn"
-}
-
-object courseClass{
-    "所属课程" courseNo = "nnn-nnn"
-    "开课班号" cClassNo = "nnnn-n-nnnn"
-    "选修人限" number = "nn"
-    "选修人数" count = "nn"
-    "开课学期" term = "n"
-    "开课时间" time = ""
-    "任课教师" teacherNo = "nn-nnnn"
-}
-
-object S_C{
-    "所属课程" courseNo = "nnn-nnn"
-    "开课班号" cClassNo = "nnnn-n-nnnn"
-    "学号" studentID = "nnnn-nn-nnn-nn-nn"
-    "成绩" score = "nn"
-}
-object experimentscores{
-    "实验成绩单号" experimentscoresNo = "nnn-nnn-nnnn-nn-nnnn-n-nnnn-nnnn-nn-nnn-nn-nn"
-    "所属课程实验" experimentNo = "nnn-nnn-nnnn-nn"
-    "所属课程" courseNo = "nnn-nnn"
-    "开课班号" cClassNo = "nnnn-n-nnnn"
-    "学号" studentID = "nnnn-nn-nnn-nn-nn"
 }
 student "N" -- "1" clazz
 clazz "N" o-- "1" major

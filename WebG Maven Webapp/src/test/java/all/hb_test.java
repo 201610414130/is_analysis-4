@@ -69,18 +69,17 @@ public class hb_test {
 		List<Student> students = q.list();
 		student = students.get(0);
 		student=session.get(Student.class, "2015010010101");
-//		student =getStudent();
 		Gson gson = new GsonBuilder().serializeNulls().create();
 		String studentStr = gson.toJson(student);
 		System.out.println("---------------\n刚刚获取:\n"+studentStr);
-		try {
-			byte[] encrypt = secretKeyUtil.encryptByPrivateKey(studentStr.getBytes());
-			System.out.println("---------------\n加密后:\n"+new String(encrypt));
-			System.out.println("---------------\n解密后:\n"+secretKeyUtil.decryptByPublicKey(encrypt));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			byte[] encrypt = secretKeyUtil.encryptByPrivateKey(studentStr.getBytes());
+//			System.out.println("---------------\n加密后:\n"+new String(encrypt));
+//			System.out.println("---------------\n解密后:\n"+secretKeyUtil.decryptByPublicKey(encrypt));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	@After
 	public void destroy() {
