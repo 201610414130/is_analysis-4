@@ -17,6 +17,11 @@ import java.util.Map;
 
 import javax.crypto.Cipher;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
+@Controller
 public class SecretKeyUtil {
 	private static final String KEY_ALGORITHM = "RSA";// 加密算法
 	private static final String PUBLIC_KEY = "RSAPublicKey";// 公钥

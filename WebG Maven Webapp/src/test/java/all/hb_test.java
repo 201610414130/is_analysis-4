@@ -1,81 +1,59 @@
 package all;
 
-
-
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
-import org.apache.struts2.components.Else;
-import org.apache.struts2.interceptor.ApplicationAware;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.annotations.Source;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.sinmem.bean.Admin;
-import org.sinmem.bean.Clazz;
+import org.junit.runner.RunWith;
 import org.sinmem.bean.Institute;
-import org.sinmem.bean.Major;
-import org.sinmem.bean.Student;
-import org.sinmem.bean.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import utils.HibernateProxyTypeAdapter;
-import utils.HibernateSessionFactory;
 import utils.SecretKeyUtil;
-import utils.TargetStrategy;
-
-
+/**
+ * 使用spring.test让Junit调用spring容器里面注册的对象
+ * @author sinmem
+ *
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:springconfig.xml")
 public class hb_test {
 	SessionFactory sessionFactory;
 	Session session;
 	Transaction tx;
 	ApplicationContext ctx;
-	@Autowired
 	SecretKeyUtil secretKeyUtil;
 	
 	@Before
 	public void init() {
-		ApplicationContext ctx = new FileSystemXmlApplicationContext("src/main/resources/springconfig.xml");
-		sessionFactory = ctx.getBean("sessionFactory", SessionFactory.class);
-		session = sessionFactory.getCurrentSession();
-		tx = session.beginTransaction();
 	}
-	@SuppressWarnings("static-access")
 	@Test
 	public void getMajor(){
-		Student student;
-		String sql = "SELECT * FROM student AS st WHERE st.userID = '2015010010101'";
-		SQLQuery q= session.createSQLQuery(sql).addEntity(Student.class);
-		List<Student> students = q.list();
-		student = students.get(0);
-		student=session.get(Student.class, "2015010010101");
-		Gson gson = new GsonBuilder().serializeNulls().create();
-		String studentStr = gson.toJson(student);
-		System.out.println("---------------\n刚刚获取:\n"+studentStr);
+		Institute institute = new Institute();
+		institute.setInstituteno("02");
+		institute.setInstitutename("ceshi");
+		institute.setTelephone("023147");
+//		tserviceimlp.insert(institute);
+//		date.openSession().getMapper(InstituteMapper.class).insert(institute);
+//		tserviceimlp.say();
+//		ttt.name();
+//		System.out.println("ok");
+//		Gson gson = new Gson();
+//		String studentStr = gson.toJson(institute);
+//		System.out.println("---------------\n刚刚获取:\n"+studentStr);
 //		try {
 //			byte[] encrypt = secretKeyUtil.encryptByPrivateKey(studentStr.getBytes());
-//			System.out.println("---------------\n加密后:\n"+new String(encrypt));
-//			System.out.println("---------------\n解密后:\n"+secretKeyUtil.decryptByPublicKey(encrypt));
+//			String string=Base64Utils.encode(encrypt);
+//			System.out.println("K8MPi96/ra2vY7TuXWFBkbWkjhx/ZBu7qu+TPgw7wWKQCMELOWpuITE4y+ctXyOglRUvucQLd3N+iYDizJuUB5TgpTNLJl9g6u3akpA76n/z8+VgsxGJuzvTtTI1CgWDL97zPlzep0gE6ZneQSk/Gk0hUwZHVZHxw0KXidQrjsc="+new String(string));
+//			System.out.println("---------------\n解密后:\n"+secretKeyUtil.decryptByPublicKey(Base64Utils.decode(string)));
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -83,7 +61,6 @@ public class hb_test {
 	}
 	@After
 	public void destroy() {
-		tx.commit();
 	}
 }
 

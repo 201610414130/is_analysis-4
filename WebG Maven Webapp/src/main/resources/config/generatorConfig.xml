@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE generatorConfiguration 
+	PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"   
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<!-- 文件头，必须放在第一行 -->
+
+<!-- 此文件只是mybatis 的数据库自动生成映射文件，实体类，接口等方法的，发布时，不用提交此文件，也可删除 -->
+<!-- 根节点 -->
+<generatorConfiguration>
+
+	<!-- <properties>用来指定一个需要在配置中解析使用的外部属性文件，不是必须的元素。 -->
+
+	<!-- 可选，用于添加运行类路径位置到类路径中的MBG： 当加载 JDBC 驱动内省数据库时 当加载根类中的 JavaModelGenerator 
+		检查重写的方法时 <classPathEntry location="这里写指定的路径名，可以是相对路径也可以是绝对路径" /> -->
+	<!-- 对MBG的各种置 -->
+	<classPathEntry location="F:\Repository\m2_repo\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+	<context id="context1" targetRuntime="MyBatis3"
+		defaultModelType="flat">
+
+
+		<!-- <property> 写在context下的property是用来对一些基本配置的设置 autoDelimitKeywords、beginningDelimiter、endingDelimiter用于给表明或字段添加上分隔符 
+			javaFileEncoding用来设置要使用的Java文本的编码 javaFormatter和xmlFormatter使用模板定制java和xml的样式 -->
+		<!--<plugin> 用来定义一个插件。插件用于扩展或修改通过MBG代码生成器生成的代码。插件将按在配置中配置的顺序执行。 -->
+
+		<!-- 定义注释生成器的属性 -->
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释? true : false -->
+			<property name="suppressAllComments" value="false" />
+			<!-- 是否阻止生成注释代时间戳? true : false -->
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<!-- 指定的jdbc的连接信息 ,有且只有一个（其值不用写入这里，参看：http://blog.csdn.net/pk490525/article/details/16819307） 
+			利用properties之类的加进来 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/ssh_test?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false" userId="root"
+			password="sinmem" />
+
+		<!-- 类型转换，JDBC类型和Java类型如何转换。 -->
+		<javaTypeResolver>
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） true一定会使用java.math.BigDecimal -->
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+
+		<!-- 生成实体类地址 Model -->
+		<javaModelGenerator targetPackage="org.sinmem.bean"
+			targetProject="WebG Maven Webapp/src/main/java">
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+
+		<!-- 生成map.xml文件 XML -->
+		<sqlMapGenerator targetPackage="org.sinmem.dao"
+			targetProject="WebG Maven Webapp/src/main/java">
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+
+
+		<!-- 生成map.xml对应client，也就是接口DAO -->
+		<javaClientGenerator targetPackage="org.sinmem.dao"
+			targetProject="WebG Maven Webapp/src/main/java" type="XMLMAPPER">
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+
+
+		<!-- 参考：http://mbg.cndocs.tk/configreference/table.html schema：数据库名 tableName：对应的数据库表 
+			domainObjectName：要生成的实体类 enable*ByExample： 是否生成 example类 -->
+		<!-- 自动维护主键 -->
+		<table tableName="institute" domainObjectName="Institute"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="major" domainObjectName="Major"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="admin" domainObjectName="Admin"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="teacher" domainObjectName="Teacher"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="clazz" domainObjectName="Clazz"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="course" domainObjectName="Course"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="courseclass" domainObjectName="Courseclass"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="student" domainObjectName="Student"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="cexperiment" domainObjectName="Cexperiment"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="experimentclause" domainObjectName="Experimentclause"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="s_c" domainObjectName="S_c"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="experimentscores" domainObjectName="Experimentscores"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="cexperiments" domainObjectName="Cexperiments"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		<table tableName="experimentclauses" domainObjectName="Experimentclauses"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+		</table>
+		
+
+	</context>
+</generatorConfiguration>
+<!-- 详细参考:http://mbg.cndocs.tk/index.html http://blog.csdn.net/isea533/article/details/42102297 -->

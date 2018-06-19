@@ -12,49 +12,25 @@
         http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
-    <context:component-scan base-package="org.sinmem.service"></context:component-scan>
-    <context:component-scan base-package="org.sinmem.action"></context:component-scan>
-    
-	<bean id= "date" class="java.util.Date"></bean>
-	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver">
-		</property>		
-		<property name="url" value="jdbc:mysql://localhost:3306/ssh_test?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="sinmem"></property>
-	</bean>
-
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:hibernate.cfg.xml" /> <!-- 加载hibernate配置文件 -->
-	</bean>
-	
-	<!--配置事务管理器，是用来管理sessionFactory的，这样所有的由sessionFactory产生的session将会有声明式的管理 -->
-	<!-- org.springframework.orm.hibernate5.HibernateTransactionManager类spring-orm-4.2.4.RELEASE.jar包的org.springframework.orm.hibernate4包中 -->
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<!--transactionManager对sessionFactory管理，我们用刚刚配置好的sessionFactory -->
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<!-- 配置advice的目的是指定哪些方法需要什么类型的事务模式 -->
-	<tx:advice id="advice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="save*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="delete*" propagation="REQUIRED" />
-			<tx:method name="query*" propagation="REQUIRED" />
-			<tx:method name="*" propagation="SUPPORTS" />
-		</tx:attributes>
-	</tx:advice>
-	<aop:config>
-		<!-- 配置哪些包的类要切入事务 -->
-		<aop:pointcut id="pointcut"
-			expression="execution(* com.sss.service.impl.*.*(..))" />
-		<aop:advisor advice-ref="advice" pointcut-ref="pointcut" /><!-- 
-			连接了上面的advice和上面的pointcut -->
-		<!-- aop:pointcut要写在aop:advisor上面，否则会报错 -->
-	</aop:config>
-	
+	<context:annotation-config/> 
+    <context:component-scan base-package="org.sinmem.action"/>
+    <context:component-scan base-package="org.sinmem.dao"/>
+    <context:component-scan base-package="org.sinmem.service"/>
+    <bean id= "date" class="java.util.Date"></bean>
+    <bean id="log4jInitialization" class="org.sinmem.common.log4j.MytMethodInvokingFactoryBean">
+        <property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+        <property name="targetMethod" value="initLogging" />
+        <property name="arguments">
+            <list>
+                <value>classpath:config/properties/log4j.properties</value>
+            </list>
+        </property>
+    </bean>   
+       
+    <!--导入数据库配置  -->
+    <import resource="config/xml/mybatis-db.xml"/>
+    <!--导入DAO配置  -->
+    <import resource="config/xml/mybatis-dao.xml"/>
+    <!--导入数据库事务配置  -->
+    <import resource="config/xml/spring-tx.xml"/>
 </beans>
