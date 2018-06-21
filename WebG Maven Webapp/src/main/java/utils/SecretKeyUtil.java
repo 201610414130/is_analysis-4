@@ -1,6 +1,11 @@
 package utils;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -13,16 +18,23 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.crypto.Cipher;
 
+import org.sinmem.bean.KeyMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class SecretKeyUtil {
+	@Autowired
+	private static KeyMap key;
+	private static final String FILE_PATH = "F:/key.properties";//为了可以在Junit以及Tomcat下都能使用,暂时用绝对路径
 	private static final String KEY_ALGORITHM = "RSA";// 加密算法
 	private static final String PUBLIC_KEY = "RSAPublicKey";// 公钥
 	private static final String PRIVATE_KEY = "RSAPrivateKey";// 私钥
@@ -35,7 +47,7 @@ public class SecretKeyUtil {
 	// 以饿汉方式创建加密工具
 	private SecretKeyUtil() {
 		try {
-			generateKey();
+			get_keys_onfile();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,27 +62,27 @@ public class SecretKeyUtil {
 	/**
 	 * 生成密钥对
 	 */
-	private void generateKey() {
-		KeyPairGenerator keyPairGen;
-		try {
-			keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
-			SecureRandom secureRandom = new SecureRandom(new Date().toString().getBytes()); 
-			keyPairGen.initialize(1024, secureRandom);
-			KeyPair keyPair = keyPairGen.generateKeyPair();
-			RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-			RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-			try {
-				byte[] tempByte = ((Key)publicKey).getEncoded();
-				keyMap.put(PUBLIC_KEY, Base64Utils.encode(tempByte));
-				tempByte = ((Key)privateKey).getEncoded();
-				keyMap.put(PRIVATE_KEY, Base64Utils.encode(tempByte));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-	}
+//	private void generateKey() {
+//		KeyPairGenerator keyPairGen;
+//		try {
+//			keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
+//			SecureRandom secureRandom = new SecureRandom(new Date().toString().getBytes()); 
+//			keyPairGen.initialize(1024, secureRandom);
+//			KeyPair keyPair = keyPairGen.generateKeyPair();
+//			RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+//			RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+//			try {
+//				byte[] tempByte = ((Key)publicKey).getEncoded();
+//				keyMap.put(PUBLIC_KEY, Base64Utils.encode(tempByte));
+//				tempByte = ((Key)privateKey).getEncoded();
+//				keyMap.put(PRIVATE_KEY, Base64Utils.encode(tempByte));
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		} catch (NoSuchAlgorithmException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	
 	/** 
@@ -119,6 +131,7 @@ public class SecretKeyUtil {
      */  
     public static String decryptByPublicKey(byte[] encryptedData)  
             throws Exception {
+//    	byte[] encryptedData = inputStr.getBytes();
     	String publicKey = keyMap.get(PUBLIC_KEY);
         byte[] keyBytes = Base64Utils.decode(publicKey);  
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);  
@@ -192,8 +205,9 @@ public class SecretKeyUtil {
      * @return 
      * @throws Exception 
      */  
-    public static byte[] encryptByPrivateKey(byte[] data)  
-            throws Exception {  
+    public static byte[] encryptByPrivateKey(String dataStr)  
+            throws Exception {
+    	byte[] data = dataStr.getBytes();
     	String privateKey = keyMap.get(PRIVATE_KEY);
         byte[] keyBytes = Base64Utils.decode(privateKey);  
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);  
@@ -222,9 +236,61 @@ public class SecretKeyUtil {
         return encryptedData;  
     }
 	
+    /**
+     * 
+     * @return 公钥
+     */
+    public static String getPublicKey(){
+    	return keyMap.get(PUBLIC_KEY).toString();
+    }
 	
 	public static void main(String[] argvs){
-		System.out.println(keyMap.get(PRIVATE_KEY).toString());
-		System.out.println(keyMap.get(PUBLIC_KEY).toString());
+		Properties prop=new Properties();
+		InputStream in;
+        try {
+            in = new BufferedInputStream(new FileInputStream(FILE_PATH));
+            prop.load(in);     ///加载属性列表
+            System.out.println("PUBLIC_KEY:"+prop.getProperty(PUBLIC_KEY));
+            System.out.println("PRIVATE_KEY:"+prop.getProperty(PRIVATE_KEY));
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }  
+	}
+	private static void get_keys_onfile(){
+		
+//		文件读写路径有问题懒得改
+		Properties prop=new Properties();
+		InputStream in;
+        try {
+            in = new BufferedInputStream(new FileInputStream(FILE_PATH));
+            prop.load(in);     ///加载属性列表
+//            System.out.println("PUBLIC_KEY:"+prop.getProperty(PUBLIC_KEY));
+//            System.out.println("PRIVATE_KEY:"+prop.getProperty(PRIVATE_KEY));
+            keyMap.put(PUBLIC_KEY, prop.getProperty(PUBLIC_KEY));
+			keyMap.put(PRIVATE_KEY, prop.getProperty(PRIVATE_KEY));
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 }
+
+
+
+
+
+/////保存属性到b.properties文件
+//Properties props=new Properties();
+//FileOutputStream oFile;
+//try {
+//	oFile = new FileOutputStream("src/main/resources/config/properties/key.properties", false);
+//	props.setProperty(PRIVATE_KEY, keyMap.get(PRIVATE_KEY).toString());
+//	props.setProperty(PUBLIC_KEY, keyMap.get(PUBLIC_KEY).toString());
+//	props.store(oFile, "RSAKey");
+//	System.out.println("save ok");
+//	oFile.close();
+//} catch (Exception e) {
+//	// TODO Auto-generated catch block
+//	e.printStackTrace();
+//}//true表示追加打开

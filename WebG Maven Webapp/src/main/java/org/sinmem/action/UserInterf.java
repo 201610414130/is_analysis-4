@@ -14,7 +14,7 @@ public interface UserInterf<T> {
 	 * @param t 用户实体
 	 * @return 操作执行状态
 	 */
-	public String login(T user, Map<String, Object> sessionMap);
+	public boolean login(T user, Map<String, Object> sessionMap);
 	
 	
 	/**
@@ -36,7 +36,7 @@ public interface UserInterf<T> {
 	 * @param user 用户实体
 	 * @return 操作执行状态
 	 */
-	public String update_Pwd(T user);
+	public boolean update_Pwd(T user);
 	
 	
 	/**
@@ -47,7 +47,7 @@ public interface UserInterf<T> {
 	 * @param user 用户实体
 	 * @return 操作执行状态
 	 */
-	public String update_user(T user);
+	public boolean update_user(String data, Class<T> type);
 	
 	
 	/**

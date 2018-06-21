@@ -10,6 +10,12 @@
 		</action> -->
 		
 	<!-- user IPAs -->
+		<action name="get_publicKey" class="org.sinmem.action.UserAction" method="get_publicKey">
+			<result type="json" name="ok">
+				<!-- 利用name属性'root'为jsonstr仅返回action中字段'jsonStr'值(鬼知道为什么他居然str的'S'不能大写...) -->
+				<param name="root">jsonstr</param>
+			</result>
+		</action>
 		<!-- 用户登录 UserAction StudentAction-->
 		<action name="login" class="org.sinmem.action.UserAction" method="login">
 			<result type="json" name="ok">
@@ -28,6 +34,16 @@
 			</result>
 		</action>
 		<action name="update_Pwd" class="org.sinmem.action.UserAction" method="update_Pwd">
+			<result type="json" name="ok">
+				<param name="root">jsonstr</param>
+			</result>
+		</action>
+		<action name="update_user" class="org.sinmem.action.UserAction" method="update_user">
+			<result type="json" name="ok">
+				<param name="root">jsonstr</param>
+			</result>
+		</action>
+		<action name="get_MUserInfo" class="org.sinmem.action.UserAction" method="get_MUserInfo">
 			<result type="json" name="ok">
 				<param name="root">jsonstr</param>
 			</result>

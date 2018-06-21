@@ -12,24 +12,24 @@ public class StudentServiceImpl extends UserServiceImpl<Student>{
 	@Autowired
 	StudentMapper studentMapper;
 	
-	@Override
-	public Student login(Student student) {
-		return studentMapper.selectByPrimaryKey(student.getUserid());
-	}
+//	@Override
+//	public Student login(Student student) {
+//		return studentMapper.selectByPrimaryKey(student.getUserid());
+//	}
 
-	@Override
-	public void updatePwd(Student student) {
-		studentMapper.updateByPrimaryKeySelective(student);
-	}
+//	@Override
+//	public boolean updatePwd(Student student) {
+//		return studentMapper.updateByPrimaryKeySelective(student)>0?true:false;
+//	}
 
-	@Override
-	public Student getUserInfo(String id) {
-		return studentMapper.selectByPrimaryKey(id);
-	}
+//	@Override
+//	public Student getUserInfo(Student student) {
+//		return studentMapper.selectByPrimaryKey(student.getUserid());
+//	}
 
-	@Override
-	public void updateUserInfo(Student student) {
-		
-	}
+//	@Override
+//	public boolean updateUserInfo(Student student) {
+//		return studentMapper.updateByPrimaryKeySelective(student)>0?true:false;
+//	}
 
 }

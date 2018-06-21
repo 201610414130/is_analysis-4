@@ -1,29 +1,34 @@
 package org.sinmem.service.impl;
 
+import org.sinmem.bean.User;
+import org.sinmem.dao.UserMapper;
 import org.sinmem.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl<T> implements UserService<T>{
+	@Autowired
+	UserMapper<T> userMapper;
 
 	@Override
-	public T login(T t) {
-		return null;
+	public T login(T user) {
+		return userMapper.selectByPrimaryKey(((User) user).getUserid());
 	}
 
 	@Override
-	public void updatePwd(T t) {
-		
+	public boolean updatePwd(T user) {
+		return userMapper.updateByPrimaryKeySelective(user)>0?true:false;
 	}
 
 	@Override
-	public T getUserInfo(String id) {
-		return null;
+	public T getUserInfo(T user) {
+		return userMapper.selectByPrimaryKey(((User) user).getUserid());
 	}
 
 	@Override
-	public void updateUserInfo(T t) {
-		
+	public boolean updateUserInfo(T user) {
+		return userMapper.updateByPrimaryKeySelective(user)>0?true:false;
 	}
 
 }

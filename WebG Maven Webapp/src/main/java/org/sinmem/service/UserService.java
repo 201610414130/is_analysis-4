@@ -1,11 +1,11 @@
 package org.sinmem.service;
 
 public interface UserService<T> {
-	public T login(T t);
+	public T login(T user);
 	
-	public void updatePwd(T t);
+	public boolean updatePwd(T user);
 	
-	public T getUserInfo(String id);
+	public T getUserInfo(T user);
 	
-	public void updateUserInfo(T t);
+	public boolean updateUserInfo(T user);
 }

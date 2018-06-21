@@ -10,23 +10,23 @@ public class TeacherServiceImpl extends UserServiceImpl<Teacher>{
 	@Autowired
 	TeacherMapper teacherMapper;
 	
-	@Override
-	public Teacher login(Teacher teacher) {
-		return teacherMapper.selectByPrimaryKey(teacher.getUserid());
-	}
-
-	@Override
-	public void updatePwd(Teacher teacher) {
-		teacherMapper.updateByPrimaryKeySelective(teacher);
-	}
-
-	@Override
-	public Teacher getUserInfo(String id) {
-		return null;
-	}
-
-	@Override
-	public void updateUserInfo(Teacher t) {
-		
-	}
+//	@Override
+//	public Teacher login(Teacher teacher) {
+//		return teacherMapper.selectByPrimaryKey(teacher.getUserid());
+//	}
+//
+//	@Override
+//	public boolean updatePwd(Teacher teacher) {
+//		return teacherMapper.updateByPrimaryKeySelective(teacher)>0?true:false;
+//	}
+//
+//	@Override
+//	public Teacher getUserInfo(Teacher teacher) {
+//		return null;
+//	}
+//
+//	@Override
+//	public boolean updateUserInfo(Teacher teacher) {
+//		return teacherMapper.updateByPrimaryKeySelective(teacher)>0?true:false;
+//	}
 }

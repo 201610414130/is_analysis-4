@@ -1,6 +1,7 @@
 package all;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,10 +10,12 @@ import org.junit.runner.RunWith;
 import org.sinmem.action.UserAction;
 import org.sinmem.bean.Admin;
 import org.sinmem.bean.Institute;
+import org.sinmem.bean.KeyMap;
 import org.sinmem.bean.Student;
 import org.sinmem.bean.Teacher;
 import org.sinmem.bean.User;
 import org.sinmem.service.UserService;
+import org.sinmem.service.impl.ClazzServiceImpl;
 import org.sinmem.service.impl.StudentServiceImpl;
 import org.sinmem.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.gson.Gson;
 
+import utils.Base64Utils;
 import utils.SecretKeyUtil;
 import utils.Sha;
 /**
@@ -38,8 +42,10 @@ public class hb_test {
 	// 将名字为studentServiceImpl的StudentServiceImpl类注入到给UserService接口
 	@Autowired
 	UserService<Student> userService;
+//	@Autowired
+//	UserAction userAction;
 	@Autowired
-	UserAction userAction;
+	ClazzServiceImpl clazzServiceImpl;
 	
 	@Before
 	public void init() {
@@ -47,26 +53,36 @@ public class hb_test {
 	}
 	@Test
 	public void getMajor(){
-		Admin admin =new Admin();
-		admin.setUserid("011001");
-		admin.setPwd("sinmem");
+//		Admin admin =new Admin();
+//		admin.setUserid("011001");
+//		admin.setPwd("sinmem");
 //		Teacher teacher = new Teacher();
 //		teacher.setUserid("012001");
 //		teacher.setPwd("012001");
-//		Student student =new Student();
-//		student.setUserid("2015010010102");
-//		student.setPwd("2015010010102");
-		
-//		Student tempStudent = userService.login(student);
-//		tempStudent.setUpdatedate(new Date());
-//		Student tempStudent = userService.login(student);
-		userAction.setType(1);
-		userAction.setData(gson.toJson(admin));
-		userAction.login();
-//		System.out.println(gson.toJson(tempStudent));
-//		User user = tempStudent;
-//		System.out.println("\n\n---------------\n"+user.getPwd()+"/id:"+user.getUserid());
-//		System.out.println(Sha.sha_pwd("sqqqinmesssssssssssssmasasasasa"));
+		Student student =new Student();
+		student.setUserid("2015010010102");
+		student.setPwd("2015010010102");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		Student tempStudent = userService.getUserInfo(student);
+		map.put("student", tempStudent);
+		map.put("clazz", clazzServiceImpl.get_modle(tempStudent.getClazzno()));
+		String mapjson=gson.toJson(map);
+		System.out.println("\n\n\n-----mapjson-------\n"+mapjson);
+		try {
+			byte[] bb=SecretKeyUtil.encryptByPrivateKey(mapjson);
+			int sum=0;
+			for (byte b : bb) {
+				sum+=b;
+			}
+			String aa = Base64Utils.encode(bb);
+			bb = Base64Utils.decode(aa);
+			System.out.println(sum);
+			System.out.println(SecretKeyUtil.decryptByPublicKey(bb)+"\n\n");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@After
 	public void destroy() {

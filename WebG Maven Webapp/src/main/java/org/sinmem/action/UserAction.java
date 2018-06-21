@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionSupport;
 
 import utils.GsonUtils;
+import utils.SecretKeyUtil;
 
 @Controller
 public class UserAction extends ActionSupport implements SessionAware{
@@ -37,6 +38,16 @@ public class UserAction extends ActionSupport implements SessionAware{
 	
 	UserInterf userInterf;
 	
+	public String get_publicKey(){
+		jsonObjMap.put("title", "get_publicKey");
+		jsonObjMap.put("message", true);
+		jsonObjMap.put("publicKey", SecretKeyUtil.getPublicKey());
+		sessionMap.put("publicKey", SecretKeyUtil.getPublicKey());
+		jsonStr=GsonUtils.toJson(jsonObjMap);
+		return "ok";
+	}
+	
+	
 	/**
 	 * <dl>
 	 * 	<dt>用户登录 </dt>
@@ -50,15 +61,12 @@ public class UserAction extends ActionSupport implements SessionAware{
 		 */
 		generatorEntity();
 		jsonObjMap.put("title", "loginResponse");
-		jsonObjMap.put("message", userInterf.login(user, sessionMap)==null? false : true);
+		jsonObjMap.put("message", userInterf.login(user, sessionMap));
 		jsonStr=GsonUtils.toJson(jsonObjMap);
 		System.out.println("--jsonStr---\n"+jsonStr+"\n--------");
 		return "ok";
 	}
 	
-	public String tologin(){
-		return "ok";
-	}
 	/**
 	 * <dl>
 	 * 	<dt>用户登出</dt>
@@ -100,7 +108,7 @@ public class UserAction extends ActionSupport implements SessionAware{
 	 */
 	public String update_Pwd(){
 		generatorEntity();
-		jsonObjMap.put("title", "check_lastPwdResponse");
+		jsonObjMap.put("title", "update_PwdResponse");
 		jsonObjMap.put("message", userInterf.update_Pwd(user));
 		jsonStr=GsonUtils.toJson(jsonObjMap);
 		return "ok";
@@ -115,7 +123,30 @@ public class UserAction extends ActionSupport implements SessionAware{
 	 * @return 操作执行状态
 	 */
 	public String update_user(){
-		return null;
+		System.out.println("\n\n---------------\ndata"+data);
+		System.out.println("\n\n---------------\ntype"+type);
+		Class clazz = null;
+		switch (type) {
+		case 1:
+			clazz = Admin.class;
+			userInterf = admInterf;
+			break;
+		case 2:
+			clazz = Teacher.class;
+			userInterf = teaInterf;
+			break;
+		case 3:
+			clazz = Student.class;
+			userInterf = stuInterf;
+			break;
+		default:
+			System.out.println("---------\n用户类型错误\n---------");
+			break;
+		}
+		jsonObjMap.put("title", "update_userResponse");
+		jsonObjMap.put("message", userInterf.update_user(data, clazz));
+		jsonStr=GsonUtils.toJson(jsonObjMap);
+		return "ok";
 	}
 	
 	
@@ -127,7 +158,13 @@ public class UserAction extends ActionSupport implements SessionAware{
 	 * @return 操作执行状态
 	 */
 	public String get_MUserInfo(){
-		return null;
+		generatorEntity();
+		String tempString = userInterf.get_MUserInfo(user);
+		jsonObjMap.put("title", "get_MUserInfoResponse");
+		jsonObjMap.put("message", tempString==null?false:true);
+		jsonObjMap.put("data",tempString);
+		jsonStr=GsonUtils.toJson(jsonObjMap);
+		return "ok";
 	}
 
 	/**
@@ -166,7 +203,10 @@ public class UserAction extends ActionSupport implements SessionAware{
 	public void setSession(Map<String, Object> session) {
 		this.sessionMap = session;
 	}
-	
+	// 以下是页面跳转
+	public String tologin(){
+		return "ok";
+	}
 	// 以下为setter/getter方法区域
 	public String getData() {
 		return data;
