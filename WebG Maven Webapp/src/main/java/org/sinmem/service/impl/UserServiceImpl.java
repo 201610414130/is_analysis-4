@@ -1,16 +1,13 @@
 package org.sinmem.service.impl;
 
 import org.sinmem.service.UserService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl<T> implements UserService<T>{
 
 	@Override
 	public T login(T t) {
-		return null;
-	}
-
-	@Override
-	public String getPwd(T t) {
 		return null;
 	}
 

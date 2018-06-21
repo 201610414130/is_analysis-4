@@ -20,22 +20,35 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- struts-start -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
 			<version>2.5.14.1</version>
 		</dependency>
-		<dependency>
+		
+		
+<!-- 	未使用,忽略	<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.2.12.Final</version>
-		</dependency>
+		</dependency> -->
+		
 		<!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-spring-plugin -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
 			<version>2.5.14</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-json-plugin -->
+		<dependency>
+		    <groupId>org.apache.struts</groupId>
+		    <artifactId>struts2-json-plugin</artifactId>
+		    <version>2.5.14.1</version>
+		</dependency>
+		<!-- struts-end -->
+		
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

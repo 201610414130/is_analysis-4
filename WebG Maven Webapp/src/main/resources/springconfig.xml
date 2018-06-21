@@ -15,7 +15,7 @@
 	<context:annotation-config/> 
     <context:component-scan base-package="org.sinmem.action"/>
     <context:component-scan base-package="org.sinmem.dao"/>
-    <context:component-scan base-package="org.sinmem.service"/>
+    <context:component-scan base-package="org.sinmem.service.impl"/>
     <bean id= "date" class="java.util.Date"></bean>
     <bean id="log4jInitialization" class="org.sinmem.common.log4j.MytMethodInvokingFactoryBean">
         <property name="targetClass" value="org.springframework.util.Log4jConfigurer" />

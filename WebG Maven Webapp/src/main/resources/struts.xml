@@ -3,36 +3,36 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
     "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
-	<package name="default" extends="struts-default">
-		<!-- 用户登录 -->
-		<action name="test" class="org.sinmem.action.LoginAction" method="test">
-		</action>
-		<!-- 查询已借图书 -->
-		<action name="selectBook" class="org.action.LendAction" method="selectAllLend">
-			<result name="success">/lend.jsp</result>
-		</action>
-		<!-- 借书 -->
-		<action name="lendBook" class="org.action.LendAction" method="lendBook">
-			<result name="success">/lend.jsp</result>
-		</action>
-		<!-- 图书管理 -->
-		<action name="book" class="org.action.BookAction">
-			<result name="success">/bookmanage.jsp</result>
-			<result name="input">/bookmanage.jsp</result>
-			<interceptor-ref name="defaultStack">
-				<param name="validation.excludeMethods">*</param>
-				<param name="validation.includeMethods">addBook,updateBook</param>
-			</interceptor-ref>
-			<allowed-methods>addBook,updateBook,deleteBook,selectBook</allowed-methods>
-		</action>
-		<!-- 读取照片 -->
-		<action name="getImage" class="org.action.BookAction" method="getImage">
-			<interceptor-ref name="defaultStack">
-				<param name="validation.excludeMethods">*</param>
-				<param name="validation.includeMethods">addBook,updateBook</param>
-			</interceptor-ref>
-		</action>
+	<package name="default" extends="json-default">
+	
+<!-- 定义页面跳转,暂时没用		<action name="tologin" class="org.sinmem.action.UserAction" method="tologin">
+			<result name="ok">/loginSuccess.jsp</result>
+		</action> -->
 		
+	<!-- user IPAs -->
+		<!-- 用户登录 UserAction StudentAction-->
+		<action name="login" class="org.sinmem.action.UserAction" method="login">
+			<result type="json" name="ok">
+				<!-- 利用name属性'root'为jsonstr仅返回action中字段'jsonStr'值(鬼知道为什么他居然str的'S'不能大写...) -->
+				<param name="root">jsonstr</param>
+			</result>
+		</action>
+		<action name="logout" class="org.sinmem.action.UserAction" method="logout">
+			<result type="json" name="ok">
+				<param name="root">jsonstr</param>
+			</result>
+		</action>
+		<action name="check_lastPwd" class="org.sinmem.action.UserAction" method="check_lastPwd">
+			<result type="json" name="ok">
+				<param name="root">jsonstr</param>
+			</result>
+		</action>
+		<action name="update_Pwd" class="org.sinmem.action.UserAction" method="update_Pwd">
+			<result type="json" name="ok">
+				<param name="root">jsonstr</param>
+			</result>
+		</action>
+	<!-- user IPAs end-->	
 	</package>
 	<constant name="struts.i18n.encoding" value="gb2312"></constant>
 	<constant name="struts.multipart.saveDir" value="/tmp"></constant>

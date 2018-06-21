@@ -1,23 +1,29 @@
 package all;
 
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import java.util.Date;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.sinmem.action.UserAction;
+import org.sinmem.bean.Admin;
 import org.sinmem.bean.Institute;
+import org.sinmem.bean.Student;
+import org.sinmem.bean.Teacher;
+import org.sinmem.bean.User;
+import org.sinmem.service.UserService;
+import org.sinmem.service.impl.StudentServiceImpl;
+import org.sinmem.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.gson.Gson;
 
 import utils.SecretKeyUtil;
+import utils.Sha;
 /**
  * 使用spring.test让Junit调用spring容器里面注册的对象
  * @author sinmem
@@ -26,38 +32,41 @@ import utils.SecretKeyUtil;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:springconfig.xml")
 public class hb_test {
-	SessionFactory sessionFactory;
-	Session session;
-	Transaction tx;
 	ApplicationContext ctx;
 	SecretKeyUtil secretKeyUtil;
+	Gson gson;
+	// 将名字为studentServiceImpl的StudentServiceImpl类注入到给UserService接口
+	@Autowired
+	UserService<Student> userService;
+	@Autowired
+	UserAction userAction;
 	
 	@Before
 	public void init() {
+		gson = new Gson();
 	}
 	@Test
 	public void getMajor(){
-		Institute institute = new Institute();
-		institute.setInstituteno("02");
-		institute.setInstitutename("ceshi");
-		institute.setTelephone("023147");
-//		tserviceimlp.insert(institute);
-//		date.openSession().getMapper(InstituteMapper.class).insert(institute);
-//		tserviceimlp.say();
-//		ttt.name();
-//		System.out.println("ok");
-//		Gson gson = new Gson();
-//		String studentStr = gson.toJson(institute);
-//		System.out.println("---------------\n刚刚获取:\n"+studentStr);
-//		try {
-//			byte[] encrypt = secretKeyUtil.encryptByPrivateKey(studentStr.getBytes());
-//			String string=Base64Utils.encode(encrypt);
-//			System.out.println("K8MPi96/ra2vY7TuXWFBkbWkjhx/ZBu7qu+TPgw7wWKQCMELOWpuITE4y+ctXyOglRUvucQLd3N+iYDizJuUB5TgpTNLJl9g6u3akpA76n/z8+VgsxGJuzvTtTI1CgWDL97zPlzep0gE6ZneQSk/Gk0hUwZHVZHxw0KXidQrjsc="+new String(string));
-//			System.out.println("---------------\n解密后:\n"+secretKeyUtil.decryptByPublicKey(Base64Utils.decode(string)));
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		Admin admin =new Admin();
+		admin.setUserid("011001");
+		admin.setPwd("sinmem");
+//		Teacher teacher = new Teacher();
+//		teacher.setUserid("012001");
+//		teacher.setPwd("012001");
+//		Student student =new Student();
+//		student.setUserid("2015010010102");
+//		student.setPwd("2015010010102");
+		
+//		Student tempStudent = userService.login(student);
+//		tempStudent.setUpdatedate(new Date());
+//		Student tempStudent = userService.login(student);
+		userAction.setType(1);
+		userAction.setData(gson.toJson(admin));
+		userAction.login();
+//		System.out.println(gson.toJson(tempStudent));
+//		User user = tempStudent;
+//		System.out.println("\n\n---------------\n"+user.getPwd()+"/id:"+user.getUserid());
+//		System.out.println(Sha.sha_pwd("sqqqinmesssssssssssssmasasasasa"));
 	}
 	@After
 	public void destroy() {
