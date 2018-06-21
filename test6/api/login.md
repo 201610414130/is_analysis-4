@@ -39,11 +39,6 @@
         {
             "title": "update_pwd"
             "message": "ture"
-            "user": {
-                "userID": "2015010120118"
-                "name": "臧三"
-                "userType": "3"
-                ...(还有一些用户特有的信息)
-            }
+            "user"修改:此处不再返回user,改成通过session返回
         }
         ~~~
