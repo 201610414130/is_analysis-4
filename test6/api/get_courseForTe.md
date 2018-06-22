@@ -10,7 +10,7 @@
  
     |请求参数|必选|描述|
     |:-------:|:---:|:-----|
-    |instituteNo|TURE|教师的所属院系号|
+    |instituteNo(fKey)|TURE|教师的所属院系号|
 
 - 返回参数
  
@@ -24,7 +24,7 @@
     - **Request**
         ~~~
         Content-Type: application/json
-        "instituteNo" : "01"
+        "instituteNo(fKey)" : "01"
         ~~~
     - **Response**
         ~~~
