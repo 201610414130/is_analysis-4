@@ -1,5 +1,6 @@
 package org.sinmem.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.sinmem.bean.Institute;
@@ -16,7 +17,7 @@ public class InstituteServiceImpl extends BaseServiceImpl<Institute>{
 	public Institute get_modle(String modleid) {
 		return instituteMapper.selectByPrimaryKey(modleid);
 	}
-
+	
 	@Override
 	public boolean saveARecord(Institute modle) {
 		// TODO Auto-generated method stub

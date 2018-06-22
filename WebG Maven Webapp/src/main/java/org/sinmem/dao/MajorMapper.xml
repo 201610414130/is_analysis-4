@@ -100,4 +100,11 @@
       instituteNo = #{instituteno,jdbcType=VARCHAR}
     where majorNo = #{majorno,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectMajorsByinstituteNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from major
+    where instituteNo = #{instituteno,jdbcType=VARCHAR}
+  </select>
 </mapper>

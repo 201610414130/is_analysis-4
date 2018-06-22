@@ -13,19 +13,17 @@ public class ClazzServiceImpl extends BaseServiceImpl<Clazz>{
 	ClazzMapper clazzMapper;
 
 	@Override
-	public Clazz get_modle(String modleid) {
-		return clazzMapper.selectByPrimaryKey(modleid);
+	public Clazz get_modle(String clazzid) {
+		return clazzMapper.selectByPrimaryKey(clazzid);
 	}
 
 	@Override
 	public boolean saveARecord(Clazz modle) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public int saveRecords(List<Clazz> modles) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

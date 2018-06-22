@@ -1,5 +1,7 @@
 package org.sinmem.dao;
 
+import java.util.ArrayList;
+
 import org.sinmem.bean.Major;
 
 public interface MajorMapper {
@@ -39,4 +41,6 @@ public interface MajorMapper {
 	 * @mbggenerated
 	 */
 	int updateByPrimaryKey(Major record);
+
+	ArrayList<Major> selectMajorsByinstituteNo(String instituteNo);
 }

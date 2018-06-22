@@ -203,10 +203,14 @@ public class UserAction extends ActionSupport implements SessionAware{
 	public void setSession(Map<String, Object> session) {
 		this.sessionMap = session;
 	}
+	
+	
 	// 以下是页面跳转
 	public String tologin(){
 		return "ok";
 	}
+	
+	
 	// 以下为setter/getter方法区域
 	public String getData() {
 		return data;

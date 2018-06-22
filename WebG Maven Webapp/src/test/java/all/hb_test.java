@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.sinmem.action.CourseAction;
 import org.sinmem.action.UserAction;
 import org.sinmem.bean.Admin;
 import org.sinmem.bean.Institute;
@@ -45,7 +46,7 @@ public class hb_test {
 //	@Autowired
 //	UserAction userAction;
 	@Autowired
-	ClazzServiceImpl clazzServiceImpl;
+	CourseAction courseAction;
 	
 	@Before
 	public void init() {
@@ -53,36 +54,31 @@ public class hb_test {
 	}
 	@Test
 	public void getMajor(){
-//		Admin admin =new Admin();
-//		admin.setUserid("011001");
-//		admin.setPwd("sinmem");
-//		Teacher teacher = new Teacher();
-//		teacher.setUserid("012001");
-//		teacher.setPwd("012001");
-		Student student =new Student();
-		student.setUserid("2015010010102");
-		student.setPwd("2015010010102");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		Student tempStudent = userService.getUserInfo(student);
-		map.put("student", tempStudent);
-		map.put("clazz", clazzServiceImpl.get_modle(tempStudent.getClazzno()));
-		String mapjson=gson.toJson(map);
-		System.out.println("\n\n\n-----mapjson-------\n"+mapjson);
-		try {
-			byte[] bb=SecretKeyUtil.encryptByPrivateKey(mapjson);
-			int sum=0;
-			for (byte b : bb) {
-				sum+=b;
-			}
-			String aa = Base64Utils.encode(bb);
-			bb = Base64Utils.decode(aa);
-			System.out.println(sum);
-			System.out.println(SecretKeyUtil.decryptByPublicKey(bb)+"\n\n");
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		courseAction.add_course();
+//		Student student =new Student();
+//		student.setUserid("2015010010102");
+//		student.setPwd("2015010010102");
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		Student tempStudent = userService.getUserInfo(student);
+//		map.put("student", tempStudent);
+//		map.put("clazz", clazzServiceImpl.get_modle(tempStudent.getClazzno()));
+//		String mapjson=gson.toJson(map);
+//		System.out.println("\n\n\n-----mapjson-------\n"+mapjson);
+//		try {
+//			byte[] bb=SecretKeyUtil.encryptByPrivateKey(mapjson);
+//			int sum=0;
+//			for (byte b : bb) {
+//				sum+=b;
+//			}
+//			String aa = Base64Utils.encode(bb);
+//			bb = Base64Utils.decode(aa);
+//			System.out.println(sum);
+//			System.out.println(SecretKeyUtil.decryptByPublicKey(bb)+"\n\n");
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	@After
 	public void destroy() {

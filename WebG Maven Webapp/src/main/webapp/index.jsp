@@ -132,6 +132,98 @@ $(document).ready(function() {
 			},
 		})
 	})
+	$("#get_majors").click(function() {
+		console.log("get_majors信息");
+		var str = {"instituteNo":"01"}
+		$.ajax({
+			url : "get_majors",
+			type: "GET",
+			data : str,
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+	
+	$("#add_course").click(function() {
+		console.log("get_majors信息");
+		var str = {
+		        "courseno": "01010008",
+		        "coursename": "软件工程导论",
+		        "credithour": "2",
+		        "coursehour": "34",
+		        "priorcourse": "",
+		        "majorno": "01010",
+		    }
+		$.ajax({
+			url : "add_course",
+			type: "GET",
+			data : str,
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+	
+		$("#update_course").click(function() {
+		console.log("update_course信息");
+		var str = {
+		        "courseno": "01010007",
+		        "coursename": "软件工程导论08-2",
+		        "credithour": "2",
+		        "coursehour": "34",
+		        "priorcourse": "",
+		        "majorno": "01010",
+		    }
+		$.ajax({
+			url : "update_course",
+			type: "GET",
+			data : str,
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+		$("#del_course").click(function() {
+		console.log("del_course信息");
+		var str = {
+		        "courseno": "01010008",
+		        "coursename": "软件工程导论",
+		        "credithour": "2",
+		        "coursehour": "34",
+		        "priorcourse": "",
+		        "majorno": "01010",
+		    }
+		$.ajax({
+			url : "del_course",
+			type: "GET",
+			data : str,
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+	
 	$("#decrypt").click(function() {
 		decrypt(data)
 	})
@@ -175,5 +267,9 @@ user.name:<s:property value="#session.user.name"/>
 <button id="get_MUserInfo">获取用户信息</button><br>
 <button id="decrypt">公钥解密</button>
 <button id="encrypt">公钥加密</button>
+<button id="get_majors">获取major</button><br>
+<button id="add_course">add_course</button>
+<button id="del_course">del_course</button>
+<button id="update_course">update_course</button>
 </body>
 </html>
