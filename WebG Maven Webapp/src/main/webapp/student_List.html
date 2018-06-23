@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>学生列表</title>
+		<link type="text/css" rel="stylesheet" href="fontsawesome/css/font-awesome.css"/>
+		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+	</head>
+	<body>
+		<div class="main_box">
+			<h2><span></span>学生列表</h2>
+			<div class="cont_box">
+				<form action="#" method="post" id="staff_form">
+					<div class="search_formbox clearfix">
+                	<table>
+						<button type="button" id="job" class="btn blue_btn curr">全部学生</button>
+						<button type="button" id="quit" class="btn blue_btn">在校学生</button>
+						<button type="button" id="all" class="btn blue_btn">毕业学生</button>
+						<tr>
+							<td><span>&nbsp;&nbsp;&nbsp;&nbsp;开课班号:</span></td>
+							<td>
+							<select>
+  								<option value ="012031">012031</option>
+  								<option value ="012032">012032</option>
+  								<option value="012033">012033</option>
+  								<option value="012034">012034</option>
+							</select>
+							</td>
+							<td><span>&nbsp;&nbsp;&nbsp;&nbsp;课程名称:</span></td>
+							<td>
+							<select>
+  								<option value ="2018104101">移动开发技术</option>
+  								<option value ="2018104102">javaee高级应用</option>
+  								<option value="2018104103">信息系统分析与设计</option>
+  								<option value="2018104104">IT新技术</option>
+							</select>
+							</td>
+							<td><span>&nbsp;&nbsp;&nbsp;&nbsp;选修人数:&nbsp;&nbsp;30</span></td>
+						</tr>
+						</table>
+					</div>
+					<table border="0" cellspacing="0" cellpadding="0" class="table" id="table_box">
+					<thead>
+						<tr>
+							<th>学号</th>
+							<th>姓名</th>
+							<th>所属班级</th>
+							<th>GitHub用户名</th>
+							<th>课程实验平均成绩</th>
+							<th>修改日期</th>
+							<th width="268">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id="1"><!--此处id为进行编辑或查看时该条数据的唯一标识-->
+							<td>2015010120216</td>
+							<td>王某某</td>
+							<td>软件15-2(本)</td>
+							<td>asdsad</td>
+							<td>98.6</td>
+							<td>2018-4-12 14-25-56</td>
+							<td>
+								<a href="javascript:void(0);" class="table_btn table_edit edit_btn">
+									<i class="fa fa-edit"></i>
+									<span>批改成绩</span>
+								</a>
+								<a href="javascript:void(0);" class="table_btn table_del del_btn">
+									<i class="fa fa-trash-o"></i>
+									<span>删除</span>
+								</a>
+							</td>
+						</tr>
+						<tr id="2">
+							<td>2015010120218</td>
+							<td>张某某</td>
+							<td>软件15-1(本)</td>
+							<td>abcdef</td>
+							<td>99.9</td>
+							<td>2018-4-12 14-45-00</td>
+							<td>
+								<a href="javascript:void(0);" class="table_btn table_edit edit_btn">
+									<i class="fa fa-edit"></i>
+									<span>批改成绩</span>
+								</a>
+								<a href="javascript:void(0);" class="table_btn table_del del_btn">
+									<i class="fa fa-trash-o"></i>
+									<span>删除</span>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		</div>
+		<!--javascript include-->
+		<script src="js/jquery-2.2.1.min.js"></script>
+		<script src="js/jquery.dataTables.min.js"></script>
+		<script src="js/bootstrap-datepicker.js"></script>
+		<script src="js/jquery.validate.min.js"></script>
+		<script src="js/bootstrap-datepicker.js"></script>
+		<script src="js/other.js"></script>
+		<script>
+			$(function(){
+				$("body").other({tableId:"#table_box",tableWrap:[1,7],tableAas:[ 0,"desc"],tableSearch:true});
+				$("body").tipWindow({method:"edit",type:"form",Class:".edit_btn",even:"click",tipTit:"批改学生成绩",Twidth:"700",Theight:"460",editUrl:"edit_Staff.html"});//editUrl 批改学生成绩的请求地址
+				$("body").tipWindow({method:"edit",type:"form",Class:".see_btn",even:"click",tipTit:"删除学生",Twidth:"998",Theight:"600",editUrl:"staff_Achievement.html"});//editUrl 删除学生的请求地址
+				//学生筛选
+				$(".search_formbox .btn").click(function(){
+					var dataId = $(this).prop("id"),
+						that = $(this);
+					$.ajax({
+						type:"post",
+						url:"#",
+						data:{"id":dataId},
+						success:function(data){
+							that.addClass("curr").siblings().removeClass("curr");
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
