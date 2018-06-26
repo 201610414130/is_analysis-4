@@ -14,6 +14,18 @@
     <result column="time" jdbcType="INTEGER" property="time" />
     <result column="teacherNo" jdbcType="VARCHAR" property="teacherno" />
   </resultMap>
+  
+  <resultMap id="queryListResultMap" type="org.sinmem.bean.Courseclass">
+    <id column="cClassNo" jdbcType="VARCHAR" property="cclassno" />
+    <id column="courseNo" jdbcType="VARCHAR" property="courseno" />
+    <result column="courseName" jdbcType="VARCHAR" property="courseName" />
+    <result column="name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="term" jdbcType="INTEGER" property="term" />
+    <result column="time" jdbcType="INTEGER" property="time" />
+  </resultMap>
+  
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbggenerated
@@ -32,6 +44,21 @@
     where courseNo = #{courseno,jdbcType=VARCHAR}
       and cClassNo = #{cclassno,jdbcType=VARCHAR}
   </select>
+  
+  <select id="getCourseclassesByMajor" parameterType="java.lang.String" resultMap="queryListResultMap">
+  	SELECT cc.cClassNo,cc.courseNo,c.courseName,t.`name`,cc.number,cc.count,cc.term,cc.time
+	FROM courseclass AS cc
+	INNER JOIN teacher as t
+	ON t.userID = cc.teacherNo
+	INNER JOIN course as c
+	ON c.courseNo = cc.courseNo
+    <where>
+    	<if test="majorno != null">
+    		cc.courseno like '%${majorno}%'
+    	</if>
+    </where>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--
       WARNING - @mbggenerated

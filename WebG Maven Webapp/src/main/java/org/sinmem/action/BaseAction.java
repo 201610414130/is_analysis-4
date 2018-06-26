@@ -11,6 +11,7 @@ import com.opensymphony.xwork2.ModelDriven;
 
 @Controller
 public class BaseAction<T> implements SessionAware, ModelDriven<T>{
+	protected String fKey;
 	protected Map<String, Object> sessionMap;
 	protected Map<String, Object> jsonObjMap = new HashMap<String, Object>();
 	protected String jsonStr;
@@ -44,6 +45,14 @@ public class BaseAction<T> implements SessionAware, ModelDriven<T>{
 	
 	public void setJsonStr(String jsonStr) {
 		this.jsonStr = jsonStr;
+	}
+
+	public String getfKey() {
+		return fKey;
+	}
+
+	public void setfKey(String fKey) {
+		this.fKey = fKey;
 	}
 	
 }

@@ -12,6 +12,11 @@ public class CourseAction extends BaseAction<Course>{
 	@Autowired
 	CourseServiceImpl courseServiceImpl;
 	
+	public String get_courseForTe(){
+		
+		return "ok";
+	}
+	
 	public String add_course(){
 		// 设置主键,主键为majorno-oder,oder是顺序号,这里简单的定义为专业号相同时的课程号最大值加一
 		StringBuilder pK = new StringBuilder(model.getMajorno());
@@ -39,4 +44,7 @@ public class CourseAction extends BaseAction<Course>{
 		jsonStr = GsonUtils.toJson(jsonObjMap);
 		return "ok";
 	}
+	
+	
+	//	setter/getter
 }

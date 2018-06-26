@@ -1,5 +1,7 @@
 package org.sinmem.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Param;
 import org.sinmem.bean.Courseclass;
 
@@ -38,4 +40,6 @@ public interface CourseclassMapper {
 	 * @mbggenerated
 	 */
 	int updateByPrimaryKey(Courseclass record);
+	
+	ArrayList<Courseclass> getCourseclassesByMajor(@Param("majorno")String majorno);
 }

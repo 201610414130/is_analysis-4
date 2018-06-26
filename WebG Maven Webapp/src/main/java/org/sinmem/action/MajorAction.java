@@ -11,12 +11,11 @@ import utils.GsonUtils;
 
 @Controller
 public class MajorAction extends BaseAction<Major>{
-	private String instituteNo;
 	@Autowired
 	MajorServiceImpl majorServiceImpl;
 	
 	public String get_majors(){
-		ArrayList<Major> tempMajors = majorServiceImpl.get_modles(instituteNo);
+		ArrayList<Major> tempMajors = majorServiceImpl.get_modles(fKey);
 		jsonObjMap.put("title", "update_pwdResponse");
 		jsonObjMap.put("message", tempMajors.size()<1?false:true);
 		jsonObjMap.put("major", tempMajors);
@@ -24,15 +23,5 @@ public class MajorAction extends BaseAction<Major>{
 		return "ok";
 	}
 	
-	
-	//以下setter/getter
-	
-	public String getInstituteNo() {
-		return instituteNo;
-	}
-	
-	public void setInstituteNo(String instituteNo) {
-		this.instituteNo = instituteNo;
-	}
 	
 }

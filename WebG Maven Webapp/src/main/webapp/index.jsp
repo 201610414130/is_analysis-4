@@ -134,7 +134,7 @@ $(document).ready(function() {
 	})
 	$("#get_majors").click(function() {
 		console.log("get_majors信息");
-		var str = {"instituteNo":"01"}
+		var str = {"fKey":"01"}
 		$.ajax({
 			url : "get_majors",
 			type: "GET",
@@ -158,7 +158,7 @@ $(document).ready(function() {
 		        "credithour": "2",
 		        "coursehour": "34",
 		        "priorcourse": "",
-		        "majorno": "01010",
+		        "majorno": "01001",
 		    }
 		$.ajax({
 			url : "add_course",
@@ -199,6 +199,27 @@ $(document).ready(function() {
 			},
 		})
 	})
+	$("#get_courseForTe").click(function() {
+		console.log("get_courseForTe信息");
+		var str = {
+		        "fKey": "01001",
+		    }
+		$.ajax({
+			url : "get_courseForTe",
+			type: "GET",
+			data : str,
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+				var item = JSON.parse(msg);
+				addselect(item.course);
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
 		$("#del_course").click(function() {
 		console.log("del_course信息");
 		var str = {
@@ -213,6 +234,54 @@ $(document).ready(function() {
 			url : "del_course",
 			type: "GET",
 			data : str,
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+	
+	$("#get_courseClass").click(function(){
+		console.log("Huoqu开课班")
+		$.ajax({
+			url : "get_courseClass",
+			type: "GET",
+			data : {
+				"fKey":"20150100101"
+			},
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+	
+	
+	$("#add_selectCourseForTe button").click(function(){
+		console.log("add_selectCourseForTe 开始")
+		var data = {
+			"courseno" : $("#add_selectCourseForTe select[name=courseNo]").val(),
+			"number" : $("#add_selectCourseForTe input[name=number]").val(),
+			"count" : $("#add_selectCourseForTe input[name=number]").val(),
+			"term" : $("#add_selectCourseForTe input[name=term]").val(),
+			"time" : $("#add_selectCourseForTe input[name=time]").val(),
+			"teacherno" : $("#add_selectCourseForTe input[name=teacherNo]").val()
+		}
+		console.log((data))
+		$.ajax({
+			url : "add_selectCourseForTe",
+			type: "GET",
+			data : {
+				"jsonStr":JSON.stringify(data),
+			},
 			success : function(msg) {
 				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
 				console.log(JSON.parse(msg))
@@ -248,6 +317,11 @@ function encrypt(data){
 	var encryptData = encrypt.encrypt(data);
 	console.log(encryptData)
 }
+function addselect(item){
+	$.each(item, function(index,value,array) {
+		$("#add_selectCourseForTe select").append('<option value="'+value.courseno+'">'+value.coursename+'</option>');
+	})
+}
 </script>
 <body>
 <h2>Hello World!</h2>
@@ -269,7 +343,20 @@ user.name:<s:property value="#session.user.name"/>
 <button id="encrypt">公钥加密</button>
 <button id="get_majors">获取major</button><br>
 <button id="add_course">add_course</button>
-<button id="del_course">del_course</button>
-<button id="update_course">update_course</button>
+<button id="del_course">del_course</button>get_courseForTe
+<button id="update_course">update_course</button><br>
+<button id="get_courseForTe">get_courseForTe</button>
+<div id="add_selectCourseForTe">
+	<select name="courseNo"></select>
+	<input name="teacherNo" type="hidden" value="<s:property value="#session.user.userid"/>">
+	<input placeholder="选修人限" name="number">
+	<input placeholder="开课学期" name="term">
+	<input placeholder="开课时间" name="time">
+	<button>提交教师选课</button>
+</div>
+	<div id="add_selectCourseForSt">
+	<input type="hidden" value="<s:property value="#session.user.clazzno"/>">
+	<button id="get_courseClass">获取开课班</button>
+</div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package org.sinmem.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Param;
 import org.sinmem.bean.Course;
 
@@ -41,4 +43,5 @@ public interface CourseMapper {
 	int updateByPrimaryKey(Course record);
 
 	String getMaxPkByMajorno(@Param("no")String majorno);
+	ArrayList<Course> getCoursesByPk(String majorno);
 }

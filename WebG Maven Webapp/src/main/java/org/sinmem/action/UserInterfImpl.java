@@ -1,5 +1,6 @@
 package org.sinmem.action;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -12,7 +13,16 @@ import utils.GsonUtils;
 import utils.Sha;
 
 public class UserInterfImpl<T> implements UserInterf<T>, SessionAware{
-	private Map<String, Object> sessionMap;
+	protected String fKey;
+	
+	/**
+	 * <dl>
+	 * 	<dt>jsonStr</dt><dd>是用来前后台通信的json字符串名,前端通过它返回表单信息,后台通过它返回响应</dd>
+	 * </dl>
+	 */
+	protected String jsonStr;
+	protected Map<String, Object> sessionMap;
+	protected Map<String, Object> jsonObjMap = new HashMap<String, Object>();
 	@Autowired
 	UserService<T> userService;
 
@@ -72,5 +82,22 @@ public class UserInterfImpl<T> implements UserInterf<T>, SessionAware{
 	public void setSession(Map<String, Object> session) {
 		this.sessionMap = session;
 	}
+
+	public String getfKey() {
+		return fKey;
+	}
+
+	public void setfKey(String fKey) {
+		this.fKey = fKey;
+	}
+
+	public String getJsonStr() {
+		return jsonStr;
+	}
+
+	public void setJsonStr(String jsonStr) {
+		this.jsonStr = jsonStr;
+	}
+	
 	
 }

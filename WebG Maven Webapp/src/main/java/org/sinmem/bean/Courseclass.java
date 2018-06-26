@@ -163,4 +163,24 @@ public class Courseclass {
 	public void setTeacherno(String teacherno) {
 		this.teacherno = teacherno == null ? null : teacherno.trim();
 	}
+	
+	private String courseName;
+	private String teacherName;
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+	
 }

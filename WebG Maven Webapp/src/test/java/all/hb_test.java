@@ -54,7 +54,8 @@ public class hb_test {
 	}
 	@Test
 	public void getMajor(){
-		courseAction.add_course();
+//		courseAction.add_course();
+		System.out.println("ss");
 //		Student student =new Student();
 //		student.setUserid("2015010010102");
 //		student.setPwd("2015010010102");

@@ -29,7 +29,7 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 	}
 
 	@Override
-	public ArrayList<Major> get_modles(String privateid) {
+	public ArrayList<T> get_modles(String privateid) {
 		// TODO Auto-generated method stub
 		return null;
 	}

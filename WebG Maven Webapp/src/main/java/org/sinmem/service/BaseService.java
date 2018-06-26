@@ -14,5 +14,5 @@ public interface BaseService<T> {
 	public int saveRecords(List<T> modles);
 	int upda_Recode(T modle);
 	int del_Recode(T modle);
-	ArrayList<Major> get_modles(String privateid);
+	ArrayList<T> get_modles(String privateid);
 }
