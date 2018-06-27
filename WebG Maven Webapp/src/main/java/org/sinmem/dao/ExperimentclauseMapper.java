@@ -1,5 +1,8 @@
 package org.sinmem.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.annotations.Param;
 import org.sinmem.bean.Experimentclause;
 
 public interface ExperimentclauseMapper {
@@ -39,4 +42,7 @@ public interface ExperimentclauseMapper {
 	 * @mbggenerated
 	 */
 	int updateByPrimaryKey(Experimentclause record);
+	
+	int insertBatch(ArrayList<Experimentclause> list);
+	ArrayList<Experimentclause> get_ECByFk(@Param("fk")String fk);
 }

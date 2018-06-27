@@ -11,6 +11,17 @@
     <id column="courseNo" jdbcType="VARCHAR" property="courseno" />
     <result column="score" jdbcType="REAL" property="score" />
   </resultMap>
+  
+  <resultMap id="queryResultMap" type="org.sinmem.bean.S_c">
+    <id column="studentID" jdbcType="VARCHAR" property="studentid" />
+    <id column="cClassNo" jdbcType="VARCHAR" property="cclassno" />
+    <id column="courseNo" jdbcType="VARCHAR" property="courseno" />
+    <result column="score" jdbcType="REAL" property="score" />
+    <result column="name" jdbcType="VARCHAR" property="studentName" />
+    <result column="ClazzName" jdbcType="VARCHAR" property="clazzName" />
+    <result column="education" jdbcType="INTEGER" property="education" />
+  </resultMap>
+  
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbggenerated
@@ -30,6 +41,17 @@
       and cClassNo = #{cclassno,jdbcType=VARCHAR}
       and courseNo = #{courseno,jdbcType=VARCHAR}
   </select>
+  
+  <select id="getS_cWLcClassNo" parameterType="map" resultMap="queryResultMap">
+    SELECT ss.cClassNo, ss.courseNo, ss.studentID, st.`name`, ss.score, cl.ClazzName,cl.education
+	FROM s_c AS ss
+	INNER JOIN student as st
+	ON st.userID = ss.studentID
+	INNER JOIN clazz as cl
+	ON cl.clazzNo=st.clazzNo
+	WHERE ss.cClassNo = #{cclassno,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--
       WARNING - @mbggenerated

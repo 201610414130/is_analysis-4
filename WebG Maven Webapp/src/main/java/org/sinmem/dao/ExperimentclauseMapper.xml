@@ -19,6 +19,14 @@
     -->
     experimentclauseNo, title, num, bili, experimentNo
   </sql>
+  
+  <select id="get_ECByFk" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from experimentclause
+    where experimentNo = #{fk,jdbcType=VARCHAR}
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated
@@ -47,6 +55,18 @@
     values (#{experimentclauseno,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, 
       #{bili,jdbcType=REAL}, #{experimentno,jdbcType=VARCHAR})
   </insert>
+  
+  
+	<insert id="insertBatch" parameterType="org.sinmem.bean.Experimentclause">
+	    INSERT INTO experimentclause (experimentclauseNo, title, num, 
+      bili, experimentNo)
+	    VALUES
+	    <foreach collection ="list" item="item" separator =",">
+	         (#{item.experimentclauseno,jdbcType=VARCHAR}, #{item.title,jdbcType=VARCHAR}, #{item.num,jdbcType=INTEGER}, 
+      #{item.bili,jdbcType=REAL}, #{item.experimentno,jdbcType=VARCHAR})
+	    </foreach >
+	</insert>
+  
   <insert id="insertSelective" parameterType="org.sinmem.bean.Experimentclause">
     <!--
       WARNING - @mbggenerated

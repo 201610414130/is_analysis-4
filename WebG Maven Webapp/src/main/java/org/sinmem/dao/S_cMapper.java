@@ -1,5 +1,7 @@
 package org.sinmem.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Param;
 import org.sinmem.bean.S_c;
 
@@ -38,4 +40,5 @@ public interface S_cMapper {
 	 * @mbggenerated
 	 */
 	int updateByPrimaryKey(S_c record);
+	ArrayList<S_c> getS_cWLcClassNo(String cclassno);
 }

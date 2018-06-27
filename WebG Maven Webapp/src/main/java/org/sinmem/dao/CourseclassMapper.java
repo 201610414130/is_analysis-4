@@ -42,4 +42,5 @@ public interface CourseclassMapper {
 	int updateByPrimaryKey(Courseclass record);
 	
 	ArrayList<Courseclass> getCourseclassesByMajor(@Param("majorno")String majorno);
+	ArrayList<Courseclass> getCourseclassesWLteacher(@Param("teacherno")String teacherno, @Param("trem")Integer trem);
 }

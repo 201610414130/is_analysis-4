@@ -34,6 +34,6 @@ public class CourseServiceImpl extends BaseServiceImpl<Course>{
 	
 	@Override
 	public ArrayList<Course> get_modles(String privateid) {
-		return courseMapper.getCoursesByPk(privateid);
+		return courseMapper.getCoursesWhereFKLiek(privateid);
 	}
 }

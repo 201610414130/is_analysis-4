@@ -43,5 +43,5 @@ public interface CourseMapper {
 	int updateByPrimaryKey(Course record);
 
 	String getMaxPkByMajorno(@Param("no")String majorno);
-	ArrayList<Course> getCoursesByPk(String majorno);
+	ArrayList<Course> getCoursesWhereFKLiek(String courseno);
 }

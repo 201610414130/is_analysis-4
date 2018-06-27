@@ -1,5 +1,7 @@
 package org.sinmem.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Param;
 import org.sinmem.bean.Experimentscores;
 
@@ -38,4 +40,6 @@ public interface ExperimentscoresMapper {
 	 * @mbggenerated
 	 */
 	int updateByPrimaryKey(Experimentscores record);
+	
+	ArrayList<Experimentscores> getES_WLPkForSt(@Param("fKey")String fKey);
 }

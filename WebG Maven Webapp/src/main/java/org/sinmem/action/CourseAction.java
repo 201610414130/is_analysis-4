@@ -1,5 +1,7 @@
 package org.sinmem.action;
 
+import java.util.ArrayList;
+
 import org.sinmem.bean.Course;
 import org.sinmem.service.impl.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,12 @@ public class CourseAction extends BaseAction<Course>{
 	@Autowired
 	CourseServiceImpl courseServiceImpl;
 	
-	public String get_courseForTe(){
-		
+	public String get_course(){
+		ArrayList<Course> courses = courseServiceImpl.get_modles(fKey);
+		jsonObjMap.put("title","update_pwd");
+		jsonObjMap.put("message", courses.size()>0?true:false);
+		jsonObjMap.put("courses", courses);
+		jsonStr = GsonUtils.toJson(jsonObjMap);
 		return "ok";
 	}
 	

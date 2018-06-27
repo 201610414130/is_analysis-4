@@ -1,5 +1,7 @@
 package org.sinmem.dao;
 
+import java.util.ArrayList;
+
 import org.sinmem.bean.Cexperiment;
 
 public interface CexperimentMapper {
@@ -39,4 +41,6 @@ public interface CexperimentMapper {
 	 * @mbggenerated
 	 */
 	int updateByPrimaryKey(Cexperiment record);
+
+	ArrayList<Cexperiment> get_modles(String courseno);
 }

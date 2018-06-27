@@ -7,7 +7,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.sinmem.action.CexperimentAction;
 import org.sinmem.action.CourseAction;
+import org.sinmem.action.TeacherAction;
 import org.sinmem.action.UserAction;
 import org.sinmem.bean.Admin;
 import org.sinmem.bean.Institute;
@@ -30,7 +32,7 @@ import utils.Base64Utils;
 import utils.SecretKeyUtil;
 import utils.Sha;
 /**
- * 使用spring.test让Junit调用spring容器里面注册的对象
+ * 浣跨敤spring.test璁㎎unit璋冪敤spring瀹瑰櫒閲岄潰娉ㄥ唽鐨勫璞�
  * @author sinmem
  *
  */
@@ -40,13 +42,11 @@ public class hb_test {
 	ApplicationContext ctx;
 	SecretKeyUtil secretKeyUtil;
 	Gson gson;
-	// 将名字为studentServiceImpl的StudentServiceImpl类注入到给UserService接口
-	@Autowired
-	UserService<Student> userService;
+	// 灏嗗悕瀛椾负studentServiceImpl鐨凷tudentServiceImpl绫绘敞鍏ュ埌缁橴serService鎺ュ彛
 //	@Autowired
-//	UserAction userAction;
+//	TeacherAction teacherAction;
 	@Autowired
-	CourseAction courseAction;
+	CexperimentAction cexperimentAction;
 	
 	@Before
 	public void init() {
@@ -54,32 +54,13 @@ public class hb_test {
 	}
 	@Test
 	public void getMajor(){
-//		courseAction.add_course();
-		System.out.println("ss");
-//		Student student =new Student();
-//		student.setUserid("2015010010102");
-//		student.setPwd("2015010010102");
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//		Student tempStudent = userService.getUserInfo(student);
-//		map.put("student", tempStudent);
-//		map.put("clazz", clazzServiceImpl.get_modle(tempStudent.getClazzno()));
-//		String mapjson=gson.toJson(map);
-//		System.out.println("\n\n\n-----mapjson-------\n"+mapjson);
-//		try {
-//			byte[] bb=SecretKeyUtil.encryptByPrivateKey(mapjson);
-//			int sum=0;
-//			for (byte b : bb) {
-//				sum+=b;
-//			}
-//			String aa = Base64Utils.encode(bb);
-//			bb = Base64Utils.decode(aa);
-//			System.out.println(sum);
-//			System.out.println(SecretKeyUtil.decryptByPublicKey(bb)+"\n\n");
-//			
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		String jsonString =null;
+//		teacherAction.setfKey("012001");
+//		teacherAction.setTrem(20181);
+//		teacherAction.setcCourseno("2018101001002012001");
+		cexperimentAction.setJsonStr(jsonString);
+		cexperimentAction.add_cexperiments();
+//		teacherAction.get_students();
 	}
 	@After
 	public void destroy() {
@@ -87,22 +68,22 @@ public class hb_test {
 }
 
 /*
- * 随机学生
+ * 闅忔満瀛︾敓
 @Test
 public void getMajor(){
-	String[] firstName = {"赵", "孙", "王", "李", "杨", "柳", "庞", "候", "龚", "穆",
-						  "唐", "刘", "龙", "潘", "汤", "罗", "范", "郑", "雍", "伊",
-						  "于", "余", "贺", "钱", "戴", "彦", "严", "颜", "闫", "阎"};
-	String[] lastName = {"廖星", "海利", "英博", "南宫 ", "高超", "甄锐", "锋", "别敏", "叡柳",
-						"英", "毅", "符烨", "霖那", "飞", "昂", "谷泰", "初骆", "星", "雨",
-						"南", "门和", "韵","雪风","叶", "琴", "阎", "宜隗", "梦", "束", "柏",
-						"菊", "梁", "丘韵", "眉查", "昭","诸葛", "觅", "勤长孙书", "芳", "贝",
-						"莓夏", "夔", "夏", "荀", "公西", "夏", "班", "茗", "滕", "臧娅",
-						"全", "竹", "廉", "咛", "龙文", "咸", "枫", "聂", "怀丁", "珊",
-						"西", "门", "全丹", "车", "邱", "琴闾", "沐", "璇", "符", "靖",
-						"冷", "真", "西", "门", "珂", "亓", "官", "柔", "冷", "易", "芬",
-						"后", "庄", "雪", "班", "彤"};
-	注意:hql查询的时类名
+	String[] firstName = {"璧�", "瀛�", "鐜�", "鏉�", "鏉�", "鏌�", "搴�", "鍊�", "榫�", "绌�",
+						  "鍞�", "鍒�", "榫�", "娼�", "姹�", "缃�", "鑼�", "閮�", "闆�", "浼�",
+						  "浜�", "浣�", "璐�", "閽�", "鎴�", "褰�", "涓�", "棰�", "闂�", "闃�"};
+	String[] lastName = {"寤栨槦", "娴峰埄", "鑻卞崥", "鍗楀 ", "楂樿秴", "鐢勯攼", "閿�", "鍒晱", "鍙℃煶",
+						"鑻�", "姣�", "绗︾儴", "闇栭偅", "椋�", "鏄�", "璋锋嘲", "鍒濋獑", "鏄�", "闆�",
+						"鍗�", "闂ㄥ拰", "闊�","闆","鍙�", "鐞�", "闃�", "瀹滈殫", "姊�", "鏉�", "鏌�",
+						"鑿�", "姊�", "涓橀煹", "鐪夋煡", "鏄�","璇歌憶", "瑙�", "鍕ら暱瀛欎功", "鑺�", "璐�",
+						"鑾撳", "澶�", "澶�", "鑽�", "鍏タ", "澶�", "鐝�", "鑼�", "婊�", "鑷у▍",
+						"鍏�", "绔�", "寤�", "鍜�", "榫欐枃", "鍜�", "鏋�", "鑱�", "鎬�涓�", "鐝�",
+						"瑗�", "闂�", "鍏ㄤ腹", "杞�", "閭�", "鐞撮椌", "娌�", "鐠�", "绗�", "闈�",
+						"鍐�", "鐪�", "瑗�", "闂�", "鐝�", "浜�", "瀹�", "鏌�", "鍐�", "鏄�", "鑺�",
+						"鍚�", "搴�", "闆�", "鐝�", "褰�"};
+	娉ㄦ剰:hql鏌ヨ鐨勬椂绫诲悕
 	Query query = session.createQuery("FROM Clazz");
 	List<Clazz>  clazzs= query.list();
 	for(int i=0; i<40;i++){
@@ -126,11 +107,11 @@ public void getMajor(){
 
 
 /*
- * 生成班级
+ * 鐢熸垚鐝骇
 @Test
 public void getMajor(){
-	注意:hql查询的时类名
-	String cla[]={"一班","二班","三班","四班"};
+	娉ㄦ剰:hql鏌ヨ鐨勬椂绫诲悕
+	String cla[]={"涓�鐝�","浜岀彮","涓夌彮","鍥涚彮"};
 	Query query = session.createQuery("FROM Major");
 	List<Major> majors = query.list();
 	for(int i=1; i<=40;i++){
@@ -140,7 +121,7 @@ public void getMajor(){
 		String soder ="0"+coder;
 		Clazz tempClazz = new Clazz();
 		tempClazz.setClazzNo(year+majors.get(moder-1).getMajorNo()+soder);
-		tempClazz.setClazzName(year+"级"+majors.get(moder-1).getMajorName()+cla[coder-1]);
+		tempClazz.setClazzName(year+"绾�"+majors.get(moder-1).getMajorName()+cla[coder-1]);
 		tempClazz.setEducation(2);
 		tempClazz.setMajor(majors.get(moder-1));
 		session.save(tempClazz);
@@ -149,13 +130,13 @@ public void getMajor(){
 */
 
 /*
- * 随机教师
+ * 闅忔満鏁欏笀
 @Test
 public void getMajor(){
-	String[] firstName = {"赵", "孙", "王", "李", "杨", "柳"};
-	String[] lastName = {"廖星", "海利", "英博", "南宫 ", "高超", "甄锐", "锋", "别敏", "叡柳", "英", "毅", "符烨", "霖那", "飞", "昂", "谷泰", "初骆", "星", "雨", "南", "门和", "韵", "雪风"};
-	String[] degree = {"本科", "硕士", "博士", "博士后"};
-	String[] title = {"教授", "副教授", "讲师"};
+	String[] firstName = {"璧�", "瀛�", "鐜�", "鏉�", "鏉�", "鏌�"};
+	String[] lastName = {"寤栨槦", "娴峰埄", "鑻卞崥", "鍗楀 ", "楂樿秴", "鐢勯攼", "閿�", "鍒晱", "鍙℃煶", "鑻�", "姣�", "绗︾儴", "闇栭偅", "椋�", "鏄�", "璋锋嘲", "鍒濋獑", "鏄�", "闆�", "鍗�", "闂ㄥ拰", "闊�", "闆"};
+	String[] degree = {"鏈", "纭曞＋", "鍗氬＋", "鍗氬＋鍚�"};
+	String[] title = {"鏁欐巿", "鍓暀鎺�", "璁插笀"};
 	List<Teacher> teachers = new ArrayList<Teacher>();
 	Institute institute = new Institute();
 	institute.setInstituteNo("01");

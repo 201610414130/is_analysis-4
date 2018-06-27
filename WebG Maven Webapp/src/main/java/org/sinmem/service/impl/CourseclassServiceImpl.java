@@ -20,4 +20,17 @@ public class CourseclassServiceImpl extends BaseServiceImpl<Courseclass>{
 	public ArrayList<Courseclass> getCourseclassesByMajor(String majorno){
 		return courseclassMapper.getCourseclassesByMajor(majorno);
 	}
+	public CourseclassServiceImpl() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * 
+	 * @param teacherno 教师工号
+	 * @param trem 开课学期
+	 * @return
+	 */
+	public ArrayList<Courseclass> getCourseclassesWLteacher(String teacherno,Integer trem){
+		return courseclassMapper.getCourseclassesWLteacher(teacherno, trem);
+	}
 }

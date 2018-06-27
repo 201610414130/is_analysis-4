@@ -293,6 +293,103 @@ $(document).ready(function() {
 		})
 	})
 	
+	$("#add_selectCourseForSt button[name=add]").click(function(){
+		console.log("add_selectCourseForSt start");
+		var data = {
+			"studentid":"2015010010101",
+			"cclassno":"2018101001001012001",
+			"courseno":"01001001",
+		};
+		$.ajax({
+			url : "add_selectCourseForSt",
+			type: "GET",
+			data : {
+				"jsonStr":JSON.stringify(data),
+			},
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+	
+	$("#add_cexperiment").click(function(){
+		var data = {
+			"oder":3,
+			"title":"title",
+			"address":"address",
+			"courseno":"01001001",
+			"experimentclauseList":[{
+    			"title":"01",
+				"num":100,
+				"bili" : 0.1,
+			},{
+    			"title":"02",
+				"num":100,
+				"bili" : 0.1,
+			},{
+    			"title":"03",
+				"num":100,
+				"bili" : 0.1,
+			},{
+    			"title":"04",
+				"num":100,
+				"bili" : 0.1,
+			},{
+    			"title":"05",
+				"num":100,
+				"bili" : 0.1,
+			},{
+    			"title":"06",
+				"num":100,
+				"bili" : 0.05,
+			},{
+    			"title":"07",
+				"num":100,
+				"bili" : 0.05,
+			},{
+    			"title":"08",
+				"num":100,
+				"bili" : 0.05,
+			},{
+    			"title":"09",
+				"num":100,
+				"bili" : 0.05,
+			},{
+    			"title":"10",
+				"num":100,
+				"bili" : 0.1,
+			},{
+    			"title":"11",
+				"num":100,
+				"bili" : 0.1,
+			},{
+    			"title":"12",
+				"num":100,
+				"bili" : 0.1,
+			},]
+		}
+		$.ajax({
+			url : "add_cexperiment",
+			type: "GET",
+			data : {
+				"jsonStr":JSON.stringify(data),
+			},
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+	
 	$("#decrypt").click(function() {
 		decrypt(data)
 	})
@@ -354,9 +451,135 @@ user.name:<s:property value="#session.user.name"/>
 	<input placeholder="开课时间" name="time">
 	<button>提交教师选课</button>
 </div>
-	<div id="add_selectCourseForSt">
-	<input type="hidden" value="<s:property value="#session.user.clazzno"/>">
+<div id="add_selectCourseForSt">
+	<input name="teacherNo" type="hidden" value="<s:property value="#session.user.userid"/>">
 	<button id="get_courseClass">获取开课班</button>
+	<button name="add">添加学生选课</button>
 </div>
+<button id="add_cexperiment">添加课程实验</button>
+<button id="del_cexperiment">删除课程实验</button>
+<button id="update_cexperiment">更新课程实验</button>
+<button id="get_cexperiment">获取课程实验</button>
+
+<button id="add_cexperiments">批改成绩</button>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#add_cexperiments").click(function() {
+		var data =  {
+		"cexperiments": {
+            "experimentno": "01001001201801",
+            "userid": "2015010120118",
+            "oder": "1",
+            "title": "title1",
+            "info": "emmmmmm,就是介绍了啊",
+            "address": "addressaaa",
+            "date": "2018-06-07 00:00:18",
+            "experimentclausesList": [{
+            	"experimentno": "01001001201801",
+                "experimentclauseno": "0100100120180101",
+                "title": "内容完整性",
+                "evaluate": "教师输入的评价啦...",
+                "num": "100",
+                "bili": "0.35",
+                "score": "94",
+            },{
+            	"experimentno": "01001001201801",
+                "experimentclauseno": "0100100120180102",
+                "title": "格式工整",
+                "evaluate": "教师输入的评价啦...",
+                "num": "100",
+                "bili": "0.25",
+                "score": "94",
+            },{
+                "experimentno": "01001001201801",
+                "experimentclauseno": "0100100120180103",
+                "title": "算法逻辑",
+                "evaluate": "教师输入的评价啦...",
+                "num": "100",
+                "bili": "0.4",
+                "score": "94",
+            },],
+        },
+        "experimentscores": {
+            "experimentno": "01001001201801",
+            "courseno": "01001001",
+            "cclassno": "2018101001001012001",
+            "studentid": "2015010010105",
+        }
+				};
+		$.ajax({
+			url : "add_cexperiments",
+			type: "GET",
+			data : {
+				"jsonStr":JSON.stringify(data),
+			},
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+	$("#update_cexperiment").click(function() {
+		$.ajax({
+			url : "update_cexperiment",
+			type: "GET",
+			data : {
+				"jsonStr":JSON.stringify(data),
+			},
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+	
+	$("#get_cexperiment").click(function() {
+	
+		$.ajax({
+			url : "get_cexperiment",
+			type: "GET",
+			data : {
+				"jsonStr":JSON.stringify(data),
+			},
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+	
+	$("#del_cexperiment").click(function() {
+		$.ajax({
+			url : "del_cexperiment",
+			type: "GET",
+			data : {
+				"jsonStr":JSON.stringify(data),
+			},
+			success : function(msg) {
+				console.log("success:type"+typeof(msg)+"\nsuccess:"+msg);
+				console.log(JSON.parse(msg))
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		})
+	})
+})
+</script>
+
+
 </body>
 </html>

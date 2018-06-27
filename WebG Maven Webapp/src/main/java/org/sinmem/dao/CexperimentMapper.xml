@@ -19,6 +19,14 @@
     -->
     experimentNo, oder, title, address, courseNo
   </sql>
+  
+  <select id="get_modles" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cexperiment
+    where courseNo = #{courseno,jdbcType=VARCHAR}
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated

@@ -1,19 +1,11 @@
 {
   "ecmaVersion": 6,
-  "plugins": {
-    "guess-types": {
-      
-    },
-    "browser-extension": {
-      
-    },
-    "bootstrap": {
-      
-    }
-  },
   "libs": [
     "ecma5",
     "browser",
     "jquery"
-  ]
+  ],
+  "plugins": {
+    
+  }
 }

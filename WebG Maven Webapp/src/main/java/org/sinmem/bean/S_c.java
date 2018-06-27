@@ -94,4 +94,33 @@ public class S_c {
 	public void setScore(Float score) {
 		this.score = score;
 	}
+	
+	private String studentName;
+	private String clazzName;
+	private Integer education;
+
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	public String getClazzName() {
+		return clazzName;
+	}
+
+	public void setClazzName(String clazzName) {
+		this.clazzName = clazzName;
+	}
+
+	public Integer getEducation() {
+		return education;
+	}
+
+	public void setEducation(Integer education) {
+		this.education = education;
+	}
+	
 }

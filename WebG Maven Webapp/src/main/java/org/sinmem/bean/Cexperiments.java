@@ -1,5 +1,6 @@
 package org.sinmem.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Cexperiments {
@@ -210,5 +211,15 @@ public class Cexperiments {
 	 */
 	public void setScore(Float score) {
 		this.score = score;
+	}
+	
+	private ArrayList<Experimentclauses> experimentclausesList;
+
+	public ArrayList<Experimentclauses> getExperimentclausesList() {
+		return experimentclausesList;
+	}
+
+	public void setExperimentclausesList(ArrayList<Experimentclauses> experimentclausesList) {
+		this.experimentclausesList = experimentclausesList;
 	}
 }

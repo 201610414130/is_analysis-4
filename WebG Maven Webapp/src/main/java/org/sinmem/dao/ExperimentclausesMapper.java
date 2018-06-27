@@ -1,5 +1,7 @@
 package org.sinmem.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Param;
 import org.sinmem.bean.Experimentclauses;
 
@@ -38,4 +40,6 @@ public interface ExperimentclausesMapper {
 	 * @mbggenerated
 	 */
 	int updateByPrimaryKey(Experimentclauses record);
+	
+	int insertBatch(ArrayList<Experimentclauses> list);
 }

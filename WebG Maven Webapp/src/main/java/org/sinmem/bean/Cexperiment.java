@@ -1,5 +1,7 @@
 package org.sinmem.bean;
 
+import java.util.ArrayList;
+
 public class Cexperiment {
 
 	/**
@@ -116,5 +118,15 @@ public class Cexperiment {
 	 */
 	public void setCourseno(String courseno) {
 		this.courseno = courseno == null ? null : courseno.trim();
+	}
+	
+	private ArrayList<Experimentclause> experimentclauseList;
+
+	public ArrayList<Experimentclause> getExperimentclauseList() {
+		return experimentclauseList;
+	}
+
+	public void setExperimentclauseList(ArrayList<Experimentclause> experimentclauseList) {
+		this.experimentclauseList = experimentclauseList;
 	}
 }

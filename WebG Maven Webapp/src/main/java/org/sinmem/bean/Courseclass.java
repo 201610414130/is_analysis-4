@@ -1,5 +1,7 @@
 package org.sinmem.bean;
 
+import java.util.ArrayList;
+
 public class Courseclass {
 
 	/**
@@ -166,6 +168,7 @@ public class Courseclass {
 	
 	private String courseName;
 	private String teacherName;
+	private ArrayList<S_c> student_Class;
 
 	public String getCourseName() {
 		return courseName;
@@ -181,6 +184,14 @@ public class Courseclass {
 
 	public void setTeacherName(String teacherName) {
 		this.teacherName = teacherName;
+	}
+
+	public ArrayList<S_c> getStudent_Class() {
+		return student_Class;
+	}
+
+	public void setStudent_Class(ArrayList<S_c> student_Class) {
+		this.student_Class = student_Class;
 	}
 	
 }

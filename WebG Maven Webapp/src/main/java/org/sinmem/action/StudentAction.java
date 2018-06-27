@@ -43,7 +43,8 @@ public class StudentAction extends UserInterfImpl<Student>{
 	
 	public String get_courseClass(){
 		jsonObjMap.put("title", "get_courseClass");
-		jsonObjMap.put("message", courseclassServiceImpl.getCourseclassesByMajor(clazzServiceImpl.get_modle(fKey).getMajorno()));
+		// 传过来的fkey是学生的班级号,其第5-9位便是专业号,用subString方法获取
+		jsonObjMap.put("message", courseclassServiceImpl.getCourseclassesByMajor(fKey.substring(4, 9)));
 		jsonStr = GsonUtils.toJson(jsonObjMap);
 		System.out.println(jsonStr);
 		return "ok";

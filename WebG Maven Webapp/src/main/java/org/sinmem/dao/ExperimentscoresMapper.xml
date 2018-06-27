@@ -19,6 +19,16 @@
     -->
     experimentscoresNo, experimentNo, courseNo, cClassNo, studentID
   </sql>
+  
+  <select id="getES_WLPkForSt" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from experimentscores
+    <where>
+    	experimentscoresNo like #{fKey,jdbcType=VARCHAR}
+    </where> 
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated

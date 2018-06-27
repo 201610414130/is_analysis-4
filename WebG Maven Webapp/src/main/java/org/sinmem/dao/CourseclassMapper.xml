@@ -59,6 +59,21 @@
     </where>
   </select>
   
+  <select id="getCourseclassesWLteacher" parameterType="java.lang.String" resultMap="queryListResultMap">
+  	SELECT cc.cClassNo,cc.courseNo,c.courseName,cc.number,cc.count,cc.term,cc.time
+	FROM courseclass AS cc
+	INNER JOIN teacher as t
+	ON t.userID = cc.teacherNo
+	INNER JOIN course as c
+	ON c.courseNo = cc.courseNo
+    <where>
+    	<if test="teacherno != null">
+    		cc.cClassNo like '%${teacherno}'
+    		and cc.term = #{trem,jdbcType=INTEGER}
+    	</if>
+    </where>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--
       WARNING - @mbggenerated

@@ -31,11 +31,15 @@
     where courseNo = #{courseno,jdbcType=VARCHAR}
   </select>
   
-  <select id="getCoursesByPk" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="getCoursesWhereFKLiek" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from course
-    where majorNo = #{majorno,jdbcType=VARCHAR}
+    <where>
+    	<if test="courseno != null">
+	    	courseNo like '${courseno,jdbcType=VARCHAR}%'
+    	</if>
+    </where>
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

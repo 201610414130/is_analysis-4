@@ -45,6 +45,24 @@
       and experimentNo = #{experimentno,jdbcType=VARCHAR}
       and experimentclauseNo = #{experimentclauseno,jdbcType=VARCHAR}
   </delete>
+  
+  <insert id="insertBatch" parameterType="org.sinmem.bean.Experimentclause">
+	insert into experimentclauses (experimentscoresNo, experimentNo,
+	experimentclauseNo, title, evaluate,
+	num, bili, score)
+	values
+	<foreach collection="list" item="item" separator=",">
+		(#{item.experimentscoresno,jdbcType=VARCHAR},
+		#{item.experimentno,jdbcType=VARCHAR},
+		#{item.experimentclauseno,jdbcType=VARCHAR},
+		#{item.title,jdbcType=VARCHAR},
+		#{item.evaluate,jdbcType=VARCHAR},
+		#{item.num,jdbcType=INTEGER},
+		#{item.bili,jdbcType=REAL},
+		#{item.score,jdbcType=REAL})
+	</foreach>
+	</insert>
+  
   <insert id="insert" parameterType="org.sinmem.bean.Experimentclauses">
     <!--
       WARNING - @mbggenerated
