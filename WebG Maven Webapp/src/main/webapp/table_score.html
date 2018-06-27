@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>学生列表</title>
+    <title>批改成绩</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -29,9 +29,6 @@
 	<link href="public/media/css/bootstrap-fileupload.css" rel="stylesheet" type="text/css" />
 	<link href="public/media/css/chosen.css" rel="stylesheet" type="text/css" />
 	<link href="public/media/css/profile.css" rel="stylesheet" type="text/css" />
-	<link href="public/media/css/select2_metro.css" rel="stylesheet" type="text/css" />
-	<link href="public/media/css/DT_bootstrap.css" rel="stylesheet" />
-	<link href="public/media/css/user.css" rel="stylesheet" type="text/css" />
 	<!-- END PAGE LEVEL STYLES -->
 	<link rel="shortcut icon" href="public/media/image/favicon.ico" />
 </head>
@@ -125,7 +122,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="table_courses.html">
+                    <a href="table_ourses.html">
                         <i class="icon-book"></i>
                         <span class="title">课程列表</span>
                     </a>
@@ -153,6 +150,7 @@
                 </li>
                 </li>
             </ul>
+            
             <!-- END SIDEBAR MENU -->
         </div>
 		<!-- END SIDEBAR -->
@@ -167,28 +165,14 @@
 						<!-- END BEGIN STYLE CUSTOMIZER -->  
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							学生列表 <small>用户可选择相应选项查看不同的学生列表</small>
+							批改成绩 <small>只有老师用户可以批改成绩，并且老师只能批改自己所选择的课程的学生的成绩</small>
 						</h3>
 						<ul class="breadcrumb">
-							<li><span>&nbsp;&nbsp;&nbsp;&nbsp;开课班号:</span></li>
-							<li><select>
-  								<option value ="012031">012031</option>
-  								<option value ="012032">012032</option>
-  								<option value="012033">012033</option>
-  								<option value="012034">012034</option>
-							</select>
-							</li>
-							<li><span>&nbsp;&nbsp;&nbsp;&nbsp;课程名称:</span></li>
-							<li>
-							<select>
-  								<option value ="2018104101">移动开发技术</option>
-  								<option value ="2018104102">javaee高级应用</option>
-  								<option value="2018104103">信息系统分析与设计</option>
-  								<option value="2018104104">IT新技术</option>
-							</select>
-							</li>
-							<li><span>&nbsp;&nbsp;&nbsp;&nbsp;选修人数:&nbsp;&nbsp;30</span></li>
-							<li>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="" class="btn blue">确认</button></li>
+							<li><span>课程: Web高级开发技术</span></li>
+							<li><span>&nbsp;&nbsp;&nbsp;&nbsp;学生: 201510414109,软件15-1(本),郭某某</span></li>
+							<li><span>&nbsp;&nbsp;&nbsp;&nbsp;课程实验平均成绩: 95.8</span></li>
+							<li>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="" class="btn green">上一个</button></li>
+							<li>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="" class="btn blue">下一个</button></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -202,39 +186,118 @@
 							<div class="portlet-body">
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<thead>
-										<tr>
-											<th>学号</th>
-											<th>姓名</th>
-											<th>所属班级</th>
-											<th>GitHub用户名</th>
-											<th>课程实验平均成绩</th>
-											<th>修改日期</th>
-											<th width="268">操作</th>
-										</tr>
+										<tr><h4>实验1: 类图的设计&nbsp;&nbsp;<a href="https://github.com/HaveyouBinbin/is_analysis/tree/master/test1"> >> HaveyouBinbin/test1</a></h4></tr>
 									</thead>
 									<tbody>
 										<tr id="1"><!--此处id为进行编辑或查看时该条数据的唯一标识-->
-											<td>2015010120218</td>
-											<td>王某某</td>
-											<td>软件15-2(本)</td>
-											<td>asdsad</td>
-											<td>98.6</td>
-											<td>2018-4-12 14-25-56</td>
 											<td>
-												<a href="table_score.html"><button type="button" class="btn green">批改成绩</button></a>
-												<button type="button" class="btn red" onclick="return delete_info({id})">删除</button>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项1: 文档完整性 <span class="title" style="float: right;">满分:20分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+											<td>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项2: 文档排版及说明 <span class="title" style="float: right;">满分:10分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+											<td>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项3: 相关链接跳转是否正确 <span class="title" style="float: right;">满分:10分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
 											</td>
 										</tr>
 										<tr id="2">
-											<td>2015010120219</td>
-											<td>张某某</td>
-											<td>软件15-1(本)</td>
-											<td>abcdef</td>
-											<td>99.9</td>
-											<td>2018-4-12 14-45-00</td>
 											<td>
-												<a href="table_score.html"><button type="button" class="btn green">批改成绩</button></a>
-												<button type="button" class="btn red" onclick="return delete_info({id})">删除</button>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项4: 类图是否正确 <span class="title" style="float: right;">满分:20分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+											<td>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项5: 有无注释 <span class="title" style="float: right;">满分:20分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+											<td>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项6: 内容一致性 <span class="title" style="float: right;">满分:20分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+										</tr>
+										<tr id="3">
+											<td colspan="3">
+												<span class="title">实验得分: </span>
+												<button type="button" id="" class="btn blue" style="float: right;">提交</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table table-striped table-hover table-bordered" id="sample_editable_2">
+									<thead>
+										<tr><h4>实验2: 用例图及约束&nbsp;&nbsp;<a href="https://github.com/HaveyouBinbin/is_analysis/tree/master/test2"> >> HaveyouBinbin/test1</a></h4></tr>
+									</thead>
+									<tbody>
+										<tr id="1"><!--此处id为进行编辑或查看时该条数据的唯一标识-->
+											<td>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项1: 文档完整性 <span class="title" style="float: right;">满分:20分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+											<td>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项2: 文档排版及说明 <span class="title" style="float: right;">满分:10分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+											<td>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项3: 相关链接跳转是否正确 <span class="title" style="float: right;">满分:10分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+										</tr>
+										<tr id="2">
+											<td>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项4: 类图是否正确 <span class="title" style="float: right;">满分:20分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+											<td>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项5: 有无注释 <span class="title" style="float: right;">满分:20分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+											<td>
+												<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+													<tr><td>评分项6: 内容一致性 <span class="title" style="float: right;">满分:20分</span></td></tr>
+													<tr><td>分数: <input /> </td></tr>
+													<tr><td>评价: <textarea name="reworkmes" cols="40" rows="4" style="overflow: auto;"></textarea> </td></tr>
+												</table>
+											</td>
+										</tr>
+										<tr id="3">
+											<td colspan="3">
+												<span class="title">实验得分: </span>
+												<button type="button" id="" class="btn blue" style="float: right;">提交</button>
 											</td>
 										</tr>
 									</tbody>
@@ -285,7 +348,6 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="public/media/js/app.js"></script>
-	<script src="public/media/js/user.js"></script>
 	<script src="public/media/js/table-editable.js"></script>    
 	<script>
 		jQuery(document).ready(function() {       
