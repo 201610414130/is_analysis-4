@@ -56,6 +56,10 @@ public class CexperimentAction extends BaseAction<Cexperiment>{
 		return "ok";
 	}
 	
+	/**
+	 * @param fKey课程的课程实验号
+	 * @return
+	 */
 	public String get_cexperimentByPK(){
 		jsonObjMap.put("title", "get_cexperimentByPK");
 		jsonObjMap.put("message", cexperimentServiceImpl.get_modle(fKey));

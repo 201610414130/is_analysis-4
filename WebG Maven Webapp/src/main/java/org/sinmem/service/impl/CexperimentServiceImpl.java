@@ -21,6 +21,10 @@ public class CexperimentServiceImpl extends BaseServiceImpl<Cexperiment>{
 		return cexperimentMapper.insertSelective(modle) * experimentclauseMapper.insertBatch(modle.getExperimentclauseList()) != 0 ? true:false;
 	}
 	
+	/**
+	 * @param modleid 主键experimentNo,课程实验表里面的...
+	 * @return 查询到的实验信息,用于批改成绩时显示
+	 */
 	@Override
 	public Cexperiment get_modle(String modleid) {
 		Cexperiment temp = cexperimentMapper.selectByPrimaryKey(modleid);

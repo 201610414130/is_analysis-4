@@ -78,7 +78,7 @@ object courseClass{
     "所属课程" courseNo = "nn-nnn-nnn"
     "选修人限" number = "nn"
     "选修人数" count = "nn"
-    "开课学期" term = "n"
+    "开课学期" term = "nnnn-n"
     "开课时间" time = ""
     "任课教师" teacherNo = "nn-nnnn"
 }

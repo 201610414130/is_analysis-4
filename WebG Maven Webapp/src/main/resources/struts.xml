@@ -139,7 +139,13 @@
 				<param name="root">jsonStr</param>
 			</result>
 		</action>
-		<!-- 选课实验用例 end -->
+		<action name="get_cexperimentByPK" class="org.sinmem.action.CexperimentAction" method="get_cexperimentByPK">
+			<result type="json" name="ok">
+				<!-- 哇啊啊啊啊...鬼知道这里为什么要用'jsonStr'的字符串样子了 -->
+				<param name="root">jsonStr</param>
+			</result>
+		</action>
+		<!-- 课程实验用例 end -->
 	</package>
 	<constant name="struts.i18n.encoding" value="gb2312"></constant>
 	<constant name="struts.multipart.saveDir" value="/tmp"></constant>
