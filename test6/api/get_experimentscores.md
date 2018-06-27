@@ -10,8 +10,8 @@
  
     |请求参数|必选|描述|
     |:-------:|:---:|:-----|
-    |studentID|TURE|学生学号|
-    |cClassNo|TURE|开课班号|
+    |fKey|TURE|课程号|
+    |jsonStr|TURE|开课班号-学号|
 
 - 返回参数
  
