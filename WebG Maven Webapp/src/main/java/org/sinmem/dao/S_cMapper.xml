@@ -22,6 +22,16 @@
     <result column="education" jdbcType="INTEGER" property="education" />
   </resultMap>
   
+  <resultMap id="S_CsResultMap" type="org.sinmem.bean.S_c">
+    <id column="studentID" jdbcType="VARCHAR" property="studentid" />
+    <id column="cClassNo" jdbcType="VARCHAR" property="cclassno" />
+    <id column="courseNo" jdbcType="VARCHAR" property="courseno" />
+    <result column="score" jdbcType="REAL" property="score" />
+    <result column="name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="courseName" jdbcType="VARCHAR" property="courseName" />
+    <result column="term" property="term" jdbcType="INTEGER"/>
+  </resultMap>
+  
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbggenerated
@@ -29,6 +39,24 @@
     -->
     studentID, cClassNo, courseNo, score
   </sql>
+  
+  
+	<select id="get_S_Cs" parameterType="map" resultMap="S_CsResultMap">
+		SELECT sc.courseNo, sc.cClassNo, sc.studentID,
+			c.courseName,t.`name`,cc.term
+		FROM s_c AS sc
+		INNER JOIN courseclass AS cc
+		ON sc.courseNo=cc.courseNo AND sc.cClassNo=cc.cClassNo
+		INNER JOIN teacher AS t
+		ON t.userID = cc.teacherNo
+		INNER JOIN course AS c
+		ON c.courseNo = sc.courseNo
+		<where>
+			 sc.studentID = #{studentid,jdbcType=VARCHAR} 
+			AND cc.term like '${term}%'
+		</where>
+	</select>
+  
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated

@@ -41,4 +41,5 @@ public interface S_cMapper {
 	 */
 	int updateByPrimaryKey(S_c record);
 	ArrayList<S_c> getS_cWLcClassNo(String cclassno);
+	ArrayList<S_c> get_S_Cs(@Param("studentid")String studentid,@Param("term")Integer term);
 }

@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sinmem.action.CexperimentAction;
 import org.sinmem.action.CourseAction;
+import org.sinmem.action.StudentAction;
 import org.sinmem.action.TeacherAction;
 import org.sinmem.action.UserAction;
 import org.sinmem.bean.Admin;
@@ -43,24 +44,17 @@ public class hb_test {
 	SecretKeyUtil secretKeyUtil;
 	Gson gson;
 	// 灏嗗悕瀛椾负studentServiceImpl鐨凷tudentServiceImpl绫绘敞鍏ュ埌缁橴serService鎺ュ彛
-//	@Autowired
-//	TeacherAction teacherAction;
 	@Autowired
-	CexperimentAction cexperimentAction;
-	
+	StudentAction studentAction;
 	@Before
 	public void init() {
 		gson = new Gson();
 	}
 	@Test
 	public void getMajor(){
-		String jsonString =null;
-//		teacherAction.setfKey("012001");
-//		teacherAction.setTrem(20181);
-//		teacherAction.setcCourseno("2018101001002012001");
-		cexperimentAction.setJsonStr(jsonString);
-		cexperimentAction.add_cexperiments();
-//		teacherAction.get_students();
+		studentAction.setfKey("2015010010101");
+		studentAction.setJsonStr("all");
+		studentAction.get_S_Cs();
 	}
 	@After
 	public void destroy() {

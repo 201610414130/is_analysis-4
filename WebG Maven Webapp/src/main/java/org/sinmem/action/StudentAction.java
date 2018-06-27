@@ -25,11 +25,16 @@ public class StudentAction extends UserInterfImpl<Student>{
 	@Autowired
 	S_CServiceImpl s_CServiceImpl;
 
-//	@Override
-//	public String update_user(String data) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	public String get_S_Cs() {
+		//当jsonStr为all是表示查询在校成绩
+		if("all".equals(jsonStr))
+			jsonStr = null;
+		jsonObjMap.put("title", "add_selectCourseForSt");
+		// 这里虽然传递的和存储的都是Integer类型的参数,但为了模糊查询,在sql语句是用的VACHER类型于是xml中用的是${param},而不是#{param,jdbctype}
+		jsonObjMap.put("message", s_CServiceImpl.get_S_Cs(fKey, jsonStr == null?null:Integer.parseInt(jsonStr)));
+		jsonStr = GsonUtils.toJson(jsonObjMap);
+		return "ok";
+	}
 
 	@Override
 	public String get_MUserInfo(Student user) {

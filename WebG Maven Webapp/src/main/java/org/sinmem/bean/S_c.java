@@ -96,8 +96,11 @@ public class S_c {
 	}
 	
 	private String studentName;
+	private String teacherName;
 	private String clazzName;
+	private String courseName;
 	private Integer education;
+	private Integer term;
 
 	public String getStudentName() {
 		return studentName;
@@ -121,6 +124,30 @@ public class S_c {
 
 	public void setEducation(Integer education) {
 		this.education = education;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public Integer getTerm() {
+		return term;
+	}
+
+	public void setTerm(Integer term) {
+		this.term = term;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 	
 }
