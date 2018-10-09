@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="Basejsp.jsp"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -9,18 +12,41 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
-    <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="public/media/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="public/media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
-    <link href="public/media/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="public/media/css/style-metro.css" rel="stylesheet" type="text/css" />
     <link href="public/media/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="public/media/css/style-responsive.css" rel="stylesheet" type="text/css" />
-    <link href="public/media/css/default.css" rel="stylesheet" type="text/css" id="style_color" />
-    <link href="public/media/css/uniform.default.css" rel="stylesheet" type="text/css" />
-	<link href="public/media/css/login.css" rel="stylesheet" type="text/css"/>
-	<!-- END PAGE LEVEL STYLES -->
-	<link rel="shortcut icon" href="public/media/image/favicon.ico" />
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#login").click(function() {
+		console.log("ti jiao qing qiu zhong");
+		var str = {
+			"userid":$("#username").val(),
+			"pwd":$("#pwd").val()
+		}
+		var data = {
+			"data":JSON.stringify(str), 
+			"type":3
+		};
+		$.ajax({
+			async : true,
+			type : "POST",
+			url : "login",
+			dataType:"json",
+			data : data,
+			success : function(msg) {
+				console.log("msg-type:"+typeof(msg)+"\nmsg-data:"+msg);
+				var jsondata = JSON.parse(msg);
+				if(jsondata.message)
+					window.location.href = "index.html"
+				else
+					alert("登录失败,请检查用户\n名密码和用户类型是否正确")
+			},
+			error : function(msg) {
+				console.log("Tomcat Error");
+				return;
+			},
+		});
+	})
+})
+</script>
 </head>
 
 <!-- END HEAD -->
@@ -45,7 +71,7 @@
 
 		<!-- BEGIN LOGIN FORM -->
 
-		<form class="form-vertical login-form" action="index.html">
+		<form class="form-vertical login-form">
 
 			<h4 class="form-title">基于GitHub的实验管理平台</h4>
 
@@ -69,7 +95,7 @@
 
 						<i class="icon-user"></i>
 
-						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="username"/>
+						<input id="username" class="m-wrap placeholder-no-fix" type="text" placeholder="Username" name="username"/>
 
 					</div>
 
@@ -87,7 +113,7 @@
 
 						<i class="icon-lock"></i>
 
-						<input class="m-wrap placeholder-no-fix" type="password" placeholder="Password" name="password"/>
+						<input id="pwd" class="m-wrap placeholder-no-fix" type="password" placeholder="Password" name="password"/>
 
 					</div>
 
@@ -95,15 +121,30 @@
 
 			</div>
 
+			<div class="control-group">
+				<label class="control-label">用户类型</label>
+				<div class="controls" id="ttype" style="display: inline-block;">
+					<label class="radio"> 
+						<input type="radio" name="optionsRadios1" value="3" style="display: inline-block;"/> 学生
+					</label> 
+					<label class="radio"> 
+						<input type="radio" name="optionsRadios1" value="2" checked /> 教师
+					</label> 
+					<label class="radio"> 
+						<input type="radio" name="optionsRadios1" value="1" /> 管理员
+					</label>
+				</div>
+			</div>
+			
 			<div class="form-actions">
 
-				<button type="submit" class="btn pull-left">
+				<button  class="btn pull-left">
 
 				重置 
 
 				</button>
 				
-				<button type="submit" class="btn green pull-right">
+				<button id="login" class="btn green pull-right">
 
 				登录 
 
@@ -125,53 +166,10 @@
 
 	</div>
 
-	<!-- END COPYRIGHT -->
-
-	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-
-	<!-- BEGIN CORE PLUGINS -->
-
-	<script src="public/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
-
-	<script src="public/media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-
-	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-
-	<script src="public/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
-
-	<script src="public/media/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--[if lt IE 9]>
-
-	<script src="media/js/excanvas.min.js"></script>
-
-	<script src="media/js/respond.min.js"></script>  
-
-	<![endif]-->   
-
-	<script src="public/media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
-
-	<script src="public/media/js/jquery.blockui.min.js" type="text/javascript"></script>  
-
-	<script src="public/media/js/jquery.cookie.min.js" type="text/javascript"></script>
-
-	<script src="public/media/js/jquery.uniform.min.js" type="text/javascript" ></script>
-
-	<!-- END CORE PLUGINS -->
-
-	<!-- BEGIN PAGE LEVEL PLUGINS -->
-
-	<script src="public/media/js/jquery.validate.min.js" type="text/javascript"></script>
-
-	<!-- END PAGE LEVEL PLUGINS -->
-
-	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 
 	<script src="public/media/js/app.js" type="text/javascript"></script>
 
 	<script src="public/media/js/login.js" type="text/javascript"></script>      
-
-	<!-- END PAGE LEVEL SCRIPTS --> 
 
 	<script>
 

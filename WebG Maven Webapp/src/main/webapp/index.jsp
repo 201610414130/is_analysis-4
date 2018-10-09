@@ -18,6 +18,9 @@ $(document).ready(function() {
 			success : function(msg) {
 				console.log("msg-type:"+typeof(msg)+"\nmsg-data:"+msg);
 				console.log(JSON.parse(msg))
+				var jsondata = JSON.parse(msg);
+				if(jsondata.message)
+					console.log(jsondata.message)
 			},
 			error : function(msg) {
 				console.log("Tomcat Error");

@@ -20,20 +20,7 @@ body {
   font-size:13px; 
   direction: ltr;
 }
-.span12 form{ margin: 20px 0; }
-.loading{ display: none }
-.loading img.load{ display: block; width: 50px; height: 50px; margin: 20%  auto }
 
-.last{padding: 20px 0 0 0!important;color: white;}
-.last p a:hover{ color: white; text-decoration: none; }
-.last p{ width: 100%;  padding: 0 0 0 48px; font-size: 1rem; }
-.last p img{width: 127px; height: 127px; display: block;}
-.last h6{ color: white; text-align: center; }
-#mask{ display: none; position: fixed; width: 100%;height: 100%; top:0; left: 0; background: rgba(0,0,0,0.5);z-index: 9; }
-::-webkit-scrollbar { width:1px;} 
-::-webkit-scrollbar-track { background-color: #ffffff;} 
-::-webkit-scrollbar-thumb { background-color:#e03824;} 
-::-webkit-scrollbar-button {background-color:none;} 
 /***
 General typography 
 ***/
@@ -51,9 +38,9 @@ h1.block, h2.block, h3.block, h4.block, h5.block, h6.block {
 
 a {
   text-shadow: none !important;
-  color:inherit;
+  color: #0d638f;
 }
-li{list-style-type: none;}
+
 /***
 General backgrounds
 ***/
@@ -330,19 +317,14 @@ Header and header elements.
   display: inline-block;
   margin-top: -1px;
   margin-right: 0;
-  padding-left: 20px;
+  padding-left: 0;
   padding-right: 0;
   width: 225px;
-  font-size: 16px;
-  color: #fff;
 }
-.header .brand:hover {
-  color: #DDDDDD;
+
+.header .brand img {
+  margin-left: 20px;
 }
-/*.header .brand img:hover {
-  src: url(../image/logo_01.png);
-  background: url(../image/logo_01.png);
-}*/
 
 .header .btn-navbar {
   margin-bottom: 0px;
@@ -903,14 +885,13 @@ Page content
 Page title
 ***/
 .page-title {
-  padding: 0 0 10px 0;
-  font-size: 26px;
+  padding: 0px;
+  font-size: 30px;
   letter-spacing: -1px;
   display: block;
   color: #666;
   margin: 20px 0px 15px 0px;
   font-weight: 300;
-  border-bottom: 1px solid #e5e5e5;
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial;
 }
 
@@ -990,7 +971,6 @@ Footer
 .footer {
   padding: 8px 20px 5px 20px; 
   font-size: 12px;
-  background-color: #000;
 }
 
 .footer:after,
@@ -1210,6 +1190,147 @@ Portlets
   padding: 0px;
 }
 
+.portlet-title {  
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.portlet-title:after,
+.portlet-title:before {
+  content: "";
+  display: table;
+  line-height: 0;
+}
+
+.portlet-title:after {
+  clear: both;
+}
+
+.portlet-title .caption {
+  float: left;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 7px; 
+}
+
+.portlet-title .caption i {
+  float: left;
+  margin-top: 5px;
+  display: inline-block !important;
+  font-size: 13px;
+  margin-right: 5px;
+  color: #666;
+}
+
+.portlet.blue > .portlet-title .caption, .portlet-title.blue .caption, 
+.portlet.green > .portlet-title .caption, .portlet-title.green .caption,
+.portlet.yellow > .portlet-title .caption, .portlet-title.yellow .caption,
+.portlet.red > .portlet-title .caption, .portlet-title.red .caption,
+.portlet.purple > .portlet-title .caption, .portlet-title.purple .caption,
+.portlet.grey > .portlet-title .caption, .portlet-title.dark-grey .caption, {
+  color: #fff;
+}
+
+.portlet.box.blue > .portlet-title .caption > i, 
+.portlet.box.green > .portlet-title .caption > i,
+.portlet.box.grey > .portlet-title .caption > i,
+.portlet.box.yellow > .portlet-title .caption > i, 
+.portlet.box.red > .portlet-title .caption > i,  
+.portlet.box.purple > .portlet-title .caption > i, 
+.portlet.box.light-grey > .portlet-title .caption > i{
+  color: #fff;
+}
+
+.sortable .portlet .portlet-title {
+  cursor: move;
+}
+
+.portlet-title .tools,
+.portlet-title .actions
+ {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  margin-top: 6px;
+  float: right;
+}
+
+.portlet-title .tools > a {
+  display: inline-block;
+  height: 16px;
+  margin-left:5px;
+}
+
+.portlet-title .dropdown-menu i {
+  color: #000 !important;
+}
+
+.portlet-title .tools > a.remove {
+  background-image:url(../image/portlet-remove-icon.png);
+  background-repeat: no-repeat;
+  width: 11px;
+}
+
+.portlet-title .tools > a.config {
+  background-image:url(../image/portlet-config-icon.png);
+  background-repeat: no-repeat;
+  width: 12px;
+}
+
+.portlet-title .tools > a.reload {
+  background-image:url(../image/portlet-reload-icon.png);
+  width: 13px;
+}
+
+.portlet-title .tools > a.expand {
+  background-image:url(../image/portlet-expand-icon.png);
+  width: 14px;
+}
+
+.portlet-title .tools > a.collapse {
+  background-image:url(../image/portlet-collapse-icon.png);
+  width: 14px;
+}
+
+.portlet-title .tools > a:hover {
+  text-decoration: none;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  opacity:.6;  
+  filter:'alpha(opacity=60)';
+}
+
+.portlet-title .actions > .btn-group {
+  margin-top: -12px;
+}
+
+.portlet-title .actions > .btn {
+  padding: 4px 10px;
+  margin-top: -13px;
+}
+
+.portlet-title .actions > .btn-group > .btn {
+  padding: 4px 10px;
+  margin-top: -1px;
+}
+
+.portlet-title .actions > .btn.mini {
+  margin-top: -12px;
+  padding: 4px 10px;
+}
+
+.portlet-title .pagination.pagination-small {
+  float: right !important;
+  display: inline-block !important;
+  margin: 0px;
+  margin-top: -2px;
+}
 
 .portlet-body {
   clear: both;  
@@ -5162,24 +5283,4 @@ Datatables Plugin(in v1.3)
 .dataTable .details tr:nth-child(even) td,
 .dataTable .details tr:nth-child(even) th {
   background-color: #eee !important;
-}
-
-
-/*zml*/
-.pupLoadbtn,.peditBtn,.pdelBtn{
-  padding: 4px !important;
-}   
-.row-fluid>.photo>li{
-  margin-left: 40px;
-  margin-bottom: 40px;
-  border: 2px solid #f4f4f4;
-  padding: 8px;
-  
-}
-.shade{
-  box-shadow: 3px 2px 3px #f4f4f4;
-}
-.borderTop{
-    border-top: 1px solid #eee;
-    padding-top: 10px;
 }
